@@ -18,10 +18,11 @@
 <body>
     <div class='container'>
         <h1>Work To-Dos</h1>
-        <form action="POST">
+        <form action="{% url 'new_list' %}" method='post'>
+        {% csrf_token %}
             <div class='row'>
                 <div class="col s10">
-                    <input type="text" />
+                    <input type="text" name='todo' placeholder='Toto List'/>
                 </div>
                 <div class="col s2">
                     <input type="submit" value='Add'>
@@ -30,6 +31,8 @@
             </div>
         </form>
     </div>
+    {% block content %} 
+    {% endblock content %}
 </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
