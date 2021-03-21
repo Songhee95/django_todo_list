@@ -6,11 +6,8 @@ from . import models
 
 
 def index(request):
-    return render(request, 'index.html')
-
-
-def new_list(request):
     new_list = request.POST.get('todo')
+    print(new_list)
     exist_list = models.List.objects.all()
 
     if exist_list.count() == 0:
@@ -27,3 +24,8 @@ def new_list(request):
         'add_list': all_list
     }
     return render(request, 'write_list/new_list.html', send_data)
+
+
+def new_list(request):
+
+    return render(request, 'write_list/new_list.html')
