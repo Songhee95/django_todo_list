@@ -1,5 +1,7 @@
 {% extends 'index.html' %}
 
     {% block content %}
-        <p>{{ add_list }}</p>
+        {% for list in add_list %}
+            <p>{{list}}</p>
+        {% endfor %}
     {% endblock content %}
