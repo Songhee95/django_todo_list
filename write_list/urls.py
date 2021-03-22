@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
 
+app_name = 'list'
 urlpatterns = [
     path('', views.index, name='index'),
     path('new_list', views.new_list, name='new_list'),
+    path('<int:list_id>', views.delete, name='delete'),
 ]

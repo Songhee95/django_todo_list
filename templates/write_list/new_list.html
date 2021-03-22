@@ -3,9 +3,15 @@
     {% block content %}
         {% for list in add_list %}
         <div class='row'>
-            <p class='col s10'>{{list}}</p>
-            <button class='col s1 button'><i class="material-icons">edit</i></button>
-            <button class='col s1 button'><i class="material-icons">delete</i></button>
+            <p class='col s10'>*️* {{list}}</p>
+            {% comment %} <form action="{% url 'index' %}" method='post' name='edit'>
+             {% csrf_token %}
+                <button class='col s1 edit'><i class="material-icons">edit</i></button>
+            </form> {% endcomment %}
+            <form action="{% url 'list:delete' list.id %}" method='post' name='delete'>
+             {% csrf_token %}
+                <button class='col s1 delete'><i class="material-icons">delete</i></button>
+            </form>
         </div>
         {% endfor %}
     {% endblock content %}

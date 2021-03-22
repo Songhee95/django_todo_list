@@ -35,7 +35,7 @@
 
     <div class='container'>
         <h1>Work To-Dos</h1>
-        <form action="{% url 'index' %}" method='post'>
+        <form action="{% url 'list:index' %}" method='post'>
         {% csrf_token %}
             <div class='row'>
                 <div class="col s10">

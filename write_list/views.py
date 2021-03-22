@@ -1,8 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 import requests
 from . import models
-
 # Create your views here.
+
+
+def getData():
+    all_list = models.List.objects.all()
+    send_data = {
+        'add_list': all_list
+    }
+    return send_data
 
 
 def index(request):
@@ -18,12 +26,15 @@ def index(request):
         except:
             print('no match')
             models.List.objects.create(todo_list=new_list)
-
-    all_list = models.List.objects.all()
-    send_data = {
-        'add_list': all_list
-    }
+    send_data = getData()
     return render(request, 'write_list/new_list.html', send_data)
+
+
+def delete(request, list_id):
+    selected = models.List.objects.get(pk=list_id)
+    selected.delete()
+    send_data = getData()
+    return redirect('list:index')
 
 
 def new_list(request):
