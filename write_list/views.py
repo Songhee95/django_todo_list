@@ -37,6 +37,10 @@ def delete(request, list_id):
     return redirect('list:index')
 
 
+def edit(request, list_id):
+    return redirect('list:index')
+
+
 def new_list(request):
 
     return render(request, 'write_list/new_list.html')
