@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 import requests
 from . import models
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -37,8 +38,15 @@ def delete(request, list_id):
     return redirect('list:index')
 
 
+@csrf_exempt
 def edit(request, list_id):
-    return redirect('list:index')
+    edit_string = request.POST.get('string')
+    edit_id = list_id
+    get_original_value = models.List.objects.get(pk=list_id)
+    get_original_value.todo_list = edit_string
+    get_original_value.save()
+    send_data = getData()
+    return render(request, 'write_list/new_list.html', send_data)
 
 
 def new_list(request):

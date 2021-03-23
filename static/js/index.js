@@ -14,6 +14,15 @@ for (el of editBtn) {
       selected_row.removeAttribute("disabled");
     } else {
       selected_row.setAttribute("disabled", "");
+      const url = `/edit/${edit_selected}`;
+      const data = selected_row.value;
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+          string: data,
+        },
+      });
     }
   });
 }
