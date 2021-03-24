@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
 
 def registerPage(request):
-    context = {}
-    return render(request, 'user_authentication/register.html')
+    form = UserCreationForm()
+    context = {"form": form}
+    return render(request, 'user_authentication/register.html', context)
 
 
 def loginPage(request):
