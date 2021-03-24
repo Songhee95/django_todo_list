@@ -1,7 +1,7 @@
 <h3>register page</h3>
 
-<form action="" method='POST' >
-{% csrf_token %}
+<form action="" method='post' >
+    {% csrf_token %}
     {{form.as_p}}
     <input type="submit" name="Create User">
 </form>
