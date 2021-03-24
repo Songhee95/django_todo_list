@@ -6,9 +6,10 @@ from django.db import models
 class List(models.Model):
     todo_list = models.CharField(max_length=5000)
     created = models.DateTimeField(auto_now=True)
+    updated_time = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return '{}'.format(self.todo_list)
+        return f"{self.todo_list}, {self.updated_time}, {self.created}"
 
     # class Meta:
     #     verbose_name_plural = 'Lists'

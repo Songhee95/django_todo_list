@@ -8,8 +8,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 def getData():
     all_list = models.List.objects.all()
+    list_array = []
+    for listEle in all_list:
+        add_list = {
+            "li": listEle.todo_list,
+            "created": listEle.created,
+            "updated": listEle.updated_time,
+            "id": listEle.id
+        }
+        list_array.append(add_list)
     send_data = {
-        'add_list': all_list
+        'add_list': list_array
     }
     return send_data
 
@@ -20,13 +29,12 @@ def index(request):
         exist_list = models.List.objects.all()
 
         if exist_list.count() == 0:
-            models.List.objects.create(todo_list=new_list)
-
+            models.List.objects.create(todo_list=new_list).save()
         try:
             models.List.objects.get(todo_list=new_list)
         except:
             print('no match')
-            models.List.objects.create(todo_list=new_list)
+            models.List.objects.create(todo_list=new_list).save()
     send_data = getData()
     return render(request, 'write_list/new_list.html', send_data)
 
@@ -38,7 +46,7 @@ def delete(request, list_id):
     return redirect('list:index')
 
 
-@csrf_exempt
+@ csrf_exempt
 def edit(request, list_id):
     edit_string = request.POST.get('string')
     edit_id = list_id
