@@ -5,11 +5,15 @@ import requests
 from . import models
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from datetime import date
 # Create your views here.
+
+today = date.today()
 
 
 def getData(userid):
-    user = models.List.objects.filter(user=userid)
+    user = models.List.objects.filter(
+        user=userid, created__year=today.year, created__month=today.month, created__day=today.day)
     list_array = []
     for listEle in user:
         add_list = {
