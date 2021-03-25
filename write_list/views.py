@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 import requests
 from . import models
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -24,7 +25,7 @@ def getData(userid):
     return send_data
 
 
-# @login_required(login_url='login')
+@login_required(login_url='/login')
 def index(request):
     userid = request.user.id
     new_list = request.POST.get('todo')
@@ -43,6 +44,7 @@ def index(request):
     return render(request, 'write_list/new_list.html', send_data)
 
 
+@login_required(login_url='/login')
 def delete(request, list_id):
     userid = request.user.id
     selected = models.List.objects.get(pk=list_id)
@@ -51,6 +53,7 @@ def delete(request, list_id):
     return redirect('list:index')
 
 
+@login_required(login_url='/login')
 @ csrf_exempt
 def edit(request, list_id):
     userid = request.user.id
@@ -63,11 +66,13 @@ def edit(request, list_id):
     return render(request, 'write_list/new_list.html', send_data)
 
 
+@login_required(login_url='/login')
 def new_list(request):
 
     return render(request, 'write_list/new_list.html')
 
 
+@login_required(login_url='/login')
 def logoutUser(request):
     logout(request)
     return redirect('/login')
