@@ -2,6 +2,7 @@
 
     {% block content %}
         {% for list in add_list %}
+        {% comment %} <p>hello {{request.user}} </p> {% endcomment %}
         <div class='row'>
                 <input class='col s10' value='{{list.li}}' id='{{list.id}}' disabled> 
                 <button class='col s1 editBtn' data-id='{{list.id}}'><i class="material-icons" data-id='{{list.id}}'>edit</i></button>

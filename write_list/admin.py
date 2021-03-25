@@ -6,4 +6,5 @@ from .models import List
 class ListAdmin(admin.ModelAdmin):
     list_display = ("todo_list", "updated_time", "created")
 
+
 # Register your models here.

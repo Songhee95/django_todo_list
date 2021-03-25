@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 import requests
@@ -23,7 +24,10 @@ def getData():
     return send_data
 
 
+# @login_required(login_url='login')
 def index(request):
+    username = request.user.username
+    print(username)
     new_list = request.POST.get('todo')
     if new_list:
         exist_list = models.List.objects.all()
@@ -60,3 +64,8 @@ def edit(request, list_id):
 def new_list(request):
 
     return render(request, 'write_list/new_list.html')
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('/login')
