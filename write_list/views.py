@@ -11,9 +11,13 @@ from datetime import date
 today = date.today()
 
 
-def getData(userid):
-    user = models.List.objects.filter(
-        user=userid, created__year=today.year, created__month=today.month, created__day=today.day)
+def getData(userid, getAll):
+    if getAll:
+        user = models.List.objects.filter(user=userid)
+    else:
+        user = models.List.objects.filter(
+            user=userid, created__year=today.year, created__month=today.month, created__day=today.day)
+
     list_array = []
     for listEle in user:
         if listEle.cleared:
@@ -51,7 +55,7 @@ def index(request):
             print('no match')
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
-    send_data = getData(userid)
+    send_data = getData(userid, False)
     return render(request, 'write_list/new_list.html', send_data)
 
 
@@ -60,7 +64,7 @@ def delete(request, list_id):
     userid = request.user.id
     selected = models.List.objects.get(pk=list_id)
     selected.delete()
-    send_data = getData(userid)
+    send_data = getData(userid, False)
     return redirect('list:index')
 
 
@@ -78,7 +82,7 @@ def edit(request, list_id):
         get_original_value.cleared = edit_cleared
 
     get_original_value.save()
-    send_data = getData(userid)
+    send_data = getData(userid, False)
     return render(request, 'write_list/new_list.html', send_data)
 
 
@@ -91,8 +95,14 @@ def new_list(request):
 @login_required(login_url='/login')
 def history(request):
     userid = request.user.id
-    send_data = getData(userid)
+    send_data = getData(userid, True)
     return render(request, 'write_list/history.html', send_data)
+
+
+@login_required(login_url='/login')
+def month(request):
+    userid = request.user.id
+    return render(request, 'write_list/month.html')
 
 
 @login_required(login_url='/login')
