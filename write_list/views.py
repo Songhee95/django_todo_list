@@ -89,6 +89,13 @@ def new_list(request):
 
 
 @login_required(login_url='/login')
+def history(request):
+    userid = request.user.id
+    send_data = getData(userid)
+    return render(request, 'write_list/history.html', send_data)
+
+
+@login_required(login_url='/login')
 def logoutUser(request):
     logout(request)
     return redirect('/login')
