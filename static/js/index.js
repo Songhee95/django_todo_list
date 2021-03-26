@@ -10,16 +10,18 @@ for (el of editBtn) {
     clicked = !clicked;
     const edit_selected = e.target.getAttribute("data-id");
     const selected_row = document.getElementById(edit_selected);
+    const dataType = e.target.getAttribute("data-type");
     if (clicked) {
       selected_row.removeAttribute("disabled");
     } else {
       selected_row.setAttribute("disabled", "");
       const url = `/edit/${edit_selected}`;
       const data = selected_row.value;
-      $.ajax({
+      const type = $.ajax({
         type: "POST",
         url: url,
         data: {
+          pageType: dataType,
           string: data,
         },
       });

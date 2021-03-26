@@ -102,17 +102,31 @@ def delete(request, list_id):
 def edit(request, list_id):
     userid = request.user.id
     edit_id = list_id
-    get_original_value = models.List.objects.get(pk=list_id)
-    if request.POST.get('string'):
+    pageType = request.POST.get('pageType')
+
+    if pageType == 'list':
+        get_original_value = models.List.objects.get(pk=list_id)
         edit_string = request.POST.get('string')
         get_original_value.todo_list = edit_string
+        get_original_value.save()
+        send_data = getData(userid, False)
+        url = 'write_list/new_list.html'
+    elif pageType == 'monthly':
+        get_original_monthly = models.Monthly.objects.get(pk=list_id)
+        edit_string = request.POST.get('string')
+        get_original_monthly.monthly_goal = edit_string
+        get_original_monthly.save()
+        send_data = get_monthly_data(userid, False)
+        url = 'write_list/month.html'
     elif request.POST.get('checked'):
+        get_original_value = models.List.objects.get(pk=list_id)
         edit_cleared = request.POST.get('checked')
         get_original_value.cleared = edit_cleared
+        get_original_value.save()
+        send_data = getData(userid, False)
+        url = 'write_list/new_list.html'
 
-    get_original_value.save()
-    send_data = getData(userid, False)
-    return render(request, 'write_list/new_list.html', send_data)
+    return render(request, url, send_data)
 
 
 @login_required(login_url='/login')
