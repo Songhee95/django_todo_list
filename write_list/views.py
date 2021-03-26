@@ -5,7 +5,7 @@ import requests
 from . import models
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from datetime import date
+from datetime import date, datetime
 # Create your views here.
 
 today = date.today()
@@ -28,6 +28,35 @@ def getData(userid, getAll):
         add_list = {
             'cleared': status,
             "li": listEle.todo_list,
+            "created": listEle.created,
+            "updated": listEle.updated_time,
+            "id": listEle.id
+        }
+        list_array.append(add_list)
+
+    send_data = {
+        'add_list': list_array
+    }
+    return send_data
+
+
+def get_monthly_data(userid, getAll):
+    if getAll:
+        user = models.Monthly.objects.filter(user=userid)
+    else:
+        user = models.Monthly.objects.filter(
+            user=userid, created__year=today.year, created__month=today.month)
+
+    list_array = []
+    for listEle in user:
+        if listEle.cleared:
+            status = 'checked'
+        else:
+            status = 'unchecked'
+
+        add_list = {
+            'cleared': status,
+            "li": listEle.monthly_goal,
             "created": listEle.created,
             "updated": listEle.updated_time,
             "id": listEle.id
@@ -102,10 +131,26 @@ def history(request):
 @login_required(login_url='/login')
 def month(request):
     userid = request.user.id
-    return render(request, 'write_list/month.html')
+    new_list = request.POST.get('monthly')
+    send_data = get_monthly_data(userid, False)
+    if new_list:
+        if send_data == None:
+            models.Monthly.objects.create(
+                user_id=userid, monthly_goal=new_list).save()
+        try:
+            models.Monthly.objects.get(user_id=userid, monthly_goal=new_list)
+        except:
+            print('no match')
+            models.Monthly.objects.create(
+                user_id=userid, monthly_goal=new_list).save()
+    send_data = {
+        'data': get_monthly_data(userid, False),
+        'date': today.strftime('%B')
+    }
+    return render(request, 'write_list/month.html', send_data)
 
 
-@login_required(login_url='/login')
+@ login_required(login_url='/login')
 def logoutUser(request):
     logout(request)
     return redirect('/login')
