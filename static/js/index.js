@@ -26,3 +26,23 @@ for (el of editBtn) {
     }
   });
 }
+
+const clear_btn = document.querySelectorAll(".clearBtn");
+for (el of clear_btn) {
+  el.addEventListener("click", function (e) {
+    const checked_el = e.target.getAttribute("data-id");
+    const url = `/edit/${checked_el}`;
+    if (e.target.checked) {
+      status = "True";
+    } else {
+      status = "False";
+    }
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {
+        checked: status,
+      },
+    });
+  });
+}

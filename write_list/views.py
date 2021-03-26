@@ -15,7 +15,6 @@ def getData(userid):
     user = models.List.objects.filter(
         user=userid, created__year=today.year, created__month=today.month, created__day=today.day)
     list_array = []
-    print(user)
     for listEle in user:
         if listEle.cleared:
             status = 'checked'
@@ -29,13 +28,11 @@ def getData(userid):
             "updated": listEle.updated_time,
             "id": listEle.id
         }
-        print(add_list)
         list_array.append(add_list)
 
     send_data = {
         'add_list': list_array
     }
-    print(send_data)
     return send_data
 
 
@@ -45,8 +42,6 @@ def index(request):
     new_list = request.POST.get('todo')
     if new_list:
         exist_list = getData(userid)
-        print('-' * 20)
-        print(exist_list)
         if exist_list == None:
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
@@ -57,7 +52,6 @@ def index(request):
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
     send_data = getData(userid)
-    print(send_data)
     return render(request, 'write_list/new_list.html', send_data)
 
 
@@ -74,10 +68,15 @@ def delete(request, list_id):
 @ csrf_exempt
 def edit(request, list_id):
     userid = request.user.id
-    edit_string = request.POST.get('string')
     edit_id = list_id
     get_original_value = models.List.objects.get(pk=list_id)
-    get_original_value.todo_list = edit_string
+    if request.POST.get('string'):
+        edit_string = request.POST.get('string')
+        get_original_value.todo_list = edit_string
+    elif request.POST.get('checked'):
+        edit_cleared = request.POST.get('checked')
+        get_original_value.cleared = edit_cleared
+
     get_original_value.save()
     send_data = getData(userid)
     return render(request, 'write_list/new_list.html', send_data)
