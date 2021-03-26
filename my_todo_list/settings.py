@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,5 +125,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# session timeout
+SESSION_EXPIRE_SECONDS = 6000
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 1800
+SESSION_TIMEOUT_REDIRECT = '/login'
 
 django_heroku.settings(locals())

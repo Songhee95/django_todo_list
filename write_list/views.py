@@ -44,9 +44,9 @@ def getData(userid, getAll):
 def index(request):
     userid = request.user.id
     new_list = request.POST.get('todo')
+    send_data = getData(userid, False)
     if new_list:
-        exist_list = getData(userid)
-        if exist_list == None:
+        if send_data == None:
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
         try:
@@ -55,8 +55,8 @@ def index(request):
             print('no match')
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
-    send_data = getData(userid, False)
-    return render(request, 'write_list/new_list.html', send_data)
+
+    return render(request, 'write_list/new_list.html', getData(userid, False))
 
 
 @login_required(login_url='/login')
