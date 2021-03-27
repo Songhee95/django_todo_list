@@ -4,7 +4,7 @@
         {% for list in add_list %}
         <div class='row'> 
                 <label class='col s1 home_list_buttons'>
-                    <input type="checkbox" class='clearBtn' data-type='monthly_clear' {{list.cleared}} data-id='{{list.id}}' status='false'/>
+                    <input type="checkbox" class='clearBtn' data-type='list_clear' {{list.cleared}} data-id='{{list.id}}' status='false'/>
                     <span></span>
                 </label>
                 <input class='col s9' value='{{list.li}}' id='{{list.id}}' disabled> 

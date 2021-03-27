@@ -110,17 +110,17 @@ def edit(request, list_id):
     userid = request.user.id
     edit_id = list_id
     pageType = request.POST.get('pageType')
+    send_data = getData(userid, False)
+    url = 'write_list/new_list.html'
 
-    if pageType == 'list':
+    if pageType == 'list_clear':
         get_original_value = models.List.objects.get(pk=list_id)
         if request.POST.get('string'):
             get_original_value.todo_list = request.POST.get('string')
         elif request.POST.get('checked'):
             get_original_value.cleared = request.POST.get('checked')
         get_original_value.save()
-        send_data = getData(userid, False)
-        url = 'write_list/new_list.html'
-    elif pageType == 'monthly':
+    elif pageType == 'monthly_clear':
         get_original_value = models.Monthly.objects.get(pk=list_id)
         if request.POST.get('string'):
             get_original_value.monthly_goal = request.POST.get('string')
