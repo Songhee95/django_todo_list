@@ -33,6 +33,7 @@ const clear_btn = document.querySelectorAll(".clearBtn");
 for (el of clear_btn) {
   el.addEventListener("click", function (e) {
     const checked_el = e.target.getAttribute("data-id");
+    const dataType = e.target.getAttribute("data-type");
     const url = `/edit/${checked_el}`;
     if (e.target.checked) {
       status = "True";
@@ -43,6 +44,7 @@ for (el of clear_btn) {
       type: "POST",
       url: url,
       data: {
+        pageType: dataType,
         checked: status,
       },
     });

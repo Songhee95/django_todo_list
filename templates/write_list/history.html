@@ -19,7 +19,7 @@
 <body>
 {% include 'navbar.html' %}
 <div class="container">
-    <h1>{{request.user}}'s Todo list History</h1>
+    <h1>{{request.user}}'s Todo List History</h1>
     <table>
     <thead>
         <th>Created</th>
@@ -27,7 +27,7 @@
         <th>Completed</th>
         <th>Updated</th>
     </thead>
-    {% for list in add_list %}
+    {% for list in daily.add_list %}
         <tr>
             <td>
                 <p>{{list.created}}</p>
@@ -47,7 +47,38 @@
         </tr>
     {% endfor %}
     </table>
+        <h1>{{request.user}}'s Monthly Goal History</h1>
+    <table>
+    <thead>
+        <th>Created</th>
+        <th>Monthly Goal</th>
+        <th>Completed</th>
+        <th>Updated</th>
+    </thead>
+    {% for list in month.add_list %}
+        <tr>
+            <td>
+                <p>{{list.created}}</p>
+            </td> 
+            <td>
+                <p>{{list.li}}</p>
+            </td>
+            <td>
+                <label>
+                    <input type="checkbox" {{list.cleared}} disabled/>
+                    <span></span>
+                </label>
+            </td>
+            <td>
+                <p>{{list.updated}}</p>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
 </div>
+
+
 </body>
     <script src="{% static 'js/index.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

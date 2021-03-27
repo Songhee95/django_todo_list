@@ -106,43 +106,44 @@ def edit(request, list_id):
 
     if pageType == 'list':
         get_original_value = models.List.objects.get(pk=list_id)
-        edit_string = request.POST.get('string')
-        get_original_value.todo_list = edit_string
+        if request.POST.get('string'):
+            get_original_value.todo_list = request.POST.get('string')
+        elif request.POST.get('checked'):
+            get_original_value.cleared = request.POST.get('checked')
         get_original_value.save()
         send_data = getData(userid, False)
         url = 'write_list/new_list.html'
     elif pageType == 'monthly':
-        get_original_monthly = models.Monthly.objects.get(pk=list_id)
-        edit_string = request.POST.get('string')
-        get_original_monthly.monthly_goal = edit_string
-        get_original_monthly.save()
+        get_original_value = models.Monthly.objects.get(pk=list_id)
+        if request.POST.get('string'):
+            get_original_value.monthly_goal = request.POST.get('string')
+        elif request.POST.get('checked'):
+            get_original_value.cleared = request.POST.get('checked')
+        get_original_value.save()
         send_data = get_monthly_data(userid, False)
         url = 'write_list/month.html'
-    elif request.POST.get('checked'):
-        get_original_value = models.List.objects.get(pk=list_id)
-        edit_cleared = request.POST.get('checked')
-        get_original_value.cleared = edit_cleared
-        get_original_value.save()
-        send_data = getData(userid, False)
-        url = 'write_list/new_list.html'
-
     return render(request, url, send_data)
 
 
-@login_required(login_url='/login')
+@ login_required(login_url='/login')
 def new_list(request):
 
     return render(request, 'write_list/new_list.html')
 
 
-@login_required(login_url='/login')
+@ login_required(login_url='/login')
 def history(request):
     userid = request.user.id
-    send_data = getData(userid, True)
+    daily = getData(userid, True)
+    month = get_monthly_data(userid, True)
+    send_data = {
+        'daily': daily,
+        'month': month,
+    }
     return render(request, 'write_list/history.html', send_data)
 
 
-@login_required(login_url='/login')
+@ login_required(login_url='/login')
 def month(request):
     userid = request.user.id
     new_list = request.POST.get('monthly')
@@ -152,7 +153,8 @@ def month(request):
             models.Monthly.objects.create(
                 user_id=userid, monthly_goal=new_list).save()
         try:
-            models.Monthly.objects.get(user_id=userid, monthly_goal=new_list)
+            models.Monthly.objects.get(
+                user_id=userid, monthly_goal=new_list)
         except:
             print('no match')
             models.Monthly.objects.create(
