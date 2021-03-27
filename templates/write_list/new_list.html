@@ -10,9 +10,9 @@
                 <input class='col s9' value='{{list.li}}' id='{{list.id}}' disabled> 
                 <button class='col s1 editBtn home_list_buttons' data-type='list' data-id='{{list.id}}'><i class="material-icons" data-type='list' data-id='{{list.id}}'>edit</i></button>
             
-            <form action="{% url 'list:delete' list.id %}" method='post' name='delete'>
+            <form action="{% url 'list:delete' list.id %}" method='post'>
              {% csrf_token %}
-                <button class='col s1 delete home_list_buttons'><i class="material-icons">delete</i></button>
+                <button class='col s1 delete home_list_buttons' name='list_delete' value='list_delete'><i class="material-icons">delete</i></button>
             </form>
         </div>
         {% endfor %}

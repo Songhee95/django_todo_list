@@ -91,10 +91,17 @@ def index(request):
 @login_required(login_url='/login')
 def delete(request, list_id):
     userid = request.user.id
-    selected = models.List.objects.get(pk=list_id)
-    selected.delete()
-    send_data = getData(userid, False)
-    return redirect('list:index')
+    url = 'list:index'
+    if request.POST.get('list_delete'):
+        selected = models.List.objects.get(pk=list_id)
+        selected.delete()
+        send_data = getData(userid, False)
+    elif request.POST.get('month_delete'):
+        selected = models.Monthly.objects.get(pk=list_id)
+        selected.delete()
+        send_data = get_monthly_data(userid, False)
+        url = 'list:month'
+    return redirect(url)
 
 
 @login_required(login_url='/login')
