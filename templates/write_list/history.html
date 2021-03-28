@@ -37,7 +37,7 @@
                 <th>Updated
                 </th>
             </thead>
-            {% for list in daily.add_list %}
+            {% for list in daily.add_list|slice:":10" %}
                 <tr>
                     <td>
                         <p>{{list.created}}</p>
