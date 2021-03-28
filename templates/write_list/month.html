@@ -1,12 +1,12 @@
 {% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
@@ -15,42 +15,67 @@
       rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-{% include 'navbar.html' %}
-<div class="container">
-    <h1>{{request.user}}'s Monthly Goal : {{date}}</h1>
-        <form action="{% url 'list:month' %}" method='post'>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="container">
+      <h1 class="home-title">{{request.user}}'s Monthly Goal : {{date}}</h1>
+      <form action="{% url 'list:month' %}" method="post">
         {% csrf_token %}
-            <div class='row'>
-                <div class="col s10">
-                    <input type="text" name='monthly' placeholder='Monthly Goal'/>
-                </div>
-                <div class="col s2">
-                    <input type="submit" value='Add'>
-                    <i class="material-icons prefix">mode_edit</i>
-                </div>
+        <div class="add_input_container">
+          <div class="input_div">
+            <input type="text" class="list_input" name="monthly" placeholder="Monthly Goal" />
+          </div>
+          <div class="add_button_container">
+            <input type="submit" class="home_add_button" value="Add" />
+          </div>
+        </div>
+      </form>
+
+      {% for list in data.add_list %}
+      <div class="home_list_set_wrap">
+        <label class="home_list_checkbox">
+          <input
+            type="checkbox"
+            class="clearBtn"
+            data-type="monthly_clear"
+            {{list.cleared}}
+            data-id="{{list.id}}"
+            status="false"
+          />
+          <span></span>
+        </label>
+        <input class="displayed_list" value="{{list.li}}" id="{{list.id}}" disabled />
+        <form action="">
+            <div
+            class="editBtn home_list_buttons"
+            data-type="monthly"
+            data-id="{{list.id}}"
+            >
+            <i class="material-icons" data-type="monthly" data-id="{{list.id}}"
+                >edit</i
+            >
             </div>
         </form>
-
-        {% for list in data.add_list %}
-            <div class='row'> 
-                    <label class='col s1 home_list_buttons'>
-                        <input type="checkbox" class='clearBtn' data-type='monthly_clear' {{list.cleared}} data-id='{{list.id}}' status='false'/>
-                        <span></span>
-                    </label>
-                    <input class='col s9' value='{{list.li}}' id='{{list.id}}' disabled> 
-                    <button class='col s1 editBtn home_list_buttons' data-type='monthly' data-id='{{list.id}}'><i class="material-icons" data-type='monthly' data-id='{{list.id}}'>edit</i></button>
-                
-                <form action="{% url 'list:delete' list.id %}" method='post' name='delete'>
-                {% csrf_token %}
-                    <button class='col s1 delete home_list_buttons' name='month_delete' value='month_delete'><i class="material-icons">delete</i></button>
-                </form>
-            </div>
-        {% endfor %}
-
-</div>
-</body>
-    <script src="{% static 'js/index.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
+        <form
+          action="{% url 'list:delete' list.id %}"
+          method="post"
+          name="delete"
+        >
+          {% csrf_token %}
+          <div
+            class="delete home_list_buttons"
+            name="month_delete"
+            value="month_delete"
+          >
+            <i class="material-icons">delete</i>
+          </div>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+  <script src="{% static 'js/index.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>

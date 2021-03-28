@@ -19,62 +19,68 @@
 <body>
 {% include 'navbar.html' %}
 <div class="container">
-    <h1>{{request.user}}'s Todo List History</h1>
-    <table>
-    <thead>
-        <th>Created</th>
-        <th>List</th>
-        <th>Completed</th>
-        <th>Updated</th>
-    </thead>
-    {% for list in daily.add_list %}
-        <tr>
-            <td>
-                <p>{{list.created}}</p>
-            </td> 
-            <td>
-                <p>{{list.li}}</p>
-            </td>
-            <td>
-                <label>
-                    <input type="checkbox" {{list.cleared}} disabled/>
-                    <span></span>
-                </label>
-            </td>
-            <td>
-                <p>{{list.updated}}</p>
-            </td>
-        </tr>
-    {% endfor %}
-    </table>
-        <h1>{{request.user}}'s Monthly Goal History</h1>
-    <table>
-    <thead>
-        <th>Created</th>
-        <th>Monthly Goal</th>
-        <th>Completed</th>
-        <th>Updated</th>
-    </thead>
-    {% for list in month.add_list %}
-        <tr>
-            <td>
-                <p>{{list.created}}</p>
-            </td> 
-            <td>
-                <p>{{list.li}}</p>
-            </td>
-            <td>
-                <label>
-                    <input type="checkbox" {{list.cleared}} disabled/>
-                    <span></span>
-                </label>
-            </td>
-            <td>
-                <p>{{list.updated}}</p>
-            </td>
-        </tr>
-    {% endfor %}
-    </table>
+    <h1 class="home-title">{{request.user}}'s Todo List History</h1>
+    <div class='table-wrap'>
+        <table>
+            <thead>
+                <th>Created</th>
+                <th>List</th>
+                <th>Completed</th>
+                <th>Updated</th>
+            </thead>
+            {% for list in daily.add_list %}
+                <tr>
+                    <td>
+                        <p>{{list.created}}</p>
+                    </td> 
+                    <td>
+                        <p>{{list.li}}</p>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="checkbox" {{list.cleared}} disabled/>
+                            <span></span>
+                        </label>
+                    </td>
+                    <td>
+                        <p>{{list.updated}}</p>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <h1 class="home-title">{{request.user}}'s Monthly Goal History</h1>
+    <div class='table-wrap'>
+        <table>
+        <thead>
+            <th>Created</th>
+            <th>Monthly Goal</th>
+            <th>Completed</th>
+            <th>Updated</th>
+        </thead>
+        {% for list in month.add_list %}
+            <tr>
+                <td>
+                    <p>{{list.created}}</p>
+                </td> 
+                <td>
+                    <p>{{list.li}}</p>
+                </td>
+                <td>
+                    <label>
+                        <input type="checkbox" {{list.cleared}} disabled/>
+                        <span></span>
+                    </label>
+                </td>
+                <td>
+                    <p>{{list.updated}}</p>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
 
 </div>
 

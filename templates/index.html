@@ -1,12 +1,12 @@
 {% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
@@ -15,31 +15,34 @@
       rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-{% include 'navbar.html' %}
-    <div class='container'>
-        <h1>Work To-Dos</h1>
-        <form action="{% url 'list:index' %}" method='post'>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="container">
+      <h1 class="home-title">Add Todays' ToDo List</h1>
+      <form action="{% url 'list:index' %}" method="post">
         {% csrf_token %}
-            <div class='row'>
-                <div class="col s10">
-                    <input type="text" name='todo' placeholder='Toto List'/>
-                </div>
-                <div class="col s2">
-                    <input type="submit" value='Add'>
-                    <i class="material-icons prefix">mode_edit</i>
-                </div>
-            </div>
-        </form>
+        <div class="add_input_container">
+          <div class="input_div">
+            <input
+              type="text"
+              class="list_input"
+              name="todo"
+              placeholder="Toto List"
+            />
+          </div>
+          <div class="add_button_container">
+            <input type="submit" class="home_add_button" value="Add" />
+          </div>
+        </div>
+      </form>
     </div>
 
     <div class="container">
-        <h1>List</h1>
-        {% block content %}
-        {% endblock content %}
+      <h1 class="home-title">List</h1>
+      {% block content %} {% endblock content %}
     </div>
-</body>
-    <script src="{% static 'js/index.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+  <script src="{% static 'js/index.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>
