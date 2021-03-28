@@ -13,10 +13,11 @@ today = date.today()
 
 def getData(userid, getAll):
     if getAll:
-        user = models.List.objects.filter(user=userid)
+        user = models.List.objects.filter(
+            user=userid).order_by('created').reverse()
     else:
         user = models.List.objects.filter(
-            user=userid, created__year=today.year, created__month=today.month, created__day=today.day)
+            user=userid, created__year=today.year, created__month=today.month, created__day=today.day).order_by('created').reverse()
 
     list_array = []
     for listEle in user:
@@ -42,10 +43,11 @@ def getData(userid, getAll):
 
 def get_monthly_data(userid, getAll):
     if getAll:
-        user = models.Monthly.objects.filter(user=userid)
+        user = models.Monthly.objects.filter(
+            user=userid).order_by('created').reverse()
     else:
         user = models.Monthly.objects.filter(
-            user=userid, created__year=today.year, created__month=today.month)
+            user=userid, created__year=today.year, created__month=today.month).order_by('created').reverse()
 
     list_array = []
     for listEle in user:
