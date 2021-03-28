@@ -28,8 +28,8 @@ def getData(userid, getAll):
         add_list = {
             'cleared': status,
             "li": listEle.todo_list,
-            "created": listEle.created,
-            "updated": listEle.updated_time,
+            "created": listEle.created.strftime('%B, %d, %Y'),
+            "updated": listEle.updated_time.strftime('%B, %d, %Y'),
             "id": listEle.id
         }
         list_array.append(add_list)
@@ -57,8 +57,8 @@ def get_monthly_data(userid, getAll):
         add_list = {
             'cleared': status,
             "li": listEle.monthly_goal,
-            "created": listEle.created,
-            "updated": listEle.updated_time,
+            "created": listEle.created.strftime('%B, %d, %Y'),
+            "updated": listEle.updated_time.strftime('%B, %d, %Y'),
             "id": listEle.id
         }
         list_array.append(add_list)
