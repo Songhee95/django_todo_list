@@ -23,10 +23,19 @@
     <div class='table-wrap'>
         <table>
             <thead>
-                <th>Created</th>
+                <th class='th_which_has_sort sort_by_created'>Created
+                    <div class='table_sort_button'>
+                        <i class="material-icons">arrow_drop_down</i>    
+                    </div>
+                </th>
                 <th>List</th>
-                <th>Completed</th>
-                <th>Updated</th>
+                <th class='th_which_has_sort'>Completed
+                    <div class='table_sort_button'>
+                        <i class="material-icons">arrow_drop_down</i>    
+                    </div>
+                </th>
+                <th>Updated
+                </th>
             </thead>
             {% for list in daily.add_list %}
                 <tr>
@@ -55,9 +64,17 @@
     <div class='table-wrap'>
         <table>
         <thead>
-            <th>Created</th>
+            <th class='th_which_has_sort sort_by_created'>Created
+                <div class='table_sort_button'>
+                    <i class="material-icons">arrow_drop_down</i>    
+                </div>
+            </th>
             <th>Monthly Goal</th>
-            <th>Completed</th>
+            <th class='th_which_has_sort'>Completed
+                <div class='table_sort_button'>
+                    <i class="material-icons">arrow_drop_down</i>    
+                </div>
+            </th>
             <th>Updated</th>
         </thead>
         {% for list in month.add_list %}
@@ -84,8 +101,9 @@
 
 </div>
 
-
 </body>
+    {{ daily|json_script:'daily'}}
+    {{ month|json_script:'month'}}
     <script src="{% static 'js/index.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>

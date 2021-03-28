@@ -63,3 +63,10 @@ body{
 .table-wrap{
     overflow: auto;
 }
+.th_which_has_sort{
+    display: flex;
+    flex-direction: row;
+}
+.table_sort_button{
+    cursor: pointer;
+}

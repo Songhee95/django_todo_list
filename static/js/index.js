@@ -50,3 +50,13 @@ for (el of clear_btn) {
     });
   });
 }
+
+const created_sort_btn = document.querySelectorAll(".sort_by_created");
+for (el of created_sort_btn) {
+  el.addEventListener("click", function (e) {
+    const daily = JSON.parse(document.getElementById("daily").textContent);
+    const month = JSON.parse(document.getElementById("month").textContent);
+    console.log(daily);
+    console.log(month);
+  });
+}
