@@ -32,9 +32,6 @@
                 </th>
                 <th>List</th>
                 <th class='th_which_has_sort'>Completed
-                    <div class='table_sort_button'>
-                        <i class="material-icons">arrow_drop_down</i>    
-                    </div>
                 </th>
                 <th>Updated
                 </th>
@@ -66,21 +63,21 @@
 
     <h1 class="home-title">{{request.user}}'s Monthly Goal History</h1>
     <div class='table-wrap'>
-        <table>
+        <table id='monthly_history_data_table'>
         <thead>
             <th class='th_which_has_sort sort_by_created'>Created
                 <div class='table_sort_button'>
-                    <i class="material-icons">arrow_drop_down</i>    
+                    <i class='material-icons dropdown-trigger' data-target='monthly_dropdown_by_created'>arrow_drop_down</i>
+                    <ul class='dropdown-content' id='monthly_dropdown_by_created'>
+                    </ul>    
                 </div>
             </th>
             <th>Monthly Goal</th>
             <th class='th_which_has_sort'>Completed
-                <div class='table_sort_button'>
-                    <i class="material-icons">arrow_drop_down</i>    
-                </div>
             </th>
             <th>Updated</th>
         </thead>
+        <tbody id='monthly_history_data_row'>
         {% for list in month.add_list|slice:":10"%}
             <tr>
                 <td>
@@ -100,6 +97,7 @@
                 </td>
             </tr>
         {% endfor %}
+        </tbody>
         </table>
     </div>
 
