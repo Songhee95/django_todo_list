@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".sidenav");
   var instances = M.Sidenav.init(elems, { edge: "right" });
 });
+document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll(".dropdown-trigger");
+  var instances = M.Dropdown.init(elems, { alignment: "right" });
+});
 
 const editBtn = document.querySelectorAll(".editBtn");
 for (el of editBtn) {
@@ -51,11 +55,26 @@ for (el of clear_btn) {
   });
 }
 
+const daily = JSON.parse(document.getElementById("daily").textContent);
+const month = JSON.parse(document.getElementById("month").textContent);
+var daily_created_date = new Set();
+daily.add_list.forEach((date) => {
+  daily_created_date.add(date.created);
+});
+var month_created_date = new Set();
+month.add_list.forEach((date) => {
+  month_created_date.add(date.created);
+});
+
+const dropdown_container = document.getElementById("daily_dropdown_by_created");
+[...daily_created_date].map((li) => {
+  const daily_element = document.createElement("li");
+  daily_element.setAttribute("class", "daily_dropdown_by_created_element");
+  daily_element.textContent = li;
+  dropdown_container.append(daily_element);
+});
+
 const created_sort_btn = document.querySelectorAll(".sort_by_created");
 for (el of created_sort_btn) {
-  el.addEventListener("click", function (e) {
-    const daily = JSON.parse(document.getElementById("daily").textContent);
-    const month = JSON.parse(document.getElementById("month").textContent);
-    console.log(new Set([daily.add_list[created]]));
-  });
+  el.addEventListener("click", function (e) {});
 }
