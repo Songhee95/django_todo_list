@@ -11,8 +11,25 @@ body{
     width: 300px;
     margin: 20px;
     padding: 20px;
-    border: 1px solid rgb(179, 179, 179);
+    border: 1px solid #ee6e73;
     border-radius: 10px;
+}
+.card_header_dates_days{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ee6e73;
+}
+.card-dates{
+    font-weight: 500;
+}
+.card-days{
+    font-weight: 700;
+    font-size: 18px;
+}
+.home_card_list_row{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
 }
 .home-title{
     font-size: 22px;
