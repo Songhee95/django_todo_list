@@ -1,4 +1,44 @@
-{% extends 'index.html' %} {% block content %} {% for list in add_list %}
+{% extends 'index.html' %} {% block content %} 
+<div id="home_cards_wrap_by_date">
+    {% for date in date_array%}
+      <div class="individual_card_wrap">
+          <div class="card-title">{{date}}</div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+            <a href="#">This is a link</a>
+          </div>
+      </div>
+    {% endfor %}
+</div>
+  {% comment %} <table>
+    <thead>
+      <tr>
+      {% for date in date_array%}
+        <th>{{date}}</th>
+      {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      <tr> {% endcomment %}
+      {% comment %} {% for date in date_array %}
+          <td>
+            <ul>
+              {% for list in add_list %}
+                {% if list.created == date %}
+                  <li>{{list.li}}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </td>
+      {% endfor %} {% endcomment %}
+      {% comment %} </tr>
+    </tbody>
+  </table> {% endcomment %}
+{% for list in add_list %}
 <div class="home_list_set_wrap">
   <label class='home_list_checkbox'>
     <input

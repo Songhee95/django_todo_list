@@ -1,6 +1,19 @@
 body{
     padding-bottom: 150px;
 }
+#home_cards_wrap_by_date{
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow: auto;
+}
+.individual_card_wrap{
+    flex: 0 0 auto;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
 .home-title{
     font-size: 22px;
     font-weight: 800;

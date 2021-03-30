@@ -5,22 +5,35 @@ import requests
 from . import models
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from datetime import date, datetime
+from django.utils import timezone
+from datetime import timedelta
+import calendar
 # Create your views here.
 
-today = date.today()
+today = timezone.now()
+weekday = today.weekday()
+start_delta = timezone.timedelta(days=weekday)
+start_of_week = today - start_delta
+week_dates = [start_of_week + timezone.timedelta(days=i) for i in range(7)]
+
+date_7_days_ago = today - timezone.timedelta(days=7)
 
 
 def getData(userid, getAll):
+
     if getAll:
         user = models.List.objects.filter(
             user=userid).order_by('created').reverse()
     else:
         user = models.List.objects.filter(
-            user=userid, created__year=today.year, created__month=today.month, created__day=today.day).order_by('created').reverse()
-
+            user=userid, created__gte=date_7_days_ago).order_by('created').reverse()
     list_array = []
+    date_array = []
+
     for listEle in user:
+        if listEle.created.strftime('%B, %d, %Y') not in date_array:
+            date_array.append(listEle.created.strftime('%B, %d, %Y'))
+
         if listEle.cleared:
             status = 'checked'
         else:
@@ -31,12 +44,13 @@ def getData(userid, getAll):
             "li": listEle.todo_list,
             "created": listEle.created.strftime('%B, %d, %Y'),
             "updated": listEle.updated_time.strftime('%B, %d, %Y'),
-            "id": listEle.id
+            "id": listEle.id,
         }
         list_array.append(add_list)
 
     send_data = {
-        'add_list': list_array
+        'add_list': list_array,
+        'date_array': week_dates
     }
     return send_data
 
@@ -71,7 +85,7 @@ def get_monthly_data(userid, getAll):
     return send_data
 
 
-@login_required(login_url='/login')
+@ login_required(login_url='/login')
 def index(request):
     userid = request.user.id
     new_list = request.POST.get('todo')
@@ -90,7 +104,7 @@ def index(request):
     return render(request, 'write_list/new_list.html', getData(userid, False))
 
 
-@login_required(login_url='/login')
+@ login_required(login_url='/login')
 def delete(request, list_id):
     userid = request.user.id
     url = 'list:index'
@@ -106,7 +120,7 @@ def delete(request, list_id):
     return redirect(url)
 
 
-@login_required(login_url='/login')
+@ login_required(login_url='/login')
 @ csrf_exempt
 def edit(request, list_id):
     userid = request.user.id
