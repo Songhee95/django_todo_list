@@ -14,9 +14,20 @@ today = timezone.now()
 weekday = today.weekday()
 start_delta = timezone.timedelta(days=weekday)
 start_of_week = today - start_delta
-week_dates = [start_of_week + timezone.timedelta(days=i) for i in range(7)]
-
+week_dates_original = [start_of_week +
+                       timezone.timedelta(days=i) for i in range(7)]
+week_dates = []
+week_days = []
 date_7_days_ago = today - timezone.timedelta(days=7)
+
+for dates in week_dates_original:
+    obj = {
+        "date": dates.strftime('%B, %d, %Y'),
+        'day': dates.strftime('%A')
+    }
+    week_dates.append(obj)
+    # week_dates.append(dates.strftime('%B, %d, %Y'))
+    # week_days.append(dates.strftime('%A'))
 
 
 def getData(userid, getAll):
