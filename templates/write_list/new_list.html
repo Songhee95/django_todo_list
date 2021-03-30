@@ -2,12 +2,18 @@
 <div id="home_cards_wrap_by_date">
     {% for date in date_array%}
       <div class="individual_card_wrap">
-          <div class="card-title">{{date.date}}</div>
-          <div>{{date.day}}</div>
+          <div class="card-dates">{{date.date}}</div>
+          <div class="card-days">{{date.day}}</div>
           <div class="card-action">
             {% for list in add_list %}
             {% if list.created == date.date %}
-            <p>{{list}}</p>
+            <div class="list_row">
+              <label>
+                  <input type="checkbox" {{list.cleared}} disabled/>
+                  <span></span>
+              </label>
+              <span>{{list.li}}</span>
+            </div>
             {% endif %}
             {% endfor %}
           </div>
@@ -15,6 +21,7 @@
     {% endfor %}
 </div>
 
+<h1 class="home-title">Edit Todo_List</h1>
 {% for list in add_list %}
 <div class="home_list_set_wrap">
   <label class='home_list_checkbox'>
