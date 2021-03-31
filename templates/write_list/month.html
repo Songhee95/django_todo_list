@@ -47,7 +47,7 @@
         </label>
         <input class="displayed_list" value="{{list.li}}" id="{{list.id}}" disabled />
         <form action="">
-            <div
+            <button
             class="editBtn home_list_buttons"
             data-type="monthly"
             data-id="{{list.id}}"
@@ -55,7 +55,7 @@
             <i class="material-icons" data-type="monthly" data-id="{{list.id}}"
                 >edit</i
             >
-            </div>
+            </button>
         </form>
         
         <form
@@ -64,13 +64,14 @@
           name="delete"
         >
           {% csrf_token %}
-          <div
+          <button
+          type='submit'
             class="delete home_list_buttons"
             name="month_delete"
             value="month_delete"
           >
             <i class="material-icons">delete</i>
-          </div>
+          </button>
         </form>
       </div>
       {% endfor %}

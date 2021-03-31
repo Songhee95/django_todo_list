@@ -87,9 +87,12 @@ body{
     font-size: 20px !important;
 }
 .editBtn, .delete{
-    padding: 8px 8px 0px 8px;
+    padding: 0px 8px;
     height: 100%;
+    background-color: white;
+    border: none;
 }
+
 .table-wrap{
     overflow: auto;
 }
