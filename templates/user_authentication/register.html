@@ -1,25 +1,52 @@
-<h3>register page</h3>
-
-<form action="" method='post' >
-    {% csrf_token %}
-    <div>
-        {{form.username.label}}
-        {{form.username}}
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="container register_page_container">
+        <h3 class='register_page_header'>Register page</h3>
+        <form action="" method='post' >
+            {% csrf_token %}
+            <div class='register_page_icons'>
+            <i class="material-icons prefix">account_circle</i>
+                {{form.username.label}}
+                {{form.username}}
+            </div>
+            <div class='register_page_icons'>
+            <i class="material-icons prefix">email</i>
+                {{form.email.label}}
+                {{form.email}}
+            </div>
+            <div class='register_page_icons'>
+            <i class="material-icons prefix">password1</i>
+                {{form.password1.label}}
+                {{form.password1}}
+            </div>
+            <div class='register_page_icons'>
+                {{form.password2.label}}
+                {{form.password2}}
+            </div>
+            <div class='register_page_submit_btn_wrap'>
+                <input type="submit" name="Create User" class='register_page_submit_btn'>
+            </div>
+        {% comment %} inform error  {% endcomment %}
+            {{form.errors}}
+            <p class='register_page_already_p'>Aready have an account? <a href="/login">Login</a></p>
+        </form>
     </div>
-    <div>
-        {{form.email.label}}
-        {{form.email}}
-    </div>
-    <div>
-        {{form.password1.label}}
-        {{form.password1}}
-    </div>
-    <div>
-        {{form.password2.label}}
-        {{form.password2}}
-    </div>
-    <input type="submit" name="Create User">
-{% comment %} inform error  {% endcomment %}
-    {{form.errors}}
-    <p>Aready have an account? <a href="/login">Login</a></p>
-</form>
+  </body>
+</html>

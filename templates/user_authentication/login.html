@@ -1,22 +1,49 @@
-<h3>login page</h3>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}" />
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        />
+        <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+    <div class="container register_page_container">
+        <h3 class='register_page_header'>login page</h3>
 
-<form action='{% url "user_authentication:login" %}' method='post'>
-    {% csrf_token %}
-    <div>
-        <input type="text" name='username'>
-    </div>
-    <div>
-        <input type="password" name='password'>
-    </div>
-    <div>
-        <input type="submit">
-    </div>
-</form>
+        <form action='{% url "user_authentication:login" %}' method='post'>
+            {% csrf_token %}
+            <div class='login_page_icons'>
+            <label for="username" class='login_page_input_labels'><i class="material-icons prefix">account_circle</i>UserName</label>
+                <input type="text" name='username' placeholder='UserName'>
+            </div>
 
-<p>
-    Don't have an account? 
-    <a href="/register">Sign up</a>
-</p>
-{% for message in messages %}
-    <p id="messages">{{message}}</p>
-{% endfor %}
+            <div class='login_page_icons'>
+            <label for="password" class='login_page_input_labels'><i class="material-icons prefix">password</i>Password</label>
+                <input type="password" name='password' placeholder='password'>
+            </div>
+
+            <div>
+                <input type="submit" class='register_page_submit_btn'>
+            </div>
+        </form>
+
+        <p>
+            Don't have an account? 
+            <a href="/register">Sign up</a>
+        </p>
+        {% for message in messages %}
+            <p id="messages">{{message}}</p>
+        {% endfor %}
+    </div>
+    </body>
+</html>
