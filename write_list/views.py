@@ -22,7 +22,6 @@ week_dates = []
 week_days = []
 date_7_days_ago = today - timezone.timedelta(days=7)
 
-print(today)
 
 for dates in week_dates_original:
     obj = {
@@ -48,8 +47,6 @@ def getData(userid, getAll):
     date_array = []
     # print(user)
     for listEle in user:
-        print(
-            listEle.updated_time.strftime('%B, %d, %Y, %I:%M'))
         if listEle.created.strftime('%B, %d, %Y') not in date_array:
             date_array.append(listEle.created.strftime('%B, %d, %Y'))
 
@@ -147,15 +144,15 @@ def edit(request, list_id):
     pageType = request.POST.get('pageType')
     send_data = getData(userid, False)
     url = 'write_list/new_list.html'
-
-    if pageType == 'list_clear':
+    if pageType == 'list':
         get_original_value = models.List.objects.get(pk=list_id)
         if request.POST.get('string'):
+            print(request.POST.get('string'))
             get_original_value.todo_list = request.POST.get('string')
         elif request.POST.get('checked'):
             get_original_value.cleared = request.POST.get('checked')
         get_original_value.save()
-    elif pageType == 'monthly_clear':
+    elif pageType == 'monthly':
         get_original_value = models.Monthly.objects.get(pk=list_id)
         if request.POST.get('string'):
             get_original_value.monthly_goal = request.POST.get('string')
