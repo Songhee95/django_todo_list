@@ -1,3 +1,5 @@
+import pytz
+import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
@@ -20,6 +22,8 @@ week_dates = []
 week_days = []
 date_7_days_ago = today - timezone.timedelta(days=7)
 
+print(today)
+
 for dates in week_dates_original:
     obj = {
         "date": dates.strftime('%B, %d, %Y'),
@@ -28,6 +32,8 @@ for dates in week_dates_original:
     week_dates.append(obj)
     # week_dates.append(dates.strftime('%B, %d, %Y'))
     # week_days.append(dates.strftime('%A'))
+# print(today.strftime('%B, %d, %Y, %I:%M'))
+# print(date_7_days_ago)
 
 
 def getData(userid, getAll):
@@ -40,8 +46,10 @@ def getData(userid, getAll):
             user=userid, created__gte=date_7_days_ago).order_by('created').reverse()
     list_array = []
     date_array = []
-
+    # print(user)
     for listEle in user:
+        print(
+            listEle.updated_time.strftime('%B, %d, %Y, %I:%M'))
         if listEle.created.strftime('%B, %d, %Y') not in date_array:
             date_array.append(listEle.created.strftime('%B, %d, %Y'))
 
@@ -54,7 +62,7 @@ def getData(userid, getAll):
             'cleared': status,
             "li": listEle.todo_list,
             "created": listEle.created.strftime('%B, %d, %Y'),
-            "updated": listEle.updated_time.strftime('%B, %d, %Y'),
+            "updated": listEle.updated_time.strftime('%B, %d, %Y, %I:%M'),
             "id": listEle.id,
         }
         list_array.append(add_list)
