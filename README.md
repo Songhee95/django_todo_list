@@ -12,7 +12,7 @@ This todo_list web app is for managing personal todo lists on both daily and mon
 ## URLs
 
 1. Deployed URL (Heroku):
-   (https://powerful-journey-66331.herokuapp.com/)
+   (https://sh-django-todo-app.herokuapp.com/)
 
 2. Github Page URL:
    [Github](https://github.com/Songhee95/django_todo_list)
