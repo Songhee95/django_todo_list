@@ -22,6 +22,7 @@ assert local_now.replace(tzinfo=None)
 
 print(local_tz)
 print(local_now)
+print(datetime.now())
 
 
 def timezone_set(data_time):
