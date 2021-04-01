@@ -86,13 +86,15 @@ body{
 .material-icons{
     font-size: 20px !important;
 }
-.editBtn, .delete{
-    padding: 0px 8px;
-    height: 100%;
+.editBtn{
+    padding: 8px;
+}
+.delete{
+    margin-left: 5px;
     background-color: white;
+    padding: 8px;
     border: none;
 }
-
 .table-wrap{
     overflow: auto;
 }

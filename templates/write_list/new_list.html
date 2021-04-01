@@ -39,15 +39,14 @@
   </label>
   <input class="displayed_list" value="{{list.li}}" id="{{list.id}}" disabled />
   <form action="">
-    <button class="editBtn home_list_buttons" data-type="list" data-id="{{list.id}}">
+    <div class="editBtn home_list_buttons" data-type="list" data-id="{{list.id}}">
       <i class="material-icons" data-type="list" data-id="{{list.id}}">edit</i>
-    </button>
+    </div>
   </form>
 
   <form action="{% url 'list:delete' list.id %}" method="post">
     {% csrf_token %}
     <button
-      type='submit'
       class="delete home_list_buttons"
       name="list_delete"
       value="list_delete"
