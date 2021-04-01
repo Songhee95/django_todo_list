@@ -36,7 +36,6 @@ for dates in week_dates_original:
 
 
 def getData(userid, getAll):
-
     if getAll:
         user = models.List.objects.filter(
             user=userid).order_by('created').reverse()
@@ -45,7 +44,6 @@ def getData(userid, getAll):
             user=userid, created__gte=date_7_days_ago).order_by('created').reverse()
     list_array = []
     date_array = []
-    # print(user)
     for listEle in user:
         if listEle.created.strftime('%B, %d, %Y') not in date_array:
             date_array.append(listEle.created.strftime('%B, %d, %Y'))
