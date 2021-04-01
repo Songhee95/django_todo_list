@@ -1,5 +1,7 @@
 import pytz
-import datetime
+from tzlocal import get_localzone
+import time
+from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
@@ -9,10 +11,22 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import timedelta
-import calendar
-# Create your views here.
 
-today = timezone.now()
+# Create your views here.
+# Setting and aware local timezone
+local_tz = get_localzone()
+ts = time.time()
+utc_now, now = datetime.utcfromtimestamp(ts), datetime.fromtimestamp(ts)
+local_now = utc_now.replace(tzinfo=pytz.utc).astimezone(local_tz)
+assert local_now.replace(tzinfo=None)
+
+
+def timezone_set(data_time):
+    local_time = data_time.replace(tzinfo=pytz.utc).astimezone(local_tz)
+    return local_time
+
+
+today = local_now
 weekday = today.weekday()
 start_delta = timezone.timedelta(days=weekday)
 start_of_week = today - start_delta
@@ -56,8 +70,8 @@ def getData(userid, getAll):
         add_list = {
             'cleared': status,
             "li": listEle.todo_list,
-            "created": listEle.created.strftime('%B, %d, %Y'),
-            "updated": listEle.updated_time.strftime('%B, %d, %Y, %I:%M'),
+            "created": timezone_set(listEle.created).strftime('%B, %d, %Y'),
+            "updated": timezone_set(listEle.updated_time).strftime('%B, %d, %Y, %I:%M'),
             "id": listEle.id,
         }
         list_array.append(add_list)
@@ -84,15 +98,16 @@ def get_monthly_data(userid, getAll):
         else:
             status = 'unchecked'
 
-        add_list = {
-            'cleared': status,
-            "li": listEle.monthly_goal,
-            "created": listEle.created.strftime('%B, %d, %Y'),
-            "updated": listEle.updated_time.strftime('%B, %d, %Y'),
-            "id": listEle.id
-        }
-        list_array.append(add_list)
-
+        month_date_sort = timezone_set(listEle.created).strftime('%B')
+        if month_date_sort == today.strftime('%B'):
+            add_list = {
+                'cleared': status,
+                "li": listEle.monthly_goal,
+                "created": timezone_set(listEle.created).strftime('%B, %d, %Y'),
+                "updated": timezone_set(listEle.updated_time).strftime('%B, %d, %Y'),
+                "id": listEle.id
+            }
+            list_array.append(add_list)
     send_data = {
         'add_list': list_array
     }
