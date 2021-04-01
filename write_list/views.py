@@ -80,6 +80,7 @@ def getData(userid, getAll):
         'add_list': list_array,
         'date_array': week_dates,
         'today': timezone_set(local_now),
+        'local_now': local_now
     }
     return send_data
 
