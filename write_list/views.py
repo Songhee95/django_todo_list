@@ -78,7 +78,8 @@ def getData(userid, getAll):
 
     send_data = {
         'add_list': list_array,
-        'date_array': week_dates
+        'date_array': week_dates,
+        'today': timezone_set(local_now),
     }
     return send_data
 
