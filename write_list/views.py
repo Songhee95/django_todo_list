@@ -21,6 +21,7 @@ local_now = utc_now.replace(tzinfo=pytz.utc).astimezone(local_tz)
 assert local_now.replace(tzinfo=None)
 
 print(local_tz)
+print(local_now)
 
 
 def timezone_set(data_time):
