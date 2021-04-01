@@ -20,6 +20,8 @@ utc_now, now = datetime.utcfromtimestamp(ts), datetime.fromtimestamp(ts)
 local_now = utc_now.replace(tzinfo=pytz.utc).astimezone(local_tz)
 assert local_now.replace(tzinfo=None)
 
+print(local_tz)
+
 
 def timezone_set(data_time):
     local_time = data_time.replace(tzinfo=pytz.utc).astimezone(local_tz)
@@ -80,7 +82,7 @@ def getData(userid, getAll):
         'add_list': list_array,
         'date_array': week_dates,
         'today': timezone_set(local_now),
-        'local_now': local_now
+        'local_now': local_now,
     }
     return send_data
 
