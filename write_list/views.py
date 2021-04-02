@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import timedelta
-
+from django.utils.dateparse import parse_datetime
 # Create your views here.
 # Setting and aware local timezone
 local_tz = get_localzone()
@@ -34,8 +34,6 @@ week_dates_original = [start_of_week +
                        timezone.timedelta(days=i) for i in range(7)]
 week_dates = []
 week_days = []
-date_7_days_ago = today - timezone.timedelta(days=7)
-
 
 for dates in week_dates_original:
     obj = {
@@ -43,10 +41,14 @@ for dates in week_dates_original:
         'day': dates.strftime('%A')
     }
     week_dates.append(obj)
+
     # week_dates.append(dates.strftime('%B, %d, %Y'))
     # week_days.append(dates.strftime('%A'))
 # print(today.strftime('%B, %d, %Y, %I:%M'))
 # print(date_7_days_ago)
+
+start_date_for_filtering = week_dates_original[0].strftime('%Y-%m-%d 00:00:00')
+last_date_for_filtering = week_dates_original[6].strftime('%Y-%m-%d 11:59:59')
 
 
 def getData(userid, getAll):
@@ -55,7 +57,7 @@ def getData(userid, getAll):
             user=userid).order_by('created').reverse()
     else:
         user = models.List.objects.filter(
-            user=userid, created__gte=date_7_days_ago).order_by('created').reverse()
+            user=userid, created__gte=start_date_for_filtering, created__lte=last_date_for_filtering).order_by('created').reverse()
     list_array = []
     date_array = []
     for listEle in user:
@@ -126,9 +128,9 @@ def index(request):
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
         try:
-            models.List.objects.get(user_id=userid, todo_list=new_list)
+            models.List.objects.get(
+                user_id=userid, created=today, todo_list=new_list)
         except:
-            print('no match')
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
 
