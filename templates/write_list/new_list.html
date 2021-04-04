@@ -1,27 +1,28 @@
 {% extends 'index.html' %} {% block content %} 
-<div id="home_cards_wrap_by_date">
-    {% for date in date_array%}
-      <button class="individual_card_wrap">
-        <div class='card_header_dates_days'>
-            <div class="card-dates">{{date.date}}</div>
-            <div class="card-days">{{date.day}}</div>
+<h1 class="home-title">List</h1>
+  <div class="home_cards_inner_wrap">
+      {% for date in date_array%}
+        <div class="individual_card_wrap" data-id="{{date.date}}">
+          <div class='card_header_dates_days'>
+              <div class="card-dates">{{date.date}} <span class="card-days"> {{date.day}}</span></div>
+          </div>
+          <div class="card-action">
+            {% for list in add_list %}
+              {% if list.created == date.date %}
+              <div class="home_card_list_row">
+                <label>
+                    <input type="checkbox" {{list.cleared}} disabled/>
+                    <span></span>
+                </label>
+                <span>{{list.li}}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
-        <div class="card-action">
-          {% for list in add_list %}
-            {% if list.created == date.date %}
-            <div class="home_card_list_row">
-              <label>
-                  <input type="checkbox" {{list.cleared}} disabled/>
-                  <span></span>
-              </label>
-              <span>{{list.li}}</span>
-            </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </button>
-    {% endfor %}
-</div>
+      {% endfor %}
+  </div>
+
 <h1 class="home-title">Edit Todo_List</h1>
 {% for list in add_list %}
 <div class="home_list_set_wrap">

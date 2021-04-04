@@ -1,18 +1,30 @@
 body{
     padding-bottom: 150px;
 }
-#home_cards_wrap_by_date{
+.body__container{
+    margin: 0;
+}
+
+.home_cards_inner_wrap{
     display: flex;
-    flex-wrap: nowrap; 
-    overflow-x: scroll;
+    overflow: auto;
+    position: relative;
 }
 .individual_card_wrap{
-    flex: 0 0 auto;
-    width: 300px;
+    flex: 0 0 300px;
+    height: 300px;
     margin: 20px;
     padding: 20px;
     border: 1px solid #ee6e73;
     border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.individual_card_wrap:hover{
+    background-color: rgb(233, 230, 230);
+}
+.individual_card_wrap:active{
+    background-color: #ddd;
 }
 .card_header_dates_days{
     padding-bottom: 10px;
@@ -23,6 +35,7 @@ body{
     font-weight: 500;
 }
 .card-days{
+    margin-left: 10px;
     font-weight: 700;
     font-size: 18px;
 }
