@@ -1,8 +1,29 @@
 {% extends 'index.html' %} {% block content %} 
 <h1 class="home-title">List</h1>
-  <div class="home_cards_inner_wrap">
+      <div class="home_cards_inner_wrap">
+
+{% comment %} modal  {% endcomment %}
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal bottom-sheet">
+        <div class="modal-content">
+          <h1 class="modal_content__header"></h1>
+          <div class="input_div">
+            <input
+              type="text"
+              class="list_input"
+              name="todo"
+              placeholder="Toto List"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+      </div>
+{% comment %} modal end {% endcomment %}
+
       {% for date in date_array%}
-        <div class="individual_card_wrap" data-id="{{date.date}}">
+        <div class="individual_card_wrap modal-trigger" data-target='modal1' data-id="{{date.date}}">
           <div class='card_header_dates_days'>
               <div class="card-dates">{{date.date}} <span class="card-days"> {{date.day}}</span></div>
           </div>
