@@ -138,6 +138,14 @@ def index(request):
 
 
 @ login_required(login_url='/login')
+@ csrf_exempt
+def modal(request):
+    modal_date = request.POST.get('selected')
+
+    return render(request, "write_list/modal.html", {'modal_date': modal_date})
+
+
+@ login_required(login_url='/login')
 def delete(request, list_id):
     userid = request.user.id
     url = 'list:index'
