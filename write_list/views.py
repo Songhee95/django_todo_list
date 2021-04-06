@@ -133,6 +133,8 @@ def index(request):
         except:
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
+    if request.POST.get('todo-by-date'):
+        print('this is todo-by-date')
 
     return render(request, 'write_list/new_list.html', getData(userid, False))
 
