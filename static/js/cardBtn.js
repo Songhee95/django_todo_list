@@ -37,6 +37,19 @@ for (el of cardBtnElement) {
       }
     }
     list_container.append(adding_list_container);
+
+    const modal_submit_button = document.querySelectorAll(
+      ".modal_submit_button"
+    );
+    console.log(modal_submit_button);
+    for (var el of modal_submit_button) {
+      el.setAttribute("data-content", selectedDate);
+
+      el.addEventListener("click", function (e) {
+        console.log(el.getAttribute("data-content"));
+      });
+    }
+
     // ajax call
     // $.ajax({
     //   type: "POST",

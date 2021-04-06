@@ -133,8 +133,9 @@ def index(request):
         except:
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()
-    if request.POST.get('todo-by-date'):
-        print('this is todo-by-date')
+    # if request.POST.get('todo-by-date'):
+    #     print(request.POST.get('todo-by-date'))
+    #     user = models.List.objects.filter(user=userid, created__gte=start_date_for_filtering, created__lte=last_date_for_filtering).order_by('created').reverse()
 
     return render(request, 'write_list/new_list.html', getData(userid, False))
 
