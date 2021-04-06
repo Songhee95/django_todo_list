@@ -139,10 +139,9 @@ def index(request):
 
 @ login_required(login_url='/login')
 @ csrf_exempt
-def modal(request):
-    modal_date = request.POST.get('selected')
+def modal_pop(request):
 
-    return render(request, "write_list/modal.html", {'modal_date': modal_date})
+    return render(request, "write_list/modal_pop.html")
 
 
 @ login_required(login_url='/login')
