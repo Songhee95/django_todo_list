@@ -129,7 +129,7 @@ def index(request):
                 user_id=userid, todo_list=new_list).save()
         try:
             models.List.objects.get(
-                user_id=userid, created=today, todo_list=new_list)
+                user_id=userid, created__year=today.year, created__month=today.month, created__day=today.day, todo_list=new_list)
         except:
             models.List.objects.create(
                 user_id=userid, todo_list=new_list).save()

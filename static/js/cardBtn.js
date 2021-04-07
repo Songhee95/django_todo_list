@@ -56,7 +56,8 @@ for (el of cardBtnElement) {
       el.addEventListener("click", function (e) {
         const submitted_date = el.getAttribute("data-content");
         // let modal_add_input = el.closest("div").querySelector("input");
-        console.log(modal_input_value);
+        modal_input_value_1 = e.target.value;
+        console.log(modal_input_value_1);
       });
     }
 
