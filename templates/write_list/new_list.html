@@ -27,9 +27,10 @@
       {% endfor %}
   </div>
 
-<h1 class="home-title">Edit Todo_List</h1>
+<h1 class="home-title">Weekly Todo_List</h1>
 {% for list in add_list %}
 <div class="home_list_set_wrap" data-content='{{list.created}}'>
+<p>{{list.created}}</p>
   <label class='home_list_checkbox'>
     <input
       type="checkbox"

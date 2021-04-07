@@ -41,12 +41,22 @@ for (el of cardBtnElement) {
     const modal_submit_button = document.querySelectorAll(
       ".modal_submit_button"
     );
-    console.log(modal_submit_button);
+
+    const modal_input = document.querySelectorAll(".modal_input_value");
+    let modal_input_value = "";
+    for (var li of modal_input) {
+      li.addEventListener("change", function (e) {
+        modal_input_value = e.target.value;
+      });
+    }
+
     for (var el of modal_submit_button) {
       el.setAttribute("data-content", selectedDate);
 
       el.addEventListener("click", function (e) {
-        console.log(el.getAttribute("data-content"));
+        const submitted_date = el.getAttribute("data-content");
+        // let modal_add_input = el.closest("div").querySelector("input");
+        console.log(modal_input_value);
       });
     }
 
