@@ -5,15 +5,15 @@
       {% for date in date_array %} 
 
         {% include 'write_list/modal_pop.html' with list=add_list%}
-        <div class="individual_card_wrap modal-trigger" data-target='modal1' data-id="{{date.date}}">
-          <div class='card_header_dates_days'>
-              <div class="card-dates">{{date.date}} <span class="card-days"> {{date.day}}</span></div>
+        <div class="individual_card_wrap modal-trigger" data-target='modal1' data-content="{{date.date}}">
+          <div class='card_header_dates_days' data-content='{{date.date}}'>
+              <div class="card-dates" data-content='{{date.date}}'>{{date.date}} <span class="card-days"> {{date.day}}</span></div>
           </div>
-          <div class="card-action">
+          <div class="card-action" data-content='{{date.date}}'>
             {% for list in add_list %}
               {% if list.created == date.date %}
               
-              <div class="home_card_list_row {{date.date}}">
+              <div class="home_card_list_row" data-content='{{date.date}}'>
                 <label>
                     <input type="checkbox" {{list.cleared}} disabled/>
                     <span></span>
@@ -30,7 +30,7 @@
 <h1 class="home-title">Weekly Todo_List</h1>
 {% for list in add_list %}
 <div class="home_list_set_wrap" data-content='{{list.created}}'>
-<p>{{list.created}}</p>
+  <div>{{list.created}}</div>
   <label class='home_list_checkbox'>
     <input
       type="checkbox"
