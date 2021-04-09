@@ -36,6 +36,20 @@ for (el of cardBtnElement) {
       const get_data_content = list.getAttribute("data-content");
       if (get_data_content == modal_data_content) {
         const cln = list.cloneNode(true);
+        const modal_edit_button = cln.querySelectorAll(".editBtn");
+        modal_edit_button.forEach((button) => {
+          button.classList.add("modal_edit_button");
+        });
+        const modal_clear_button = cln.querySelectorAll(".home_list_checkbox");
+        modal_clear_button.forEach((button) => {
+          button.classList.add("modal_clear_button");
+        });
+        const modal_date_to_remove = cln.querySelectorAll(
+          ".home_list_date_column"
+        );
+        modal_date_to_remove.forEach((element) => {
+          element.parentNode.removeChild(element);
+        });
         adding_list_container.append(cln);
       }
     }
@@ -85,8 +99,71 @@ for (el of cardBtnElement) {
             string: added_input_from_modal,
             date: input_date_from_modal,
           },
-        });
+        }).then((res) => location.reload());
       }
     });
+
+    const editBtn = document.querySelectorAll(".modal_edit_button");
+    for (el of editBtn) {
+      let clicked = false;
+      el.addEventListener("click", function (e) {
+        clicked = !clicked;
+        const edit_selected = e.target.getAttribute("data-id");
+        const modal_parent_selected_row = e.target.closest(
+          "div.home_list_set_wrap"
+        );
+        const modal_edit_input = modal_parent_selected_row.querySelector(
+          "input.displayed_list"
+        );
+        const dataType = e.target.getAttribute("data-type");
+
+        if (clicked) {
+          modal_edit_input.removeAttribute("disabled");
+        } else {
+          modal_edit_input.setAttribute("disabled", "");
+          const url = `/edit/${edit_selected}`;
+          const data = modal_edit_input.value;
+          $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+              pageType: dataType,
+              string: data,
+            },
+          }).then((res) => location.reload());
+        }
+      });
+    }
+
+    const clear_btn = document.querySelectorAll(".modal_clear_button");
+    for (el of clear_btn) {
+      el.addEventListener("click", function (e) {
+        const checked_el = e.target.getAttribute("data-id");
+        const dataType = e.target.getAttribute("data-type");
+        const url = `/edit/${checked_el}`;
+        if (e.target.checked) {
+          status = "True";
+        } else {
+          status = "False";
+        }
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: {
+            pageType: dataType,
+            checked: status,
+          },
+        }).then((res) => location.reload());
+      });
+    }
   });
 }
+
+const modal_edit_cleared = modal_parent_selected_row.querySelector(
+  "input.clearBtn"
+);
+console.log(modal_edit_cleared);
+const checked_el = modal_edit_cleared.getAttribute("data-id");
+const dataType_edit_cleared = modal_edit_cleared.getAttribute("data-type");
+console.log(checked_el);
+console.log(dataType_edit_cleared);

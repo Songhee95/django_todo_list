@@ -66,7 +66,7 @@
 <h1 class="home-title">Weekly Todo List</h1>
 {% for list in add_list %}
     <div class="home_list_set_wrap" data-content='{{list.created}}'>
-    <div>{{list.created}}</div>
+    <div class='home_list_date_column'>{{list.created}}</div>
       <label class='home_list_checkbox'>
         <input
           type="checkbox"
@@ -78,7 +78,7 @@
         />
         <span></span>
       </label>
-      <input class="displayed_list {{list.id}}" value="{{list.li}}" disabled />
+      <input class="displayed_list {{list.id}}" value="{{list.li}}" name="edit_value" disabled />
       <form action="">
         <div class="editBtn home_list_buttons" data-type="list" data-id="{{list.id}}">
           <i class="material-icons" data-type="list" data-id="{{list.id}}">edit</i>
