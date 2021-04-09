@@ -13,22 +13,25 @@ for (el of editBtn) {
   el.addEventListener("click", function (e) {
     clicked = !clicked;
     const edit_selected = e.target.getAttribute("data-id");
-    const selected_row = document.getElementById(edit_selected);
+    const selected_row = document.getElementsByClassName(edit_selected);
     const dataType = e.target.getAttribute("data-type");
-    if (clicked) {
-      selected_row.removeAttribute("disabled");
-    } else {
-      selected_row.setAttribute("disabled", "");
-      const url = `/edit/${edit_selected}`;
-      const data = selected_row.value;
-      const type = $.ajax({
-        type: "POST",
-        url: url,
-        data: {
-          pageType: dataType,
-          string: data,
-        },
-      });
+
+    for (var list of selected_row) {
+      if (clicked) {
+        list.removeAttribute("disabled");
+      } else {
+        list.setAttribute("disabled", "");
+        const url = `/edit/${edit_selected}`;
+        const data = list.value;
+        const type = $.ajax({
+          type: "POST",
+          url: url,
+          data: {
+            pageType: dataType,
+            string: data,
+          },
+        }).then((res) => location.reload());
+      }
     }
   });
 }
