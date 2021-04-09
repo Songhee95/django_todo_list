@@ -76,9 +76,17 @@ for (el of cardBtnElement) {
       const input_date_from_modal = input_from_modal.firstChild.getAttribute(
         "data-content"
       );
-
-      console.log(added_input_from_modal);
-      console.log(input_date_from_modal);
+      if (added_input_from_modal !== "") {
+        $.ajax({
+          type: "POST",
+          url: "/modal_pop",
+          data: {
+            pageType: "modal",
+            string: added_input_from_modal,
+            date: input_date_from_modal,
+          },
+        });
+      }
     });
   });
 }

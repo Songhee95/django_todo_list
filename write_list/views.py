@@ -82,7 +82,7 @@ def getData(userid, getAll):
         'add_list': list_array,
         'date_array': week_dates,
         'today': timezone_set(local_now),
-        'local_now': local_now,
+        'local_now': local_now.strftime('%B, %d, %Y'),
     }
     return send_data
 
@@ -126,24 +126,36 @@ def index(request):
     if new_list:
         if send_data == None:
             models.List.objects.create(
-                user_id=userid, todo_list=new_list).save()
+                user_id=userid, todo_list=new_list, created=today).save()
         try:
             models.List.objects.get(
                 user_id=userid, created__year=today.year, created__month=today.month, created__day=today.day, todo_list=new_list)
         except:
             models.List.objects.create(
-                user_id=userid, todo_list=new_list).save()
-    # if request.POST.get('todo-by-date'):
-    #     print(request.POST.get('todo-by-date'))
-    #     user = models.List.objects.filter(user=userid, created__gte=start_date_for_filtering, created__lte=last_date_for_filtering).order_by('created').reverse()
-
+                user_id=userid, todo_list=new_list, created=today).save()
     return render(request, 'write_list/new_list.html', getData(userid, False))
 
 
 @ login_required(login_url='/login')
 @ csrf_exempt
 def modal_pop(request):
+    userid = request.user.id
+    if request.POST.get('pageType'):
+        modal_input = request.POST.get("string")
+        modal_input_date = request.POST.get("date")
+        modal_date_utc = datetime.strptime(
+            modal_input_date, '%B, %d, %Y')
 
+        user = models.List.objects.filter(user=userid, created=modal_date_utc)
+        if user == None:
+            models.List.objects.create(
+                user_id=userid, todo_list=modal_input, created=modal_date_utc).save()
+        try:
+            models.List.objects.get(
+                user_id=userid, created=modal_date_utc, todo_list=modal_input)
+        except:
+            models.List.objects.create(
+                user_id=userid, todo_list=modal_input, created=modal_date_utc).save()
     return render(request, "write_list/modal_pop.html")
 
 
