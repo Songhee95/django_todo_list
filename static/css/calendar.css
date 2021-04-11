@@ -1,0 +1,19 @@
+.calendar{
+    margin: 30px;
+}
+.calendar > table{
+    width: 20%;
+    table-layout: fixed;
+}
+th, td{
+    text-align: center !important;
+}
+.mon, .tue, .wed, .thu, .fri, .sat, .sun{
+    cursor: pointer;
+}
+.mon:hover, .tue:hover, .wed:hover, .thu:hover, .fri:hover, .sat:hover, .sun:hover{
+    background-color: #ddd;
+}
+.month_next_prev_buttons{
+    margin-top: 10px;
+}

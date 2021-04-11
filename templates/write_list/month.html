@@ -18,6 +18,8 @@
   </head>
   <body>
     {% include 'navbar.html' %}
+    {% comment %} {% include 'calendar_app/calendar.html' %} {% endcomment %}
+
     <div class="container">
       <h1 class="home-title">{{request.user}}'s Monthly Goal : {{date}}</h1>
       <form action="{% url 'list:month' %}" method="post">
