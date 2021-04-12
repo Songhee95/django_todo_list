@@ -10,5 +10,5 @@ urlpatterns = [
     path('<int:list_id>', views.delete, name='delete'),
     path('edit/<int:list_id>', views.edit, name='edit'),
     path('history', views.history, name='history'),
-    path('month', views.month, name='month'),
+    # path('month', views.month, name='month'),
 ]

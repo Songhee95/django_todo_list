@@ -1,8 +1,14 @@
+.calendar_whole_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
 .calendar{
+    width: 30%;
     margin: 30px;
+    text-align: center;
 }
 .calendar > table{
-    width: 20%;
     table-layout: fixed;
 }
 th, td{
@@ -16,4 +22,7 @@ th, td{
 }
 .month_next_prev_buttons{
     margin-top: 10px;
+}
+.monthly_goal_container{
+    width: 40%;
 }

@@ -220,31 +220,33 @@ def history(request):
     send_data = {
         'daily': daily,
         'month': month,
+        'current_year': datetime.now().year,
+        'current_month': datetime.now().month
     }
     return render(request, 'write_list/history.html', send_data)
 
 
-@ login_required(login_url='/login')
-def month(request):
-    userid = request.user.id
-    new_list = request.POST.get('monthly')
-    send_data = get_monthly_data(userid, False)
-    if new_list:
-        if send_data == None:
-            models.Monthly.objects.create(
-                user_id=userid, monthly_goal=new_list).save()
-        try:
-            models.Monthly.objects.get(
-                user_id=userid, monthly_goal=new_list)
-        except:
-            print('no match')
-            models.Monthly.objects.create(
-                user_id=userid, monthly_goal=new_list).save()
-    send_data = {
-        'data': get_monthly_data(userid, False),
-        'date': today.strftime('%B')
-    }
-    return render(request, 'write_list/month.html', send_data)
+# @ login_required(login_url='/login')
+# def month(request):
+#     userid = request.user.id
+#     new_list = request.POST.get('monthly')
+#     send_data = get_monthly_data(userid, False)
+#     if new_list:
+#         if send_data == None:
+#             models.Monthly.objects.create(
+#                 user_id=userid, monthly_goal=new_list).save()
+#         try:
+#             models.Monthly.objects.get(
+#                 user_id=userid, monthly_goal=new_list)
+#         except:
+#             print('no match')
+#             models.Monthly.objects.create(
+#                 user_id=userid, monthly_goal=new_list).save()
+#     send_data = {
+#         'data': get_monthly_data(userid, False),
+#         'date': today.strftime('%B')
+#     }
+#     return render(request, 'calendar_app/calendar.html', send_data)
 
 
 @ login_required(login_url='/login')

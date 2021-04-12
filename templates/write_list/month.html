@@ -17,12 +17,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-    {% include 'navbar.html' with list=add_list %}
-    {% comment %} {% include 'calendar_app/calendar.html' %} {% endcomment %}
-
     <div class="container">
       <h1 class="home-title">{{request.user}}'s Monthly Goal : {{date}}</h1>
-      <form action="{% url 'list:month' %}" method="post">
+      <form action="{% url 'calendar_app:cal_date' year=current_year month=current_month %}" method="post">
         {% csrf_token %}
         <div class="add_input_container">
           <div class="input_div">

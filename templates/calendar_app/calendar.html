@@ -17,8 +17,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-  {% include 'write_list/month.html' %}
-    <div class='calendar'>
+  {% include 'navbar.html' %}
+  <div class="calendar_whole_container">
+      <div class='calendar'>
         {{cal|safe}}
         <div class='month_next_prev_buttons'>
             <button class='month_prev'><i class="material-icons">chevron_left</i></button>
@@ -27,6 +28,10 @@
         </div>
 
     </div>
+    <div class="monthly_goal_container">
+        {% include 'write_list/month.html' %}
+    </div>
+  </div>
   </body>
     <script src="{% static 'js/calendar.js' %}"></script>
 </html>
