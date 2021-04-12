@@ -17,7 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-    {% include 'navbar.html' %}
+    {% include 'navbar.html' with list=add_list %}
     {% comment %} {% include 'calendar_app/calendar.html' %} {% endcomment %}
 
     <div class="container">

@@ -18,7 +18,7 @@
   </head>
   <body>
   <div class="body__container">
-    {% include 'navbar.html' %}
+    {% include 'navbar.html' with list=add_list %}
     <div class="container">
       <h1 class="home-title">Add Todays' ToDo List</h1>
       <form action="{% url 'list:index' %}" method="post">

@@ -17,13 +17,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
+  {% include 'write_list/month.html' %}
     <div class='calendar'>
         {{cal|safe}}
         <div class='month_next_prev_buttons'>
-            <button class='month_next'><i class="material-icons">chevron_left</i></button>
-            <button class='month_prev'><i class="material-icons">chevron_right</i></button>
+            <button class='month_prev'><i class="material-icons">chevron_left</i></button>
+            <span class='displaying_month'>{{month}}</span>
+            <button class='month_next'><i class="material-icons">chevron_right</i></button>
         </div>
 
     </div>
   </body>
+    <script src="{% static 'js/calendar.js' %}"></script>
 </html>

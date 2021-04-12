@@ -83,6 +83,8 @@ def getData(userid, getAll):
         'date_array': week_dates,
         'today': timezone_set(local_now),
         'local_now': local_now.strftime('%B, %d, %Y'),
+        'current_year': datetime.now().year,
+        'current_month': datetime.now().month
     }
     return send_data
 
@@ -113,7 +115,9 @@ def get_monthly_data(userid, getAll):
             }
             list_array.append(add_list)
     send_data = {
-        'add_list': list_array
+        'add_list': list_array,
+        'current_year': datetime.now().year,
+        'current_month': datetime.now().month
     }
     return send_data
 
