@@ -27,7 +27,7 @@ for (el of cardBtnElement) {
     modalContainer.text(modal_data_content);
 
     const getting_date_list = document.getElementsByClassName(
-      "home_list_set_wrap"
+      "home_list_set_wrap_for_modal"
     );
 
     let adding_list_container = document.createElement("div");

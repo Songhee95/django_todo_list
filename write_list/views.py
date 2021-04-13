@@ -180,14 +180,6 @@ def delete(request, list_id):
     return redirect(url)
 
 
-# print(datetime.now().year)
-# print(datetime.now().month)
-# url = 'calendar_app:cal_date year=' + \
-#     str(datetime.now().year) + ' month=' + str(datetime.now().month)
-
-# print(url)
-
-
 @ login_required(login_url='/login')
 @ csrf_exempt
 def edit(request, list_id):

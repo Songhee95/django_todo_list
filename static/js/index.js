@@ -15,9 +15,12 @@ for (el of editBtn) {
     const edit_selected = e.target.getAttribute("data-id");
     const selected_row = document.getElementsByClassName(edit_selected);
     const dataType = e.target.getAttribute("data-type");
-
+    console.log(edit_selected);
+    console.log(selected_row);
+    console.log(dataType);
     for (var list of selected_row) {
       if (clicked) {
+        console.log(list);
         list.removeAttribute("disabled");
       } else {
         list.setAttribute("disabled", "");
@@ -54,7 +57,7 @@ for (el of clear_btn) {
         pageType: dataType,
         checked: status,
       },
-    });
+    }).then((res) => location.reload());
   });
 }
 

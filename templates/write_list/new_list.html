@@ -64,7 +64,7 @@
 
 <h1 class="home-title">Weekly Todo List</h1>
 {% for list in add_list %}
-    <div class="home_list_set_wrap" data-content='{{list.created}}'>
+    <div class="home_list_set_wrap home_list_set_wrap_for_modal" data-content='{{list.created}}'>
     <div class='home_list_date_column'>{{list.created}}</div>
       <label class='home_list_checkbox'>
         <input
