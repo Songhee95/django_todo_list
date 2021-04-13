@@ -175,8 +175,17 @@ def delete(request, list_id):
         selected = models.Monthly.objects.get(pk=list_id)
         selected.delete()
         send_data = get_monthly_data(userid, False)
-        url = 'list:month'
+        url = 'calendar/' + \
+            str(datetime.now().year) + '/' + str(datetime.now().month)
     return redirect(url)
+
+
+# print(datetime.now().year)
+# print(datetime.now().month)
+# url = 'calendar_app:cal_date year=' + \
+#     str(datetime.now().year) + ' month=' + str(datetime.now().month)
+
+# print(url)
 
 
 @ login_required(login_url='/login')
@@ -202,7 +211,7 @@ def edit(request, list_id):
             get_original_value.cleared = request.POST.get('checked')
         get_original_value.save()
         send_data = get_monthly_data(userid, False)
-        url = 'write_list/month.html'
+        url = 'calendar_app/calendar.html'
     return render(request, url, send_data)
 
 
