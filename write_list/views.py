@@ -192,6 +192,7 @@ def edit(request, list_id):
         get_original_value = models.List.objects.get(pk=list_id)
         if request.POST.get('string'):
             get_original_value.todo_list = request.POST.get('string')
+
         elif request.POST.get('checked'):
             get_original_value.cleared = request.POST.get('checked')
         get_original_value.save()
