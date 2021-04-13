@@ -14,10 +14,10 @@
 th, td{
     text-align: center !important;
 }
-.mon, .tue, .wed, .thu, .fri, .sat, .sun{
+td.mon, td.tue, td.wed, td.thu, td.fri, td.sat, td.sun{
     cursor: pointer;
 }
-.mon:hover, .tue:hover, .wed:hover, .thu:hover, .fri:hover, .sat:hover, .sun:hover{
+td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hover, td.sun:hover{
     background-color: #ddd;
 }
 .month_next_prev_buttons{

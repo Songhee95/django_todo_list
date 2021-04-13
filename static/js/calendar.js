@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  $(document).ready(function () {
+    $(".modal").modal();
+  });
+
   obj = {
     January: 1,
     February: 2,
@@ -22,11 +26,6 @@ $(document).ready(function () {
     let next = obj[displaying_month] + 1;
     const url = `/calendar/${year}/${next}`;
     window.location.replace(url);
-
-    // $.ajax({
-    //   type: "GET",
-    //   url: url,
-    // }).then((res) => location.reload());
   });
 
   $(".month_prev").click(function (e) {
@@ -40,5 +39,10 @@ $(document).ready(function () {
         idx: prev,
       },
     });
+  });
+  $("td").click(function (e) {
+    $(e.target).addClass("modal-trigger").attr("data-target", "modal2");
+    let day = $(e.target).text();
+    $(".modal2_content__header").text(d.getMonth() + 1 + " / " + day);
   });
 });
