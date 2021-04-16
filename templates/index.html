@@ -17,29 +17,79 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-  <div class="body__container">
-    {% include 'navbar.html' %}
-    <div class="container">
-      <h1 class="home-title">Add Todays' ToDo List</h1>
-      <form action="{% url 'list:index' %}" method="post">
-        {% csrf_token %}
-        <div class="add_input_container">
-          <div class="input_div">
-            <input
-              type="text"
-              class="list_input"
-              name="todo"
-              placeholder="Toto List"
-            />
-          </div>
-          <div class="add_button_container">
-            <input type="submit" class="home_add_button" value="Add" />
-          </div>
+    <div class="body__container">
+      {% include 'navbar.html' %}
+      <div class="container">
+        <h1 class="home-title">Add Todays' ToDo List</h1>
+        <div class="today-list-container">
+          <div class="today-list-first-container">
+              <form action="{% url 'list:index' %}" method="post">
+                {% csrf_token %}
+                <div class="add_input_container">
+                  <div class="input_div">
+                    <input
+                      type="text"
+                      class="list_input"
+                      name="todo"
+                      placeholder="Toto List"
+                    />
+                  </div>
+                  <div class="add_button_container">
+                    <input type="submit" class="home_add_button" value="Add" />
+                  </div>
+                </div>
+              </form>
+            </div>
+          
+          <div class="today-list-second-container">
+              {% for list in add_list %} {% if list.created == local_now %}
+              <div class="home_list_set_wrap" data-content="{{list.created}}">
+                <label class="home_list_checkbox">
+                  <input
+                    type="checkbox"
+                    class="clearBtn"
+                    data-type="list"
+                    {{list.cleared}}
+                    data-id="{{list.id}}"
+                    status="false"
+                  />
+                  <span></span>
+                </label>
+                <input
+                  class="displayed_list {{list.id}}"
+                  value="{{list.li}}"
+                  disabled
+                />
+                <form action="">
+                  <div
+                    class="editBtn home_list_buttons"
+                    data-type="list"
+                    data-id="{{list.id}}"
+                  >
+                    <i class="material-icons" data-type="list" data-id="{{list.id}}"
+                      >edit</i
+                    >
+                  </div>
+                </form>
+
+                <form action="{% url 'list:delete' list.id %}" method="post">
+                  {% csrf_token %}
+                  <button
+                    class="delete home_list_buttons"
+                    name="list_delete"
+                    value="list_delete"
+                  >
+                    <i class="material-icons">delete</i>
+                  </button>
+                </form>
+              </div>
+              {% endif %} {% endfor %}
+            </div>
         </div>
-      </form>
+
         {% block content %} {% endblock content %}
-  </div>
-  </div>
+      </div>
+    </div>
   </body>
   <script src="{% static 'js/index.js' %}"></script>
   <script src="{% static 'js/cardBtn.js' %}"></script>

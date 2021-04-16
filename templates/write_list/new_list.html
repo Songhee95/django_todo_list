@@ -26,8 +26,8 @@
       {% endfor %}
   </div>
 
-<h1 class="home-title">Today's Todo List</h1>
-{% for list in add_list %}
+{% comment %} <h1 class="home-title">Today's Todo List</h1> {% endcomment %}
+{% comment %} {% for list in add_list %}
   {% if list.created == local_now %}
     <div class="home_list_set_wrap" data-content='{{list.created}}'>
       <label class='home_list_checkbox'>
@@ -60,7 +60,7 @@
       </form>
     </div>
     {% endif %}
-{% endfor %} 
+{% endfor %}  {% endcomment %}
 
 <h1 class="home-title">Weekly Todo List</h1>
 {% for list in add_list %}

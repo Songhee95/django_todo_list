@@ -1,8 +1,33 @@
 body{
     padding-bottom: 150px;
 }
+nav{
+    background-color:#202020 !important;
+}
+.nav-button>li:hover{
+    background-color: rgb(155, 152, 152) !important;
+}
 .body__container{
     margin: 0;
+}
+.today-list-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.today-list-first-container, .today-list-second-container{
+    width: 45%;
+    background-color: #FFDF6C;
+    border-radius: 10px;
+    padding: 3%;
+}
+.today-list-first-container{
+    
+}
+.today-list-second-container{
+}
+.today-list-second-container> .home_list_set_wrap > form > button{
+    background-color:  #FFDF6C;
 }
 
 .home_cards_inner_wrap{
@@ -104,7 +129,7 @@ body{
     padding-left: 10px !important;
 }
 .list_input{
-    border: 2px solid #ddd !important;
+    border: 1px solid #202020 !important;
     border-radius: 4px !important;
     margin: 0 !important
 }
@@ -136,7 +161,7 @@ body{
 }
 .delete{
     margin-left: 5px;
-    background-color: white;
+    background-color:  white;
     padding: 8px;
     border: none;
 }
@@ -150,25 +175,29 @@ body{
 .table_sort_button{
     cursor: pointer;
 }
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
-  }
+}
   
   /* Track */
-  ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey; 
     border-radius: 7px;
-  }
+}
    
   /* Handle */
-  ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: #ee6e73;; 
     border-radius: 10px;
-  }
+}
   
   /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #ec585d;; 
-  }
+}
+::placeholder {
+    color: #202020 !important;
+}
