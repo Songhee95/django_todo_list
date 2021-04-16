@@ -36,25 +36,116 @@
 <div id="modal2" class="modal bottom-sheet">
     <div class="modal-content container">
       <h5 class="modal2_content__header"></h5>
-        <form action="{% url 'list:index' %}" method="post">
-          {% csrf_token %}
-          <div class="add_input_container">
-            <div class="input_div">
+    
+          <div class="schedule_input_container">
+            <div class="schedule_input_div">
               <input
                 type="text"
-                class="list_input"
-                name="todo"
-                placeholder="Toto List"
+                class="schedule_input"
+                placeholder="Add Schedule"
               />
             </div>
-            <div class="add_button_container">
-              <input type="submit" class="home_add_button" value="Add" />
+            <div class="schedule_add_button_container">
+              <input type="submit" class="schedule_add_button" value="Add" />
+            </div>
+            <div class="schdule_data_from_db_container">
+
             </div>
           </div>
-        </form>
+        
     </div>
 </div> 
   </body>
-  
-    <script src="{% static 'js/calendar.js' %}"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+      $(".modal").modal();
+
+      obj = {
+        January: 1,
+        February: 2,
+        March: 3,
+        April: 4,
+        May: 5,
+        June: 6,
+        July: 7,
+        August: 8,
+        September: 9,
+        October: 10,
+        November: 11,
+        December: 12,
+      };
+      const d = new Date();
+      const year = d.getFullYear();
+      let displaying_month = $(".displaying_month").text();
+      $(".month_next").click(function (e) {
+        //   send current month +1
+        let next = obj[displaying_month] + 1;
+        const url = `/calendar/${year}/${next}`;
+        window.location.replace(url);
+      });
+
+      $(".month_prev").click(function (e) {
+        //   send current month -1
+        let prev = obj[displaying_month] - 1;
+        const url = `/calendar/${year}/${prev}`;
+        window.location.replace(url);
+      });
+
+      $("td").click(function (e) {
+        $('.schdule_data_from_db_container').empty()
+
+        if ($(e.target).attr("class") != "noday") {
+          let month = obj[displaying_month];
+          $(e.target)
+            .addClass("modal-trigger")
+            .attr("data-target", "modal2");
+          $(".schedule_input").val("");
+          let day = $(e.target).text();
+
+          let created = `${displaying_month} ${day}, ${year}, midnight`
+
+          var a = '{% for list in schedule %}{{list.created}}/{% endfor %}'
+          var b = '{% for list in schedule %}{{list.schedule}}/{% endfor %}'
+          var c = '{% for list in schedule %}{{list.id}}/{% endfor %}'
+          var all_created_arr = a.split('/')
+          var all_schedule_arr = b.split('/')
+          var all_id_arr = c.split('/')
+
+          var selected_schedule_arr = [];
+          for(var i =0; i<all_created_arr.length; i++){
+            if(all_created_arr[i] == created){
+              selected_schedule_arr.push(all_schedule_arr[i])
+              var schedule_el = $('<div>').text(all_schedule_arr[i])
+              var del_icon = $('<i>').addClass('material-icons').text('delete')
+              var schedule_del = $('<button>').addClass('schedule_del').attr('id', all_id_arr[i]).append(del_icon)
+              var schedule_container = $('<div>').addClass('schedule_modal_container').append(schedule_el).append(schedule_del)
+              $('.schdule_data_from_db_container').append(schedule_container)
+            }
+          }
+
+
+          $('.schedule_add_button').attr('id', day);
+          $(".modal2_content__header").text(month + " / " + day);
+
+
+          $(".schedule_add_button").click(function (event) {
+            if ($(event.target).attr("id") == day) {
+              const value = $(".schedule_input").val();
+              $.ajax({
+                type: "POST",
+                url: "/add_schedule",
+                data: {
+                  month: month,
+                  day: day,
+                  value: value,
+                },
+              }).then((res) => {
+                window.location.reload()
+              });
+            }
+          }); 
+        }
+      });
+    });
+  </script>
 </html>

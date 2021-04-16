@@ -26,3 +26,10 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
 .monthly_goal_container{
     width: 40%;
 }
+.schedule_modal_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2% 0;
+    border-bottom: 1px solid #ddd;
+}

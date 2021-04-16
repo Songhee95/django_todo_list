@@ -159,11 +159,11 @@ for (el of cardBtnElement) {
   });
 }
 
-const modal_edit_cleared = modal_parent_selected_row.querySelector(
-  "input.clearBtn"
-);
-console.log(modal_edit_cleared);
-const checked_el = modal_edit_cleared.getAttribute("data-id");
-const dataType_edit_cleared = modal_edit_cleared.getAttribute("data-type");
-console.log(checked_el);
-console.log(dataType_edit_cleared);
+// const modal_edit_cleared = modal_parent_selected_row.querySelector(
+//   "input.clearBtn"
+// );
+// console.log(modal_edit_cleared);
+// const checked_el = modal_edit_cleared.getAttribute("data-id");
+// const dataType_edit_cleared = modal_edit_cleared.getAttribute("data-type");
+// console.log(checked_el);
+// console.log(dataType_edit_cleared);

@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
 from write_list import models
+from . import models as calModels
 import pytz
 from tzlocal import get_localzone
 import time
@@ -58,14 +59,16 @@ def get_monthly_data(userid, getAll):
     return send_data
 
 
+# Get current year
+now = datetime.now()
+current_year = now.year
+current_month = now.month
+
+
 @ login_required(login_url='/login')
 @ csrf_exempt
 def cal_date(request, year, month):
-    # Get current year
-    now = datetime.now()
-    current_year = now.year
-    current_month = now.month
-
+    userid = request.user.id
     # create a calendar
     cal = HTMLCalendar().formatmonth(int(year), int(month))
 
@@ -88,10 +91,37 @@ def cal_date(request, year, month):
             models.Monthly.objects.create(
                 user_id=userid, monthly_goal=new_list).save()
 
+    schedule_data = calModels.Month_Schedule.objects.filter(user_id=userid)
+
     return render(request, 'calendar_app/calendar.html', {
         'cal': cal,
         'month': month_name,
         'current_year': current_year,
         'current_month': current_month,
         'data': get_monthly_data(userid, False),
+        'schedule': schedule_data
     })
+
+
+@ login_required(login_url='/login')
+@ csrf_exempt
+def add_schedule(request):
+    userid = request.user.id
+    # create a calendar
+    cal = HTMLCalendar().formatmonth(int(current_year), int(current_month))
+    # new_to_calendar = request.POST.get('schedule')
+    add_to_cal_month = int(request.POST.get('month'))
+    add_to_cal_day = int(request.POST.get('day'))
+    add_to_cal_value = request.POST.get('value')
+
+    add_to_cal_created = datetime(
+        current_year, add_to_cal_month, add_to_cal_day)
+
+    print(add_to_cal_value)
+    if add_to_cal_value:
+        user = calModels.Month_Schedule.objects.create(
+            user_id=userid, schedule=add_to_cal_value, created=add_to_cal_created)
+
+    url = 'calendar/' + \
+        str(current_year) + '/' + str(current_month)
+    return redirect(url)

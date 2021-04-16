@@ -12,4 +12,4 @@ class Month_Schedule(models.Model):
     updated_time = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return f"{self.user}, {self.cleared}, {self.schedule}, {self.created}, {self.updated}"
+        return f"{self.user}, {self.cleared}, {self.schedule}, {self.created}, {self.updated_time}"
