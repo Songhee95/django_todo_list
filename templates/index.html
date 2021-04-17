@@ -15,14 +15,16 @@
       rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
   </head>
   <body>
     <div class="body__container">
       {% include 'navbar.html' %}
       <div class="container">
-        <h1 class="home-title">Add Todays' ToDo List</h1>
         <div class="today-list-container">
           <div class="today-list-first-container">
+              <h5 class="yellow-title">Add Todays' ToDo List</h5>
               <form action="{% url 'list:index' %}" method="post">
                 {% csrf_token %}
                 <div class="add_input_container">
@@ -31,7 +33,7 @@
                       type="text"
                       class="list_input"
                       name="todo"
-                      placeholder="Toto List"
+                      placeholder="Todo List"
                     />
                   </div>
                   <div class="add_button_container">
@@ -42,6 +44,7 @@
             </div>
           
           <div class="today-list-second-container">
+              <h5 class="yellow-title">Todays' ToDo List</h5>
               {% for list in add_list %} {% if list.created == local_now %}
               <div class="home_list_set_wrap" data-content="{{list.created}}">
                 <label class="home_list_checkbox">

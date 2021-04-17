@@ -1,68 +1,35 @@
 {% extends 'index.html' %} {% block content %} 
-<h1 class="home-title">List</h1>
-  <div class="home_cards_inner_wrap">
-      {% for date in date_array %} 
+<div class="home-cards-outer-container">
+  <h5 class='yellow-title'>Weekly Todo List</h5>
+    <div class="home_cards_inner_wrap">
+        {% for date in date_array %} 
 
-        {% include 'write_list/modal_pop.html' with list=add_list%}
-        <div class="individual_card_wrap modal-trigger" data-target='modal1' data-content="{{date.date}}">
-          <div class='card_header_dates_days' data-content='{{date.date}}'>
-              <div class="card-dates" data-content='{{date.date}}'>{{date.date}} <span class="card-days"> {{date.day}}</span></div>
+          {% include 'write_list/modal_pop.html' with list=add_list%}
+          <div class="individual_card_wrap modal-trigger" data-target='modal1' data-content="{{date.date}}">
+            <div class='card_header_dates_days' data-content='{{date.date}}'>
+                <div class="card-dates" data-content='{{date.date}}'>{{date.date}} <span class="card-days"> {{date.day}}</span></div>
+            </div>
+            <div class="card-action" data-content='{{date.date}}'>
+              {% for list in add_list %}
+                {% if list.created == date.date %}
+                
+                <div class="home_card_list_row" data-content='{{date.date}}'>
+                  <label>
+                      <input type="checkbox" {{list.cleared}} disabled/>
+                      <span></span>
+                  </label>
+                  <span>{{list.li}}</span>
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
-          <div class="card-action" data-content='{{date.date}}'>
-            {% for list in add_list %}
-              {% if list.created == date.date %}
-              
-              <div class="home_card_list_row" data-content='{{date.date}}'>
-                <label>
-                    <input type="checkbox" {{list.cleared}} disabled/>
-                    <span></span>
-                </label>
-                <span>{{list.li}}</span>
-              </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-      {% endfor %}
-  </div>
-
-{% comment %} <h1 class="home-title">Today's Todo List</h1> {% endcomment %}
-{% comment %} {% for list in add_list %}
-  {% if list.created == local_now %}
-    <div class="home_list_set_wrap" data-content='{{list.created}}'>
-      <label class='home_list_checkbox'>
-        <input
-          type="checkbox"
-          class="clearBtn"
-          data-type="list"
-          {{list.cleared}}
-          data-id="{{list.id}}"
-          status="false"
-        />
-        <span></span>
-      </label>
-      <input class="displayed_list {{list.id}}" value="{{list.li}}" disabled />
-      <form action="">
-        <div class="editBtn home_list_buttons" data-type="list" data-id="{{list.id}}">
-          <i class="material-icons" data-type="list" data-id="{{list.id}}">edit</i>
-        </div>
-      </form>
-
-      <form action="{% url 'list:delete' list.id %}" method="post">
-        {% csrf_token %}
-        <button
-          class="delete home_list_buttons"
-          name="list_delete"
-          value="list_delete"
-        >
-          <i class="material-icons">delete</i>
-        </button>
-      </form>
+        {% endfor %}
     </div>
-    {% endif %}
-{% endfor %}  {% endcomment %}
+</div>
 
-<h1 class="home-title">Weekly Todo List</h1>
+
+<h1 class="home-title">Weekly Todo History</h1>
 {% for list in add_list %}
     <div class="home_list_set_wrap home_list_set_wrap_for_modal" data-content='{{list.created}}'>
     <div class='home_list_date_column'>{{list.created}}</div>
