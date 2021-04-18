@@ -32,10 +32,9 @@ def change_month_name(current_month):
     return month_name
 
 
-def get_monthly_data(userid, getAll):
+def get_monthly_data(userid, getAll, year, month):
     user = models.Monthly.objects.filter(
-        user=userid, created__year=today.year, created__month=today.month).order_by('created').reverse()
-
+        user=userid, created__year=year, created__month=month).order_by('created').reverse()
     list_array = []
     for listEle in user:
         if listEle.cleared:
@@ -49,7 +48,6 @@ def get_monthly_data(userid, getAll):
                 'cleared': status,
                 "li": listEle.monthly_goal,
                 "created": timezone_set(listEle.created).strftime('%B, %d, %Y'),
-                "updated": timezone_set(listEle.updated_time).strftime('%B, %d, %Y'),
                 "id": listEle.id
             }
             list_array.append(add_list)
@@ -78,7 +76,7 @@ def cal_date(request, year, month):
     # user monthly goal
     userid = request.user.id
     new_list = request.POST.get('monthly')
-    send_data = get_monthly_data(userid, False)
+    send_data = get_monthly_data(userid, False, year, month)
     if new_list:
         if send_data == None:
             models.Monthly.objects.create(
@@ -91,14 +89,15 @@ def cal_date(request, year, month):
             models.Monthly.objects.create(
                 user_id=userid, monthly_goal=new_list).save()
 
-    schedule_data = calModels.Month_Schedule.objects.filter(user_id=userid)
+    schedule_data = calModels.Month_Schedule.objects.filter(
+        user_id=userid, created__year=year, created__month=month)
 
     return render(request, 'calendar_app/calendar.html', {
         'cal': cal,
         'month': month_name,
         'current_year': current_year,
         'current_month': current_month,
-        'data': get_monthly_data(userid, False),
+        'data': get_monthly_data(userid, False, year, month),
         'schedule': schedule_data
     })
 

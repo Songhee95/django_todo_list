@@ -23,7 +23,7 @@
         {{cal|safe}}
         <div class='month_next_prev_buttons'>
             <button class='month_prev'><i class="material-icons">chevron_left</i></button>
-            <span class='displaying_month'>{{month}}</span>
+            <div class='displaying_month'>{{month}}</div>
             <button class='month_next'><i class="material-icons">chevron_right</i></button>
         </div>
 
@@ -60,7 +60,7 @@
   $(document).ready(function () {
       $(".modal").modal();
 
-      obj = {
+      var obj = {
         January: 1,
         February: 2,
         March: 3,
@@ -74,6 +74,34 @@
         November: 11,
         December: 12,
       };
+
+      // Getting data from views
+      var a = '{% for list in schedule %}{{list.created}}/{% endfor %}'
+      var b = '{% for list in schedule %}{{list.schedule}}/{% endfor %}'
+      var c = '{% for list in schedule %}{{list.id}}/{% endfor %}'
+      var all_created_arr = a.split('/')
+      var all_schedule_arr = b.split('/')
+      var all_id_arr = c.split('/')
+      
+      var date_for_dot = [];
+      all_created_arr.forEach(data =>{
+        var splited = data.split(',')
+        var date_only = splited[0].split(' ')[1]
+        if(date_for_dot.includes(date_only) == false){
+          date_for_dot.push(date_only)
+        }
+      })
+      
+      $('td').each(function(){
+        var this_date = $(this).text()
+        if(date_for_dot.includes(this_date)){
+          $(this).addClass('dotted')
+          var dot_div = $('<span>').addClass('dot')
+          $(this).append(dot_div)
+        }
+      })
+  
+
       const d = new Date();
       const year = d.getFullYear();
       let displaying_month = $(".displaying_month").text();
@@ -103,14 +131,6 @@
           let day = $(e.target).text();
 
           let created = `${displaying_month} ${day}, ${year}, midnight`
-
-          var a = '{% for list in schedule %}{{list.created}}/{% endfor %}'
-          var b = '{% for list in schedule %}{{list.schedule}}/{% endfor %}'
-          var c = '{% for list in schedule %}{{list.id}}/{% endfor %}'
-          var all_created_arr = a.split('/')
-          var all_schedule_arr = b.split('/')
-          var all_id_arr = c.split('/')
-
           var selected_schedule_arr = [];
           for(var i =0; i<all_created_arr.length; i++){
             if(all_created_arr[i] == created){
