@@ -47,8 +47,8 @@ for dates in week_dates_original:
 # print(today.strftime('%B, %d, %Y, %I:%M'))
 # print(date_7_days_ago)
 
-start_date_for_filtering = week_dates_original[0].strftime('%Y-%m-%d 00:00:00')
-last_date_for_filtering = week_dates_original[6].strftime('%Y-%m-%d 11:59:59')
+start_date_for_filtering = week_dates_original[0]
+last_date_for_filtering = week_dates_original[6]
 
 
 def getData(userid, getAll):

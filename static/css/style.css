@@ -26,6 +26,12 @@ nav{
     font-family: 'Courgette', cursive;
     font-weight: 600;
     padding-bottom: 10px;
+    border-bottom: 3px dotted #202020;
+}
+.weekly-title{
+    font-family: 'Courgette', cursive;
+    font-weight: 600;
+    padding-bottom: 10px;
 }
 .today-list-second-container> .home_list_set_wrap > form > button{
     background-color:  #FFDF6C;
