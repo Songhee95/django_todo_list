@@ -1,6 +1,9 @@
 nav{
     background-color:#202020 !important;
 }
+.brand-logo{
+    font-family: 'Fredericka the Great', cursive;
+}
 .nav-button>li:hover{
     background-color: rgb(155, 152, 152) !important;
 }
@@ -167,14 +170,14 @@ nav{
 .home_add_button{
     height: 100%;
     padding: 0 10px;
-    background-color: rgb(240, 232, 232);
+    background-color: #c59b05;
     border-radius: 10px ;
-    border: 1px solid rgb(165, 164, 164);
+    border: 1px solid #c7b986;
     cursor: pointer;
     font-weight: 500;
 }
 .home_add_button:hover{
-    background-color: rgb(233, 202, 202);
+    background-color: #beab64;
 }
 .home_list_set_wrap{
     display: flex;
@@ -246,6 +249,7 @@ nav{
 }
 .brand-logo{
     width: 100%;
+    font-size: 20px !important;
 }
 #modal_content_list_contents{
     padding: 0

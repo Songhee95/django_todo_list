@@ -65,7 +65,7 @@ for (el of cardBtnElement) {
     const modal_input_value = document.createElement("INPUT");
     modal_input_value.setAttribute("type", "text");
     modal_input_value.setAttribute("name", "todo-by-date");
-    modal_input_value.setAttribute("placeholder", "Todo List");
+    modal_input_value.setAttribute("placeholder", "Add Todo List");
     modal_input_value.setAttribute("data-content", modal_data_content);
     modal_input_value_wrap.appendChild(modal_input_value);
     modal_input_container.appendChild(modal_input_value_wrap);

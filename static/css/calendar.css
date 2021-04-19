@@ -20,6 +20,9 @@ tr > .month{
     background-color:rgba(224, 198, 165, 0.473);
     border: 1px solid rgb(187, 179, 179);
 }
+tr > th{
+    background-color: rgba(243, 241, 239, 0.473);
+}
 
 th, td{
     text-align: center !important;
@@ -36,7 +39,7 @@ th, td{
     left: 0;
     bottom: 0;
     background-color: #FFDF6C;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
 }
 td.mon, td.tue, td.wed, td.thu, td.fri, td.sat, td.sun{
     cursor: pointer;
@@ -60,6 +63,16 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
 }
 .month_prev:hover, .month_next:hover{
     background-color: bisque;
+}
+.modal-content{
+    text-align: center; 
+}
+.modal2_content__header{
+    font-family: 'Courgette', cursive;
+    background-color:  #FFDF6C;
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+    padding: 10px;
 }
 .schedule_modal_container{
     display: flex;
