@@ -124,3 +124,13 @@ def add_schedule(request):
     url = 'calendar/' + \
         str(current_year) + '/' + str(current_month)
     return redirect(url)
+
+
+@ login_required(login_url='/login')
+@ csrf_exempt
+def delete(request):
+    userid = request.user.id
+    schedule_id = request.POST.get('id')
+    selected = calModels.Month_Schedule.objects.get(pk=schedule_id)
+    selected.delete()
+    return redirect('/')

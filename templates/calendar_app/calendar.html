@@ -143,7 +143,6 @@
             }
           }
 
-
           $('.schedule_add_button').attr('id', day);
           $(".modal2_content__header").text(month + " / " + day);
 
@@ -164,8 +163,23 @@
               });
             }
           }); 
-        }
-      });
+        
+
+        // modal2 delete button function
+        $('.schedule_del').click(function(){
+          const schedule_id = $(this).attr('id');
+          $.ajax({
+            type: "POST",
+            url: `/delete`,
+            data: {
+              id: schedule_id
+            }
+          }).then(res =>{
+            window.location.reload()
+          })
+        })
+      }
+      })
     });
   </script>
 </html>

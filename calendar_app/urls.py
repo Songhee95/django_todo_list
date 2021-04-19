@@ -5,4 +5,5 @@ app_name = 'calendar_app'
 urlpatterns = [
     path('calendar/<int:year>/<str:month>', views.cal_date, name='cal_date'),
     path('add_schedule', views.add_schedule, name='add_schedule'),
+    path('delete', views.delete, name='delete'),
 ]
