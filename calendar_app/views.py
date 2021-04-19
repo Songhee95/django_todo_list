@@ -116,10 +116,19 @@ def add_schedule(request):
     add_to_cal_created = datetime(
         current_year, add_to_cal_month, add_to_cal_day)
 
-    print(add_to_cal_value)
+    existing_data = calModels.Month_Schedule.objects.filter(
+        user_id=userid, created__year=current_year, created__month=add_to_cal_month, created__day=add_to_cal_day)
+
     if add_to_cal_value:
-        user = calModels.Month_Schedule.objects.create(
-            user_id=userid, schedule=add_to_cal_value, created=add_to_cal_created)
+        if len(existing_data) == 0:
+            calModels.Month_Schedule.objects.create(
+                user_id=userid, schedule=add_to_cal_value, created=add_to_cal_created).save()
+        try:
+            calModels.Month_Schedule.objects.filter(
+                user_id=userid, created__year=current_year, created__month=add_to_cal_month, created__day=add_to_cal_day, schedule=add_to_cal_value)
+        except:
+            calModels.Month_Schedule.objects.create(
+                user_id=userid, schedule=add_to_cal_value, created=add_to_cal_created).save()
 
     url = 'calendar/' + \
         str(current_year) + '/' + str(current_month)
