@@ -14,11 +14,15 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1 class="home-title">{{request.user}}'s Monthly Goal : {{date}}</h1>
+      <h1 class="home-title">Monthly Goal : {{month}}</h1>
       <form action="{% url 'calendar_app:cal_date' year=current_year month=current_month %}" method="post">
         {% csrf_token %}
         <div class="add_input_container">

@@ -1,5 +1,5 @@
 nav{
-    background-color:#202020 !important;
+    background-color:#48433c !important;
 }
 .brand-logo{
     font-family: 'Fredericka the Great', cursive;
@@ -18,7 +18,7 @@ nav{
 }
 .today-list-first-container, .today-list-second-container{
     width: 45%;
-    background-color: #FFDF6C;
+    background-color: #e0bd5e;
     border-radius: 10px;
     border-top-right-radius: 50px;
     border: 3px solid #af8a03;
@@ -29,7 +29,7 @@ nav{
     font-family: 'Courgette', cursive;
     font-weight: 600;
     padding-bottom: 10px;
-    border-bottom: 3px dotted #202020;
+    border-bottom: 3px dotted #48433c;
 }
 .weekly-title{
     font-family: 'Courgette', cursive;
@@ -37,7 +37,7 @@ nav{
     padding-bottom: 10px;
 }
 .today-list-second-container> .home_list_set_wrap > form > button{
-    background-color:  #FFDF6C;
+    background-color:  #e0bd5e;
 }
 .home_cards_inner_wrap{
     display: flex;
@@ -79,11 +79,10 @@ nav{
 
 .card-dates{
     font-weight: 500;
+    font-family: 'Cinzel Decorative', cursive;
 }
 .card-days{
     margin-left: 10px;
-    font-weight: 700;
-    font-size: 18px;
 }
 
 .modal_input_container{
@@ -98,8 +97,8 @@ nav{
     font-weight: 600;
     text-align: center;
     border-radius: 10px;
-    border: 2px solid #af8a03;
-    background-color: #dbd2c8;
+    border: 2px solid #a6a08a;
+    background-color: #e2ddd6;
 }
 .modal_input_value{
     width: 100%;
@@ -128,6 +127,7 @@ nav{
     padding: 0 40px;
 }
 .home_card_list_row{
+    font-family: 'Courgette', cursive;
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
@@ -165,14 +165,14 @@ nav{
 .list_input{
     border: 1px solid #202020 !important;
     border-radius: 4px !important;
-    margin: 0 !important
+    margin: 0 !important;
 }
 .home_add_button{
     height: 100%;
     padding: 0 10px;
-    background-color: #c59b05;
+    background-color: #a6a08a;
     border-radius: 10px ;
-    border: 1px solid #c7b986;
+    border: 1px solid #48433c;
     cursor: pointer;
     font-weight: 500;
 }
@@ -187,6 +187,8 @@ nav{
 .displayed_list{
     margin-right: 10px !important;
     color: #202020 !important;
+    font-family: 'Courgette', cursive;
+    font-size: 18px;
 }
 .material-icons{
     font-size: 20px !important;
@@ -225,13 +227,13 @@ nav{
    
   /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #FFDF6C;
+    background: #48433c;
     border-radius: 10px;
 }
   
   /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #FFDF6C; 
+    background: #a6a08a; 
 }
 ::placeholder {
     color: #202020 !important;

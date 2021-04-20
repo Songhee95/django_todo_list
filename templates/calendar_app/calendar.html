@@ -14,6 +14,9 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
@@ -29,26 +32,28 @@
 
     </div>
     <div class="monthly_goal_container">
-        {% include 'write_list/month.html' %}
+        {% include 'write_list/month.html' with month=month%}
     </div>
   </div>
 
 <div id="modal2" class="modal bottom-sheet">
-    <div class="modal-content container">
+    <div class="modal2-content-wrap">
       <h5 class="modal2_content__header"></h5>
     
           <div class="schedule_input_container">
-            <div class="schedule_input_div">
-              <input
-                type="text"
-                class="schedule_input"
-                placeholder="Add Schedule"
-              />
+          <div class="schedule_input_and_list_wrap">
+              <div class="schedule_input_div">
+                <input
+                  type="text"
+                  class="schedule_input"
+                  placeholder="Add Schedule"
+                />
+              </div>
+              <div class="schedule_add_button_container">
+                <input type="submit" class="schedule_add_button" value="Add" />
+              </div>
             </div>
-            <div class="schedule_add_button_container">
-              <input type="submit" class="schedule_add_button" value="Add" />
-            </div>
-            <div class="schdule_data_from_db_container">
+            <div class="schedule_data_from_db_container">
 
             </div>
           </div>
@@ -75,6 +80,16 @@
         December: 12,
       };
 
+      var day_obj = {
+        mon: 'Monday',
+        tue: 'Tuesday',
+        wed: 'Wednesday',
+        thu: 'Thursday',
+        fri: 'Friday',
+        sat: 'Saturday',
+        sun: 'Sunday'
+      }
+
       // Getting data from views
       var a = '{% for list in schedule %}{{list.created}}/{% endfor %}'
       var b = '{% for list in schedule %}{{list.schedule}}/{% endfor %}'
@@ -95,7 +110,7 @@
       $('td').each(function(){
         var this_date = $(this).text()
         if(date_for_dot.includes(this_date)){
-          $(this).addClass('dotted')
+          $(this).attr('id', 'dotted')
           var dot_div = $('<span>').addClass('dot')
           $(this).append(dot_div)
         }
@@ -120,7 +135,7 @@
       });
 
       $("td").click(function (e) {
-        $('.schdule_data_from_db_container').empty()
+        $('.schedule_data_from_db_container').empty()
 
         if ($(e.target).attr("class") != "noday") {
           let month = obj[displaying_month];
@@ -139,12 +154,15 @@
               var del_icon = $('<i>').addClass('material-icons').text('delete')
               var schedule_del = $('<button>').addClass('schedule_del').attr('id', all_id_arr[i]).append(del_icon)
               var schedule_container = $('<div>').addClass('schedule_modal_container').append(schedule_el).append(schedule_del)
-              $('.schdule_data_from_db_container').append(schedule_container)
+              $('.schedule_data_from_db_container').append(schedule_container)
             }
           }
 
+          var getting_letter = $(this).attr('class').split('');
+          var date_from_letter = `${getting_letter[0]}${getting_letter[1]}${getting_letter[2]}`
+          var display_day = day_obj[date_from_letter]
           $('.schedule_add_button').attr('id', day);
-          $(".modal2_content__header").text(month + " / " + day);
+          $(".modal2_content__header").text(display_day + " . " +displaying_month + " . " + day);
 
 
           $(".schedule_add_button").click(function (event) {

@@ -124,7 +124,7 @@ def add_schedule(request):
             calModels.Month_Schedule.objects.create(
                 user_id=userid, schedule=add_to_cal_value, created=add_to_cal_created).save()
         try:
-            calModels.Month_Schedule.objects.filter(
+            calModels.Month_Schedule.objects.get(
                 user_id=userid, created__year=current_year, created__month=add_to_cal_month, created__day=add_to_cal_day, schedule=add_to_cal_value)
         except:
             calModels.Month_Schedule.objects.create(

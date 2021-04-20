@@ -17,20 +17,20 @@ tr > td, tr > th{
 }
 tr > .month{
     font-size: 20px;
-    background-color:rgba(224, 198, 165, 0.473);
-    border: 1px solid rgb(187, 179, 179);
+    background-color:#e2ddd6;
+    border: 1px solid #a6a08a;
 }
 tr > th{
-    background-color: rgba(243, 241, 239, 0.473);
+    background-color: #eeebe6;
 }
 
 th, td{
     text-align: center !important;
 }
 
-.dotted{
+#dotted{
     position: relative;
-    color: green ;
+    color: #48433c ;
 }
 .dot{
     position: absolute;
@@ -38,7 +38,7 @@ th, td{
     height: 5px;
     left: 0;
     bottom: 0;
-    background-color: #FFDF6C;
+    background-color: #e0bd5e;
     border-bottom: 2px solid black;
 }
 td.mon, td.tue, td.wed, td.thu, td.fri, td.sat, td.sun{
@@ -52,27 +52,40 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     display: flex;
     flex-direction: row;
     justify-content: center;
-    color: rgb(105, 70, 3);
+    color: #48433c ;
 }
 .month_prev, .month_next{
     margin: 0 10px;
     border-radius: 10px;
     cursor: pointer;
-    background-color: #FFDF6C;
+    background-color: #e0bd5e;
     border: 1px dashed #202020;
 }
 .month_prev:hover, .month_next:hover{
     background-color: bisque;
 }
-.modal-content{
-    text-align: center; 
+.modal2-content-wrap{
+    text-align: center;
+    padding: 5px;
 }
 .modal2_content__header{
     font-family: 'Courgette', cursive;
-    background-color:  #FFDF6C;
+    background-color:  #e0bd5e;
     border-top-left-radius:15px;
     border-top-right-radius:15px;
+    padding: 15px;
+    margin: 0;
+    border: 1px solid #ddd;
+}
+.schedule_input_container{
+    border: 1px solid #ddd;
     padding: 10px;
+}
+.schedule_input_and_list_wrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 10px 0;
 }
 .schedule_modal_container{
     display: flex;
@@ -80,7 +93,43 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     justify-content: space-between;
     padding: 2% 0;
     border-bottom: 1px solid #ddd;
+    margin: 0 10px;
 }
+.schedule_input_div{
+    width: 100%;
+    padding: 0 15px;
+}
+.schedule_add_button_container{
+    margin: auto 0;
+}
+.schedule_add_button{
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #a6a08a;
+    background-color: #e2ddd6;
+}
+.schedule_add_button:hover{
+    background-color: #a6a08a;
+}
+.schedule_data_from_db_container{
+    padding: 0 10px;
+    font-family: 'Courgette', cursive;
+    font-size: 18px;
+}
+.schedule_del{
+    cursor: pointer;
+    border: none;
+    background-color: none;
+    border-radius: 10px;
+}
+.schedule_del:hover{
+    background-color: #e2ddd6;
+}
+.monthly_goal_container{
+    border: 1px solid #ddd;
+}
+
 
 @media screen and (min-width: 992px) {
     .calendar_whole_container{
@@ -88,10 +137,16 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
         justify-content: space-evenly;
     }
     .calendar{
-        width: 30%;
+        width: 50%;
         margin: 30px;
     }
     .monthly_goal_container{
-        width: 40%;
+        width: 50%;
+        margin: 30px;
+        padding: 30px;
+    }
+    .monthly_goal_container{
+        border: none;
+        padding: 0;
     }
 }

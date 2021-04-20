@@ -130,13 +130,13 @@ def index(request):
     if new_list:
         if send_data == None:
             models.List.objects.create(
-                user_id=userid, todo_list=new_list, created=today).save()
+                user_id=userid, todo_list=new_list, created=now).save()
         try:
             models.List.objects.get(
                 user_id=userid, created__year=today.year, created__month=today.month, created__day=today.day, todo_list=new_list)
         except:
             models.List.objects.create(
-                user_id=userid, todo_list=new_list, created=today).save()
+                user_id=userid, todo_list=new_list, created=now).save()
     return render(request, 'write_list/new_list.html', getData(userid, False))
 
 
