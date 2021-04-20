@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('user_authentication.urls')),
     path('', include('calendar_app.urls')),
     path('admin/', admin.site.urls),
+    path('', include('pwa.urls')),
 ]

@@ -132,7 +132,6 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     background-color: #e2ddd6;
 }
 .monthly_goal_container{
-    border: 1px solid #ddd;
     padding: 30px;
 }
 .home-title{
@@ -163,12 +162,10 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
         justify-content: space-evenly;
     }
     .calendar{
-        width: 50%;
-        margin: 30px;
+        width: 100%;
     }
     .monthly_goal_container{
-        width: 50%;
-        margin: 30px;
+        width: 100%;
         padding: 30px;
     }
     .monthly_goal_container{
