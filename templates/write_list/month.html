@@ -21,63 +21,65 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="monthly-goal-container">
       <h1 class="home-title">Monthly Goal : {{month}}</h1>
-      <form action="{% url 'calendar_app:cal_date' year=current_year month=current_month %}" method="post">
-        {% csrf_token %}
-        <div class="add_input_container">
-          <div class="input_div">
-            <input type="text" class="list_input" name="monthly" placeholder="Monthly Goal" />
-          </div>
-          <div class="add_button_container">
-            <input type="submit" class="home_add_button" value="Add" />
-          </div>
-        </div>
-      </form>
-
-      {% for list in data.add_list %}
-      <div class="home_list_set_wrap">
-        <label class="home_list_checkbox">
-          <input
-            type="checkbox"
-            class="clearBtn"
-            data-type="monthly"
-            {{list.cleared}}
-            data-id="{{list.id}}"
-            status="false"
-          />
-          <span></span>
-        </label>
-        <input class="displayed_list {{list.id}}" value="{{list.li}}" id="{{list.id}}" disabled />
-        <form action="">
-            <div
-            class="editBtn home_list_buttons"
-            data-type="monthly"
-            data-id="{{list.id}}"
-            >
-            <i class="material-icons" data-type="monthly" data-id="{{list.id}}"
-                >edit</i
-            >
+      <div class="monthly-goal-content-wrap">
+        <form action="{% url 'calendar_app:cal_date' year=current_year month=current_month %}" method="post">
+          {% csrf_token %}
+            <div class="add_input_container">
+              <div class="input_div">
+                <input type="text" class="list_input" name="monthly" placeholder="Monthly Goal" />
+              </div>
+              <div class="add_button_container">
+                <input type="submit" class="home_add_button" value="Add" />
+              </div>
             </div>
         </form>
-        
-        <form
-          action="{% url 'list:delete' list.id %}"
-          method="post"
-          name="delete"
-        >
-          {% csrf_token %}
-          <button
-          type='submit'
-            class="delete home_list_buttons"
-            name="month_delete"
-            value="month_delete"
+
+        {% for list in data.add_list %}
+        <div class="home_list_set_wrap">
+          <label class="home_list_checkbox">
+            <input
+              type="checkbox"
+              class="clearBtn"
+              data-type="monthly"
+              {{list.cleared}}
+              data-id="{{list.id}}"
+              status="false"
+            />
+            <span></span>
+          </label>
+          <input class="displayed_list {{list.id}}" value="{{list.li}}" id="{{list.id}}" disabled />
+          <form action="">
+              <div
+              class="editBtn home_list_buttons"
+              data-type="monthly"
+              data-id="{{list.id}}"
+              >
+              <i class="material-icons" data-type="monthly" data-id="{{list.id}}"
+                  >edit</i
+              >
+              </div>
+          </form>
+          
+          <form
+            action="{% url 'list:delete' list.id %}"
+            method="post"
+            name="delete"
           >
-            <i class="material-icons">delete</i>
-          </button>
-        </form>
+            {% csrf_token %}
+            <button
+            type='submit'
+              class="delete home_list_buttons"
+              name="month_delete"
+              value="month_delete"
+            >
+              <i class="material-icons">delete</i>
+            </button>
+          </form>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </body>
   <script src="{% static 'js/index.js' %}"></script>

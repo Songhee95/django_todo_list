@@ -21,7 +21,7 @@ tr > .month{
     border: 1px solid #a6a08a;
 }
 tr > th{
-    background-color: #eeebe6;
+    background-color: #F6F4F1;
 }
 
 th, td{
@@ -58,19 +58,22 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     margin: 0 10px;
     border-radius: 10px;
     cursor: pointer;
-    background-color: #e0bd5e;
+    background-color: #e0bd5ec4;
     border: 1px dashed #202020;
 }
 .month_prev:hover, .month_next:hover{
     background-color: bisque;
 }
+#modal2{
+    background-color: #F6F4F1 ;
+}
 .modal2-content-wrap{
     text-align: center;
-    padding: 5px;
+    padding: 15px 10px;
 }
 .modal2_content__header{
     font-family: 'Courgette', cursive;
-    background-color:  #e0bd5e;
+    background-color:  #e0bd5ec7;
     border-top-left-radius:15px;
     border-top-right-radius:15px;
     padding: 15px;
@@ -80,6 +83,8 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
 .schedule_input_container{
     border: 1px solid #ddd;
     padding: 10px;
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
 }
 .schedule_input_and_list_wrap{
     display: flex;
@@ -91,7 +96,7 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 2% 0;
+    padding: 10px 0;
     border-bottom: 1px solid #ddd;
     margin: 0 10px;
 }
@@ -128,6 +133,27 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
 }
 .monthly_goal_container{
     border: 1px solid #ddd;
+    padding: 30px;
+}
+.home-title{
+    margin: 0;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    background-color:#e2ddd6;
+    border: 1px solid #a6a08a;
+    font-size: 20px !important;
+}
+.monthly-goal-content-wrap{
+    padding: 10px 50px;
+    border: 1px solid #ddd;
+    background-color: #F6F4F1;
+}
+.add_input_container{
+    margin: 10px 0;
+}
+.input_div {
+    background-color: rgba(255, 255, 255, 0.425);
 }
 
 
@@ -147,6 +173,11 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     }
     .monthly_goal_container{
         border: none;
-        padding: 0;
+    }
+    .modal2-content-wrap{
+        text-align: center;
+        width: 50%;
+        margin: 0 auto;
+        padding: 15px 50px;
     }
 }
