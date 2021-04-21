@@ -1,3 +1,5 @@
+{% load static %}
+{% load pwa %} 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,6 +8,10 @@
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">    <nav>
+   {% progressive_web_app_meta %}
+   </head> 
+    <body>
+    <nav>
         <div class='container'>
             <div class="nav-wrapper">
             <a href="/" class="brand-logo">{{request.user | upper}}'S SCHEDULE</a>
