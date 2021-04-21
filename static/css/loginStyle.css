@@ -1,15 +1,25 @@
 .register_page_container{
     padding: 0 20px;
+    width: 30%;
+    margin: 0 auto;
 }
 .register_page_header{
     font-size: 30px;
-    background-color: #ee6e73;
+    background-color: #48433cda;
     text-align: center;
     padding: 20px 0;
+    margin-bottom: 0;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     font-weight: 700;
-    color: rgb(65, 62, 62);
+    color: #e0bd5e;
+    font-family: 'Cinzel Decorative', cursive;
+}
+.login_input_container{
+    padding: 20px 50px;
+    border: 1px dotted rgb(195, 190, 190);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 .register_page_submit_btn_wrap{
     text-align: center;
@@ -18,14 +28,15 @@
 .register_page_submit_btn{
     margin-top: 20px;
     font-weight: 500;
-    padding: 10px 15px;
-    background-color: #ee6e73;
+    padding: 10px;
+    background-color: #dbbe6e;
     border-color: #ddd;
     border-radius: 10px;
     text-align: center;
+    width: 100%
 }
 .register_page_submit_btn:hover{
-    background-color: #e99b9d;
+    background-color: #e4ae1a;
 }
 .register_page_icons{
     margin-bottom: 10px;
@@ -33,4 +44,16 @@
 .login_page_input_labels{
     font-size: 18px;
     color: black;
+}
+
+@media screen and (max-width: 992px) {
+    .register_page_container{
+        padding: 10px;
+        margin: 0;
+        width: 100%;
+    }
+    .register_page_header{
+        margin: 0;
+
+    }
 }

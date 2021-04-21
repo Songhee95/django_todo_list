@@ -16,36 +16,41 @@
         rel="stylesheet"
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
     {% progressive_web_app_meta %}
     </head>
     <body>
-    <div class="container register_page_container">
+    <div class="register_page_container">
         <h3 class='register_page_header'>login page</h3>
+        <div class="login_input_container">
+            <form action='{% url "user_authentication:login" %}' method='post'>
+                {% csrf_token %}
+                <div class='login_page_icons'>
+                <label for="username" class='login_page_input_labels'><i class="material-icons prefix">account_circle</i>UserName</label>
+                    <input type="text" name='username' placeholder='UserName'>
+                </div>
 
-        <form action='{% url "user_authentication:login" %}' method='post'>
-            {% csrf_token %}
-            <div class='login_page_icons'>
-            <label for="username" class='login_page_input_labels'><i class="material-icons prefix">account_circle</i>UserName</label>
-                <input type="text" name='username' placeholder='UserName'>
+                <div class='login_page_icons'>
+                <label for="password" class='login_page_input_labels'><i class="material-icons prefix">password</i>Password</label>
+                    <input type="password" name='password' placeholder='Password'>
+                </div>
+
+                <div>
+                    <input type="submit" class='register_page_submit_btn'>
+                </div>
+            </form>
+            <div class="login_bottom_link">
+                <p>
+                    Don't have an account? 
+                    <a href="/register">Sign up</a>
+                </p>
             </div>
-
-            <div class='login_page_icons'>
-            <label for="password" class='login_page_input_labels'><i class="material-icons prefix">password</i>Password</label>
-                <input type="password" name='password' placeholder='password'>
-            </div>
-
-            <div>
-                <input type="submit" class='register_page_submit_btn'>
-            </div>
-        </form>
-
-        <p>
-            Don't have an account? 
-            <a href="/register">Sign up</a>
-        </p>
-        {% for message in messages %}
-            <p id="messages">{{message}}</p>
-        {% endfor %}
+            {% for message in messages %}
+                <p id="messages">{{message}}</p>
+            {% endfor %}
+        </div>
     </div>
     </body>
 </html>
