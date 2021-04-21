@@ -27,7 +27,7 @@ nav{
 
 .yellow-title{
     font-family: 'Courgette', cursive;
-    font-weight: 600;
+    font-weight: 800;
     padding-bottom: 10px;
     border-bottom: 3px dotted #48433c;
 }
@@ -78,7 +78,7 @@ nav{
 }
 
 .card-dates{
-    font-weight: 500;
+    font-weight: 600;
     font-family: 'Cinzel Decorative', cursive;
 }
 .card-days{
@@ -147,8 +147,9 @@ nav{
     cursor: pointer;
     border-radius: 10px;
 }
+
 .home_list_buttons:hover{
-    background-color: #ddd;
+    background-color: #b1a889;
 }
 .add_input_container{
     display: flex;
@@ -198,9 +199,11 @@ nav{
 }
 .delete{
     margin-left: 5px;
-    background-color:  rgb(246, 244, 241);;
     padding: 8px;
     border: none;
+}
+.home_delete_button{
+    background-color: #e0bd5e;
 }
 .table-wrap{
     overflow: auto;

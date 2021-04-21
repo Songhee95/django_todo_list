@@ -16,9 +16,9 @@
       rel="stylesheet"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">  </head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
   {% progressive_web_app_meta %}
   </head>
   <body>
@@ -27,7 +27,7 @@
       <div class="container">
         <div class="today-list-container">
           <div class="today-list-first-container">
-              <h5 class="yellow-title">Add Todays' ToDo List</h5>
+              <h6 class="yellow-title">Add Todays' ToDo List</h6>
               <form action="{% url 'list:index' %}" method="post">
                 {% csrf_token %}
                 <div class="add_input_container">
@@ -47,7 +47,7 @@
             </div>
           
           <div class="today-list-second-container">
-              <h5 class="yellow-title">Todays' ToDo List</h5>
+              <h6 class="yellow-title">Todays' ToDo List</h6>
               {% for list in add_list %} {% if list.created == local_now %}
               <div class="home_list_set_wrap" data-content="{{list.created}}">
                 <label class="home_list_checkbox">
@@ -80,13 +80,15 @@
 
                 <form action="{% url 'list:delete' list.id %}" method="post">
                   {% csrf_token %}
-                  <button
-                    class="delete home_list_buttons"
-                    name="list_delete"
-                    value="list_delete"
-                  >
-                    <i class="material-icons">delete</i>
-                  </button>
+                  <div class='home_delete_button_wrap'>
+                    <button
+                      class="delete home_list_buttons home_delete_button"
+                      name="list_delete"
+                      value="list_delete"
+                    >
+                      <i class="material-icons">delete</i>
+                    </button>
+                  </div>
                 </form>
               </div>
               {% endif %} {% endfor %}
