@@ -188,6 +188,7 @@ def edit(request, list_id):
     pageType = request.POST.get('pageType')
     send_data = getData(userid, False)
     url = 'write_list/new_list.html'
+    print(request.POST.get('string'))
     if pageType == 'list':
         get_original_value = models.List.objects.get(pk=list_id)
         if request.POST.get('string'):
