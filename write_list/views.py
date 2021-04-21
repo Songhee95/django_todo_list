@@ -33,12 +33,13 @@ start_of_week = today - start_delta
 week_dates_original = [start_of_week +
                        timezone.timedelta(days=i) for i in range(7)]
 week_dates = []
-week_days = []
+# week_days = []
 
 for dates in week_dates_original:
     obj = {
         "date": dates.strftime('%B, %d, %Y'),
-        'day': dates.strftime('%A')
+        'day': dates.strftime('%A'),
+        'filtering_date': dates.strftime('%Y-%m-%d')
     }
     week_dates.append(obj)
 
@@ -47,8 +48,8 @@ for dates in week_dates_original:
 # print(today.strftime('%B, %d, %Y, %I:%M'))
 # print(date_7_days_ago)
 
-start_date_for_filtering = week_dates_original[0]
-last_date_for_filtering = week_dates_original[6]
+start_date_for_filtering = week_dates[0]['filtering_date']+' 00:00:00'
+last_date_for_filtering = week_dates[6]['filtering_date'] + ' 11:59:59'
 
 
 def getData(userid, getAll):
@@ -137,6 +138,7 @@ def index(request):
         except:
             models.List.objects.create(
                 user_id=userid, todo_list=new_list, created=now).save()
+    print(getData(userid, False))
     return render(request, 'write_list/new_list.html', getData(userid, False))
 
 
@@ -149,7 +151,8 @@ def modal_pop(request):
         modal_input_date = request.POST.get("date")
         modal_date_utc = datetime.strptime(
             modal_input_date, '%B, %d, %Y')
-
+        print(modal_date_utc)
+        print(modal_input_date)
         user = models.List.objects.filter(user=userid, created=modal_date_utc)
         if user == None:
             models.List.objects.create(
@@ -188,7 +191,6 @@ def edit(request, list_id):
     pageType = request.POST.get('pageType')
     send_data = getData(userid, False)
     url = 'write_list/new_list.html'
-    print(request.POST.get('string'))
     if pageType == 'list':
         get_original_value = models.List.objects.get(pk=list_id)
         if request.POST.get('string'):
