@@ -3,6 +3,7 @@ from tzlocal import get_localzone
 import time
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 import requests
@@ -138,7 +139,7 @@ def index(request):
         except:
             models.List.objects.create(
                 user_id=userid, todo_list=new_list, created=now).save()
-    print(getData(userid, False))
+
     return render(request, 'write_list/new_list.html', getData(userid, False))
 
 
@@ -231,27 +232,10 @@ def history(request):
     return render(request, 'write_list/history.html', send_data)
 
 
-# @ login_required(login_url='/login')
-# def month(request):
-#     userid = request.user.id
-#     new_list = request.POST.get('monthly')
-#     send_data = get_monthly_data(userid, False)
-#     if new_list:
-#         if send_data == None:
-#             models.Monthly.objects.create(
-#                 user_id=userid, monthly_goal=new_list).save()
-#         try:
-#             models.Monthly.objects.get(
-#                 user_id=userid, monthly_goal=new_list)
-#         except:
-#             print('no match')
-#             models.Monthly.objects.create(
-#                 user_id=userid, monthly_goal=new_list).save()
-#     send_data = {
-#         'data': get_monthly_data(userid, False),
-#         'date': today.strftime('%B')
-#     }
-#     return render(request, 'calendar_app/calendar.html', send_data)
+@ login_required(login_url='/login')
+def invite(request):
+    userid = request.user.id
+    return render(request, 'write_list/invite.html')
 
 
 @ login_required(login_url='/login')

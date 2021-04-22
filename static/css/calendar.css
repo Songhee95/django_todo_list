@@ -13,7 +13,7 @@
     font-size: 14px;
 }
 tr > td, tr > th{
-    border: 1px solid #ddd;
+    border: 1px solid rgb(206, 204, 204);
 }
 tr > .month{
     font-size: 20px;
@@ -43,6 +43,12 @@ th, td{
 }
 td.mon, td.tue, td.wed, td.thu, td.fri, td.sat, td.sun{
     cursor: pointer;
+}
+.sat{
+    color: #a57c0b;
+}
+.sun{
+    color: #ac5107;
 }
 td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hover, td.sun:hover{
     background-color: #ddd;
