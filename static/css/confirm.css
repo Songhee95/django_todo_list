@@ -1,0 +1,10 @@
+.confirm-submit{
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 8px;
+    font-weight: 500;
+    border: 1px solid #ddd;
+}
+.confirm-submit:hover{
+    background-color: #ddd;
+}
