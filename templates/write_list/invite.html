@@ -33,7 +33,21 @@
   </body>
     <script type="text/javascript">
       $(document).ready(function () {
+          $('.find_button').click(function(e){
+              const button_container = e.target.closest('div')
+              const input_container = button_container.previousElementSibling
+              const input_value = input_container.querySelector('input').value
+              var all_user = '{% for user in all_user %}{{user}}/{% endfor %}'
+              const all_user_arr = all_user.split('/')
+              if(input_value && all_user_arr.includes(input_value)){
+                  let new_div = $('<div>').addClass('user_confirm_container')
+                  let user_name = $('<p>').addClass('user_name').text(input_value)
+                  let confirm_button = $('<button>').addClass('user_confirm_button').text('Invite')
+                  new_div.append(user_name).append(confirm_button)
+                  $('.find_input_container').append(new_div)
 
+              }
+          })
       })
     </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

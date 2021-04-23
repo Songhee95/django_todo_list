@@ -234,8 +234,10 @@ def history(request):
 
 @ login_required(login_url='/login')
 def invite(request):
-    userid = request.user.id
-    return render(request, 'write_list/invite.html')
+    send_data = {
+        'all_user': User.objects.all(),
+    }
+    return render(request, 'write_list/invite.html', send_data)
 
 
 @ login_required(login_url='/login')
