@@ -250,24 +250,26 @@ def invite(request):
         # Send invitation email
         selected_user = request.POST.get('selected_user')
         selected_user_pk = User.objects.get(username=selected_user).pk
+        selected_user_firstName = User.objects.get(
+            username=selected_user).first_name
 
         current_site = get_current_site(request)
-        email_body = {
-            'user': request.user,
-            'domain': current_site.domain,
-            # 'userId': request.user.pk,
-            'selected_user': selected_user,
-            'selected_user_pk': selected_user_pk
-        }
 
         link = reverse('list:confirm', kwargs={
-                       'selected_user': email_body['selected_user_pk']})
+                       'selected_user': selected_user_pk})
 
         email_subject = 'SH Schedule App Invitation'
         confirm_url = 'http://'+current_site.domain+link
 
         template = render_to_string(
-            'write_list/email_template.html', {'name': request.user, 'domain': confirm_url})
+            'write_list/email_template.html', {
+                'user': request.user,
+                'user_firstname': request.user.first_name,
+                'domain': confirm_url,
+                # 'userId': request.user.pk,
+                'selected_user': selected_user_firstName,
+                'selected_user_pk': selected_user_pk
+            })
 
         # email = EmailMessage(
         #     email_subject,
