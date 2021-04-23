@@ -10,7 +10,7 @@
     border: 1px solid #ddd;
     margin: 30px 10px;
 }
-.find_input_container{
+.find_input_container, .user_confirm_container{
     display: flex;
     flex-direction: row;
     justify-content: center;

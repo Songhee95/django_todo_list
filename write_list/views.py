@@ -13,6 +13,9 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import timedelta
 from django.utils.dateparse import parse_datetime
+from django.core.mail import EmailMessage, send_mail
+from django.conf import settings
+from django.template.loader import render_to_string
 # Create your views here.
 # Setting and aware local timezone
 local_tz = get_localzone()
@@ -233,10 +236,26 @@ def history(request):
 
 
 @ login_required(login_url='/login')
+@ csrf_exempt
 def invite(request):
     send_data = {
         'all_user': User.objects.all(),
     }
+    if request.POST.get('sent'):
+        print(request.POST.get('sent'))
+        template = render_to_string(
+            'write_list/email_template.html', {'name': request.user})
+        email_subject = 'SH Schedule App Invitation'
+        email = EmailMessage(
+            email_subject,
+            template,
+            settings.EMAIL_HOST_USER,
+            ['noros78342@laraskey.com'],
+        )
+
+        email.fail_silently = False
+        email.send()
+
     return render(request, 'write_list/invite.html', send_data)
 
 
