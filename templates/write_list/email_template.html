@@ -2,4 +2,8 @@ Hey!
 You are invited to SHSchedule app!
 
 click below link to connect your account with {{name}}!
-https://sh-django-todo-app.herokuapp.com/
+
+{% autoescape off %} Hi , Please click on the link to confirm
+your registration, 
+<a href="http://{{ domain }} ">Click</a>
+{% endautoescape %}

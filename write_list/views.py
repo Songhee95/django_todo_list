@@ -13,9 +13,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from datetime import timedelta
 from django.utils.dateparse import parse_datetime
-from django.core.mail import EmailMessage, send_mail
+
+# email
+from django.core.mail import EmailMessage, send_mail, EmailMultiAlternatives
 from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
 from django.template.loader import render_to_string
+
 # Create your views here.
 # Setting and aware local timezone
 local_tz = get_localzone()
@@ -242,21 +247,52 @@ def invite(request):
         'all_user': User.objects.all(),
     }
     if request.POST.get('sent'):
-        print(request.POST.get('sent'))
-        template = render_to_string(
-            'write_list/email_template.html', {'name': request.user})
-        email_subject = 'SH Schedule App Invitation'
-        email = EmailMessage(
-            email_subject,
-            template,
-            settings.EMAIL_HOST_USER,
-            ['noros78342@laraskey.com'],
-        )
+        # Send invitation email
+        current_site = get_current_site(request)
+        print(current_site)
+        print(current_site.domain)
+        email_body = {
+            'user': request.user,
+            'domain': current_site.domain,
+            'userId': request.user.pk
+        }
+        print(email_body['userId'])
+        print('-'*20)
+        link = reverse('list:confirm', kwargs={
+                       'user_id': email_body['userId']})
 
+        email_subject = 'SH Schedule App Invitation'
+        confirm_url = 'http://'+current_site.domain+link
+
+        template = render_to_string(
+            'write_list/email_template.html', {'name': request.user, 'domain': confirm_url})
+
+        # email = EmailMessage(
+        #     email_subject,
+        #     template,
+        #     settings.EMAIL_HOST_USER,
+        #     ['noros78342@laraskey.com'],
+        # )
+        email = EmailMultiAlternatives(
+            email_subject, template, settings.EMAIL_HOST_USER,  ['noros78342@laraskey.com'])
+        email.attach_alternative(template, "text/html")
         email.fail_silently = False
         email.send()
 
     return render(request, 'write_list/invite.html', send_data)
+
+
+@ csrf_exempt
+def confirm(request, uidb64):
+    if request.method == 'POST':
+
+        subject = 'Welcome to DataFlair'
+        message = 'Hope you are enjoying your Django Tutorials'
+        recepient = 'noros78342@laraskey.com'
+        send_mail(subject,
+                  message, settings.EMAIL_HOST_USER, [recepient], fail_silently=False)
+        return render(request, 'write_list/success.html', {'recepient': recepient})
+    return render(request, 'write_list/email_template.html', {'form': sub})
 
 
 @ login_required(login_url='/login')
