@@ -10,7 +10,7 @@
     <div class="confirmation_page_container">
     <h1>Confirm Your Invitation</h1>
     <p>From : {{request.user}}</p>
-    <form action="{% url 'list:confirm' selected_user_pk %}" method="post">
+    <form action="{% url 'list:confirm' selected_user %}" method="post">
     {% csrf_token %}
         <input type="submit" value='Confirm' name='confirmed'>
     </div>
