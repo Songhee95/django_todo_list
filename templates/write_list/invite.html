@@ -34,6 +34,10 @@
     <script type="text/javascript">
       $(document).ready(function () {
           $('.find_button').click(function(e){
+              const user_match_container = $('.user_confirm_container')
+              if(user_match_container){
+                  user_match_container.remove()
+              }
               const button_container = e.target.closest('div')
               const input_container = button_container.previousElementSibling
               const input_value = input_container.querySelector('input').value
