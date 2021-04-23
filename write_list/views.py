@@ -243,8 +243,15 @@ def history(request):
 @ login_required(login_url='/login')
 @ csrf_exempt
 def invite(request):
+    joint_status = models.Joint.objects.filter(user_id=request.user.id)
+    if joint_status:
+        for joint in joint_status:
+            joint_name = User.objects.get(pk=joint.joint_id)
+    else:
+        print('no data')
     send_data = {
         'all_user': User.objects.all(),
+        'joint_name': joint_name
     }
     if request.POST.get('selected_user'):
         # Send invitation email
