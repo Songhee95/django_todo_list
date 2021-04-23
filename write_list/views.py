@@ -246,17 +246,22 @@ def invite(request):
     send_data = {
         'all_user': User.objects.all(),
     }
-    if request.POST.get('sent'):
+    if request.POST.get('selected_user'):
         # Send invitation email
+        selected_user = request.POST.get('selected_user')
+        selected_user_pk = User.objects.get(username=selected_user).pk
+
         current_site = get_current_site(request)
         email_body = {
             'user': request.user,
             'domain': current_site.domain,
-            'userId': request.user.pk
+            # 'userId': request.user.pk,
+            'selected_user': selected_user,
+            'selected_user_pk': selected_user_pk
         }
 
         link = reverse('list:confirm', kwargs={
-                       'user_id': email_body['userId']})
+                       'selected_user': email_body['selected_user_pk']})
 
         email_subject = 'SH Schedule App Invitation'
         confirm_url = 'http://'+current_site.domain+link

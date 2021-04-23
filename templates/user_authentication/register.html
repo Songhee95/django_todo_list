@@ -29,6 +29,16 @@
                 {% csrf_token %}
                 <div class='register_page_icons'>
                 <i class="material-icons prefix">account_circle</i>
+                    {{form.first_name.label}}
+                    {{form.first_name}}
+                </div>
+                <div class='register_page_icons'>
+                <i class="material-icons prefix">account_circle</i>
+                    {{form.last_name.label}}
+                    {{form.last_name}}
+                </div>
+                <div class='register_page_icons'>
+                <i class="material-icons prefix">account_circle</i>
                     {{form.username.label}}
                     {{form.username}}
                 </div>
