@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="confirmation_page_container">
+    <h1>Confirm Your Invitation</h1>
+    <p>From : {{request.user}}</p>
+    <form action="{% url 'list:confirm' request.user.pk %}" method="post">
+    {% csrf_token %}
+        <input type="submit" value='Confirm' name='confirmed'>
+    </div>
+</body>
+</html>

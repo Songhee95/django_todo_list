@@ -249,15 +249,12 @@ def invite(request):
     if request.POST.get('sent'):
         # Send invitation email
         current_site = get_current_site(request)
-        print(current_site)
-        print(current_site.domain)
         email_body = {
             'user': request.user,
             'domain': current_site.domain,
             'userId': request.user.pk
         }
-        print(email_body['userId'])
-        print('-'*20)
+
         link = reverse('list:confirm', kwargs={
                        'user_id': email_body['userId']})
 
@@ -283,16 +280,10 @@ def invite(request):
 
 
 @ csrf_exempt
-def confirm(request, uidb64):
+def confirm(request, user_id):
     if request.method == 'POST':
-
-        subject = 'Welcome to DataFlair'
-        message = 'Hope you are enjoying your Django Tutorials'
-        recepient = 'noros78342@laraskey.com'
-        send_mail(subject,
-                  message, settings.EMAIL_HOST_USER, [recepient], fail_silently=False)
-        return render(request, 'write_list/success.html', {'recepient': recepient})
-    return render(request, 'write_list/email_template.html', {'form': sub})
+        print(request.POST.get('confirmed'))
+    return render(request, 'write_list/confirmation_page.html')
 
 
 @ login_required(login_url='/login')
