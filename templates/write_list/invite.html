@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/invite.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link
       rel="stylesheet"
@@ -23,12 +24,22 @@
   </head>
   <body>
   {% include 'navbar.html' %}
-    <div class="container">
+    <div class="container invite_page_outer_container">
+        <div class="find_user_container">
             <h5 class='weekly-title'>Invite Friends!</h5>
             <div class="find_input_container">
                 <div class="find_input"><input type="text"></div>
                 <div class="find_button"><input type="submit" value='Find'></div>
             </div>
+        </div>
+        <div class="user_status_container">
+            <div class="current_user_status_container">
+                <h5 class='weekly-title'>Connect Status!</h5>
+                <div class="current_user_status">
+                    <p>{{user}}</p>
+                </div>
+            </div>
+        </div>
     </div>
   </body>
     <script type="text/javascript">
