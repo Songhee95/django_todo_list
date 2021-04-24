@@ -1,80 +1,71 @@
-{% extends 'index.html' %} {% block content %} 
+{% extends 'index.html' %} {% block content %}
 <div class="home-cards-outer-container">
   <h5 class='weekly-title'>Weekly Todo List</h5>
-    <div class="home_cards_inner_wrap">
-        {% for date in user_data.date_array %} 
+  <div class="home_cards_inner_wrap">
+    {% for date in user_data.date_array %}
 
-          {% include 'write_list/modal_pop.html' with list=add_list%}
-          <div class="individual_card_wrap modal-trigger" data-target='modal1' data-content="{{date.date}}">
-            <div class='card_header_dates_days' data-content='{{date.date}}'>
-                <div class="card-dates" data-content='{{date.date}}'>{{date.date}} <span class="card-days"> {{date.day}}</span></div>
-            </div>
-            <div class="card-action" data-content='{{date.date}}'>
-              {% for list in user_data.add_list %}
-                {% if list.created == date.date %}
-                
-                <div class="home_card_list_row" data-content='{{date.date}}'>
-                  <label class='checkbox_wrap'> 
-                      <input type="checkbox" {{list.cleared}} disabled/>
-                      <span></span>
-                  </label>
-                  <span>{{list.li}}</span>
-                </div>
-                {% endif %}
-              {% endfor %}
-              {% comment %} jointed user data {% endcomment %}
-              {% for list in joint_data.add_list %}
-                {% if list.created == date.date %}
-                
-                <div class="home_card_list_row" data-content='{{date.date}}'>
-                  <label class='checkbox'>
-                      <input type="checkbox" {{list.cleared}} disabled/>
-                      <span></span>
-                  </label>
-                  <span>{{list.li}}</span>
-                </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
+    {% include 'write_list/modal_pop.html' with list=add_list%}
+    <div class="individual_card_wrap modal-trigger" data-target='modal1' data-content="{{date.date}}">
+      <div class='card_header_dates_days' data-content='{{date.date}}'>
+        <div class="card-dates" data-content='{{date.date}}'>{{date.date}} <span class="card-days"> {{date.day}}</span>
+        </div>
+      </div>
+      <div class="card-action" data-content='{{date.date}}'>
+        {% for list in user_data.add_list %}
+        {% if list.created == date.date %}
+
+        <div class="home_card_list_row" data-content='{{date.date}}'>
+          <label class='checkbox_wrap user_checkbox_wrap'>
+            <input type="checkbox" class='user_checkbox' {{list.cleared}} disabled />
+            <span></span>
+          </label>
+          <span>{{list.li}}</span>
+        </div>
+        {% endif %}
         {% endfor %}
+        {% comment %} jointed user data {% endcomment %}
+        {% for list in joint_data.add_list %}
+        {% if list.created == date.date %}
+
+        <div class="home_card_list_row" data-content='{{date.date}}'>
+          <label class='checkbox_wrap joint_checkbox_wrap'>
+            <input type="checkbox" {{list.cleared}} disabled />
+            <span></span>
+          </label>
+          <span>{{list.li}}</span>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
     </div>
+    {% endfor %}
+  </div>
 </div>
 
-<div class="home-cards-outer-container">
+<div class="home-cards-outer-container" style='display:none'>
   <h5 class="weekly-title">Weekly Todo History</h5>
   {% for list in user_data.add_list %}
-      <div class="home_list_set_wrap home_list_set_wrap_for_modal" data-content='{{list.created}}'>
-      <div class='home_list_date_column'>{{list.created}}</div>
-        <label class='home_list_checkbox'>
-          <input
-            type="checkbox"
-            class="clearBtn"
-            data-type="list"
-            {{list.cleared}}
-            data-id="{{list.id}}"
-            status="false"
-          />
-          <span></span>
-        </label>
-        <input class="displayed_list {{list.id}}" value="{{list.li}}" name="edit_value" disabled />
-        <form action="">
-          <div class="editBtn home_list_buttons" data-type="list" data-id="{{list.id}}">
-            <i class="material-icons" data-type="list" data-id="{{list.id}}">edit</i>
-          </div>
-        </form>
-
-        <form action="{% url 'list:delete' list.id %}" method="post">
-          {% csrf_token %}
-          <button
-            class="delete home_list_buttons"
-            name="list_delete"
-            value="list_delete"
-          >
-            <i class="material-icons">delete</i>
-          </button>
-        </form>
+  <div class="home_list_set_wrap home_list_set_wrap_for_modal" data-content='{{list.created}}'>
+    <div class='home_list_date_column'>{{list.created}}</div>
+    <label class='home_list_checkbox checkbox_wrap user_checkbox_wrap'>
+      <input type="checkbox" class="clearBtn user_checkbox" data-type="list" {{list.cleared}} data-id="{{list.id}}"
+        status="false" />
+      <span></span>
+    </label>
+    <input class="displayed_list {{list.id}}" value="{{list.li}}" name="edit_value" disabled />
+    <form action="">
+      <div class="editBtn home_list_buttons" data-type="list" data-id="{{list.id}}">
+        <i class="material-icons" data-type="list" data-id="{{list.id}}">edit</i>
       </div>
+    </form>
+
+    <form action="{% url 'list:delete' list.id %}" method="post">
+      {% csrf_token %}
+      <button class="delete home_list_buttons" name="list_delete" value="list_delete">
+        <i class="material-icons">delete</i>
+      </button>
+    </form>
+  </div>
   {% endfor %}
 </div>
 

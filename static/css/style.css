@@ -89,14 +89,18 @@ nav{
 }
 
 .checkbox_wrap{
-    background-color: rgb(240, 128, 128);
     position: relative;
     width: 22px;
     height: 22px;
     margin-right: 10px ;
     border-radius: 10px;
 }
-
+.user_checkbox_wrap{
+    background-color: rgba(219, 97, 97, 0.781) ;
+}
+.joint_checkbox_wrap{
+    background-color: rgba(89, 89, 230, 0.747);
+}
 
 .checkbox_wrap > span, .checkbox_wrap > span::before, .checkbox_wrap > span:after{
    position: absolute;
@@ -104,8 +108,12 @@ nav{
    margin-top: 0 !important;
    background: none !important;
 }
-[type="checkbox"]+span:not(.lever):before{
-    border: 2px solid black !important;
+.user_checkbox:checked+span:not(.lever):before {
+    border-right: 2px solid black !important;
+    border-bottom: 2px solid black !important;
+}
+[type="checkbox"]+span:not(.lever):before, [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
+    border: none !important
 }
 
 .modal_input_container{
