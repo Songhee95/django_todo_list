@@ -62,6 +62,7 @@ last_date_for_filtering = week_dates[6]['filtering_date'] + ' 11:59:59'
 
 
 def getData(userid, getAll):
+
     if getAll:
         user = models.List.objects.filter(
             user=userid).order_by('created').reverse()
@@ -135,6 +136,16 @@ def get_monthly_data(userid, getAll):
 @ login_required(login_url='/login')
 def index(request):
     userid = request.user.id
+    if models.Joint.objects.filter(user=userid):
+        joint_user_info = models.Joint.objects.filter(user=userid)
+        for joint_user in joint_user_info:
+            joint_user_data = getData(joint_user.joint_id, False)
+            joint_user_name = User.objects.get(
+                pk=joint_user.joint_id).first_name
+    else:
+        joint_user_data = ''
+        joint_user_name = ''
+
     new_list = request.POST.get('todo')
     send_data = getData(userid, False)
     if new_list:
@@ -147,8 +158,13 @@ def index(request):
         except:
             models.List.objects.create(
                 user_id=userid, todo_list=new_list, created=now).save()
+    send_data = {
+        'user_data': getData(userid, False),
+        'joint_data': joint_user_data,
+        'joint_user_name': joint_user_name
+    }
 
-    return render(request, 'write_list/new_list.html', getData(userid, False))
+    return render(request, 'write_list/new_list.html', send_data)
 
 
 @ login_required(login_url='/login')

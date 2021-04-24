@@ -1,3 +1,4 @@
+
 nav{
     background-color:#48433c !important;
 }
@@ -87,6 +88,26 @@ nav{
     margin-left: 10px;
 }
 
+.checkbox_wrap{
+    background-color: rgb(240, 128, 128);
+    position: relative;
+    width: 22px;
+    height: 22px;
+    margin-right: 10px ;
+    border-radius: 10px;
+}
+
+
+.checkbox_wrap > span, .checkbox_wrap > span::before, .checkbox_wrap > span:after{
+   position: absolute;
+   top: 0;
+   margin-top: 0 !important;
+   background: none !important;
+}
+[type="checkbox"]+span:not(.lever):before{
+    border: 2px solid black !important;
+}
+
 .modal_input_container{
     display: flex;
     flex-direction: row;
@@ -133,6 +154,8 @@ nav{
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
 }
 .home-title{
     font-size: 22px;
