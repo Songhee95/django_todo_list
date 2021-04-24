@@ -114,6 +114,11 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     border-bottom: 1px solid #ddd;
     margin: 0 10px;
 }
+.joint_schedule_modal_container{
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    margin: 0 10px;
+}
 .schedule_input_div{
     width: 100%;
     padding: 0 15px;
@@ -135,6 +140,23 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     padding: 0 10px;
     font-family: 'Courgette', cursive;
     font-size: 18px;
+}
+.user_color_and_list_container{
+    display: flex;
+    flex-direction: row;
+}
+.user_display_color, .joint_display_color{
+    width: 18px;
+    margin-right: 10px;
+    border-radius: 5rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.user_display_color{
+    background-color: rgba(219, 97, 97, 0.781) ;
+}
+.joint_display_color{
+    background-color: rgba(89, 89, 230, 0.747);
 }
 .schedule_del{
     cursor: pointer;
