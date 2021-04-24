@@ -9,6 +9,7 @@ from . import models as calModels
 import pytz
 from tzlocal import get_localzone
 import time
+from django.contrib.auth.models import User
 # Create your views here.
 
 local_tz = get_localzone()
@@ -36,6 +37,7 @@ def get_monthly_data(userid, getAll, year, month):
     user = models.Monthly.objects.filter(
         user=userid, created__year=year, created__month=month).order_by('created').reverse()
     list_array = []
+
     for listEle in user:
         if listEle.cleared:
             status = 'checked'
@@ -89,6 +91,14 @@ def cal_date(request, year, month):
             models.Monthly.objects.create(
                 user_id=userid, monthly_goal=new_list).save()
 
+    if models.Joint.objects.filter(user=userid):
+        joint_user_info = models.Joint.objects.filter(user=userid)
+        for joint_user in joint_user_info:
+            joint_schedule_data = calModels.Month_Schedule.objects.filter(
+                user_id=joint_user.joint_id, created__year=year, created__month=month)
+    else:
+        joint_schedule_data = ''
+
     schedule_data = calModels.Month_Schedule.objects.filter(
         user_id=userid, created__year=year, created__month=month)
 
@@ -98,7 +108,8 @@ def cal_date(request, year, month):
         'current_year': current_year,
         'current_month': current_month,
         'data': get_monthly_data(userid, False, year, month),
-        'schedule': schedule_data
+        'schedule': schedule_data,
+        'joint_schedule': joint_schedule_data
     })
 
 

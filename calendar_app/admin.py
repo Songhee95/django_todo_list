@@ -6,4 +6,4 @@ from .models import Month_Schedule
 
 @admin.register(Month_Schedule)
 class Month_Schedule_Admin(admin.ModelAdmin):
-    list_display = ("cleared", 'schedule', 'created', 'updated_time')
+    list_display = ('user', "cleared", 'schedule', 'created', 'updated_time')

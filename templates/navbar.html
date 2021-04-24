@@ -18,7 +18,7 @@
             <a href="/" data-target="mobile-demo" class="right sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down nav-button">
                 <li><a href="/">Home</a></li>
-                <li><a href="/calendar/{{current_year}}/{{current_month}}">Calendar</a></li>
+                <li><a href="/calendar/{{user_data.current_year}}/{{user_data.current_month}}">Calendar</a></li>
                 <li><a href="/invite">Invite+</a></li>
                 <li><a href="/history">History</a></li>
                 <li><a href="/logout">Logout</a></li>
@@ -28,7 +28,7 @@
     </nav>
     <ul class="sidenav nav-button" id="mobile-demo">
          <li><a href="/">Home</a></li>
-        <li><a href="/calendar/{{current_year}}/{{current_month}}">Calendar</a></li>
+        <li><a href="/calendar/{{user_data.current_year}}/{{user_data.current_month}}">Calendar</a></li>
         <li><a href="/invite">Invite+</a></li>
         <li><a href="/history">History</a></li>
         <li><a href="/logout">Logout</a></li>

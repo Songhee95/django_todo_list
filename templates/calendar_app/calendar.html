@@ -1,192 +1,216 @@
 {% load static %}
-{% load pwa %} 
+{% load pwa %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/calendar.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/calendar.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   {% progressive_web_app_meta %}
-  </head>
-  <body>
+</head>
+
+<body>
   {% include 'navbar.html' %}
   <div class="calendar_whole_container container">
-      <div class='calendar'>
-        {{cal|safe}}
-        <div class='month_next_prev_buttons'>
-            <button class='month_prev'><i class="material-icons">chevron_left</i></button>
-            <div class='displaying_month'>{{month}}</div>
-            <button class='month_next'><i class="material-icons">chevron_right</i></button>
-        </div>
+    <div class='calendar'>
+      {{cal|safe}}
+      <div class='month_next_prev_buttons'>
+        <button class='month_prev'><i class="material-icons">chevron_left</i></button>
+        <div class='displaying_month'>{{month}}</div>
+        <button class='month_next'><i class="material-icons">chevron_right</i></button>
+      </div>
 
     </div>
     <div class="monthly_goal_container">
-        {% include 'write_list/month.html' with month=month%}
+      {% include 'write_list/month.html' with month=month%}
     </div>
   </div>
 
-<div id="modal2" class="modal bottom-sheet">
+  <div id="modal2" class="modal bottom-sheet">
     <div class="modal2-content-wrap">
       <h5 class="modal2_content__header"></h5>
-    
-          <div class="schedule_input_container">
-          <div class="schedule_input_and_list_wrap">
-              <div class="schedule_input_div">
-                <input
-                  type="text"
-                  class="schedule_input"
-                  placeholder="Add Schedule"
-                />
-              </div>
-              <div class="schedule_add_button_container">
-                <input type="submit" class="schedule_add_button" value="Add" />
-              </div>
-            </div>
-            <div class="schedule_data_from_db_container">
 
-            </div>
+      <div class="schedule_input_container">
+        <div class="schedule_input_and_list_wrap">
+          <div class="schedule_input_div">
+            <input type="text" class="schedule_input" placeholder="Add Schedule" />
           </div>
-        
+          <div class="schedule_add_button_container">
+            <input type="submit" class="schedule_add_button" value="Add" />
+          </div>
+        </div>
+        <div class="schedule_data_from_db_container">
+
+        </div>
+      </div>
+
     </div>
-</div> 
-  </body>
-  <script type="text/javascript">
+  </div>
+</body>
+<script type="text/javascript">
   $(document).ready(function () {
-      $(".modal").modal();
+    $(".modal").modal();
 
-      var obj = {
-        January: 1,
-        February: 2,
-        March: 3,
-        April: 4,
-        May: 5,
-        June: 6,
-        July: 7,
-        August: 8,
-        September: 9,
-        October: 10,
-        November: 11,
-        December: 12,
-      };
+    var obj = {
+      January: 1,
+      February: 2,
+      March: 3,
+      April: 4,
+      May: 5,
+      June: 6,
+      July: 7,
+      August: 8,
+      September: 9,
+      October: 10,
+      November: 11,
+      December: 12,
+    };
 
-      var day_obj = {
-        mon: 'Monday',
-        tue: 'Tuesday',
-        wed: 'Wednesday',
-        thu: 'Thursday',
-        fri: 'Friday',
-        sat: 'Saturday',
-        sun: 'Sunday'
-      }
+    var day_obj = {
+      mon: 'Monday',
+      tue: 'Tuesday',
+      wed: 'Wednesday',
+      thu: 'Thursday',
+      fri: 'Friday',
+      sat: 'Saturday',
+      sun: 'Sunday'
+    }
 
-      // Getting data from views
-      var a = '{% for list in schedule %}{{list.created}}/{% endfor %}'
-      var b = '{% for list in schedule %}{{list.schedule}}/{% endfor %}'
-      var c = '{% for list in schedule %}{{list.id}}/{% endfor %}'
-      var all_created_arr = a.split('/')
-      var all_schedule_arr = b.split('/')
-      var all_id_arr = c.split('/')
-      
-      var date_for_dot = [];
-      all_created_arr.forEach(data =>{
+    // Getting data from views
+    var a = '{% for list in schedule %}{{list.created}}/{% endfor %}'
+    var b = '{% for list in schedule %}{{list.schedule}}/{% endfor %}'
+    var c = '{% for list in schedule %}{{list.id}}/{% endfor %}'
+    var all_created_arr = a.split('/')
+    var all_schedule_arr = b.split('/')
+    var all_id_arr = c.split('/')
+
+    // Getting joint user data from views
+    var joint_a = '{% for list in joint_schedule %}{{list.created}}/{% endfor %}'
+    var joint_b = '{% for list in joint_schedule %}{{list.schedule}}/{% endfor %}'
+    var joint_c = '{% for list in joint_schedule %}{{list.id}}/{% endfor %}'
+    var joint_all_created_arr = joint_a.split('/')
+    var joint_all_schedule_arr = joint_b.split('/')
+    var joint_all_id_arr = joint_c.split('/')
+
+    // Get scheduled dates for dotting on calendar
+    const getting_dates_for_dot = function (all_data_array, empty_array) {
+      all_data_array.forEach(data => {
         var splited = data.split(',')
         var date_only = splited[0].split(' ')[1]
-        if(date_for_dot.includes(date_only) == false){
-          date_for_dot.push(date_only)
+        if (empty_array.includes(date_only) == false) {
+          empty_array.push(date_only)
         }
       })
-      
-      $('td').each(function(){
-        var this_date = $(this).text()
-        if(date_for_dot.includes(this_date)){
-          $(this).attr('id', 'dotted')
-          var dot_div = $('<span>').addClass('dot')
-          $(this).append(dot_div)
-        }
-      })
-  
+      return empty_array
+    }
+    var date_for_dot = [];
+    var joint_date_for_dot = [];
+    getting_dates_for_dot(all_created_arr, date_for_dot)
+    getting_dates_for_dot(joint_all_created_arr, joint_date_for_dot)
 
-      const d = new Date();
-      const year = d.getFullYear();
-      let displaying_month = $(".displaying_month").text();
-      $(".month_next").click(function (e) {
-        //   send current month +1
-        let next = obj[displaying_month] + 1;
-        const url = `/calendar/${year}/${next}`;
-        window.location.replace(url);
-      });
+    $('td').each(function () {
+      var this_date = $(this).text()
+      if (date_for_dot.includes(this_date) || joint_date_for_dot.includes(this_date)) {
+        $(this).attr('id', 'dotted')
+      }
+      if (date_for_dot.includes(this_date)) {
+        var dot_div = $('<span>').addClass('dot')
+        $(this).append(dot_div)
+      }
+      if (joint_date_for_dot.includes(this_date)) {
+        var joint_dot_div = $('<span>').addClass('joint_dot')
+        $(this).append(joint_dot_div)
+      }
+    })
 
-      $(".month_prev").click(function (e) {
-        //   send current month -1
-        let prev = obj[displaying_month] - 1;
-        const url = `/calendar/${year}/${prev}`;
-        window.location.replace(url);
-      });
 
-      $("td").click(function (e) {
-        $('.schedule_data_from_db_container').empty()
+    const d = new Date();
+    const year = d.getFullYear();
+    let displaying_month = $(".displaying_month").text();
+    $(".month_next").click(function (e) {
+      //   send current month +1
+      let next = obj[displaying_month] + 1;
+      const url = `/calendar/${year}/${next}`;
+      window.location.replace(url);
+    });
 
-        if ($(e.target).attr("class") != "noday") {
-          let month = obj[displaying_month];
-          $(e.target)
-            .addClass("modal-trigger")
-            .attr("data-target", "modal2");
-          $(".schedule_input").val("");
-          let day = $(e.target).text();
+    $(".month_prev").click(function (e) {
+      //   send current month -1
+      let prev = obj[displaying_month] - 1;
+      const url = `/calendar/${year}/${prev}`;
+      window.location.replace(url);
+    });
 
-          let created = `${displaying_month} ${day}, ${year}, midnight`
-          var selected_schedule_arr = [];
-          for(var i =0; i<all_created_arr.length; i++){
-            if(all_created_arr[i] == created){
-              selected_schedule_arr.push(all_schedule_arr[i])
-              var schedule_el = $('<div>').text(all_schedule_arr[i])
-              var del_icon = $('<i>').addClass('material-icons').text('delete')
-              var schedule_del = $('<button>').addClass('schedule_del').attr('id', all_id_arr[i]).append(del_icon)
-              var schedule_container = $('<div>').addClass('schedule_modal_container').append(schedule_el).append(schedule_del)
-              $('.schedule_data_from_db_container').append(schedule_container)
-            }
+    $("td").click(function (e) {
+      $('.schedule_data_from_db_container').empty()
+
+      if ($(e.target).attr("class") != "noday") {
+        let month = obj[displaying_month];
+        $(e.target)
+          .addClass("modal-trigger")
+          .attr("data-target", "modal2");
+        $(".schedule_input").val("");
+        let day = $(e.target).text();
+
+        let created = `${displaying_month} ${day}, ${year}, midnight`
+        var selected_schedule_arr = [];
+        var joint_selected_schedule_arr = [];
+        // create schedule lists on calendar
+        for (var i = 0; i < all_created_arr.length; i++) {
+          if (all_created_arr[i] == created) {
+            selected_schedule_arr.push(all_schedule_arr[i])
+            var schedule_el = $('<div>').text(all_schedule_arr[i]).text();
+            var del_icon = $('<i>').addClass('material-icons').text('delete')
+            var schedule_del = $('<button>').addClass('schedule_del').attr('id', all_id_arr[i]).append(del_icon)
+            var schedule_container = $('<div>').addClass('schedule_modal_container').append(schedule_el).append(
+              schedule_del)
+            $('.schedule_data_from_db_container').append(schedule_container)
           }
+        }
+        for (var i = 0; i < joint_all_created_arr.length; i++) {
+          if (joint_all_created_arr[i] == created) {
+            joint_selected_schedule_arr.push(joint_all_created_arr[i])
+            var schedule_el = $('<div>').text(joint_all_schedule_arr[i]).text();
+            var schedule_container = $('<div>').addClass('schedule_modal_container').append(schedule_el).append(
+              schedule_del)
+            $('.schedule_data_from_db_container').append(schedule_container)
+          }
+        }
 
-          var getting_letter = $(this).attr('class').split('');
-          var date_from_letter = `${getting_letter[0]}${getting_letter[1]}${getting_letter[2]}`
-          var display_day = day_obj[date_from_letter]
-          $('.schedule_add_button').attr('id', day);
-          $(".modal2_content__header").text(display_day + " . " +displaying_month + " . " + day);
+        var getting_letter = $(this).attr('class').split('');
+        var date_from_letter = `${getting_letter[0]}${getting_letter[1]}${getting_letter[2]}`
+        var display_day = day_obj[date_from_letter]
+        $('.schedule_add_button').attr('id', day);
+        $(".modal2_content__header").text(display_day + " . " + displaying_month + " . " + day);
 
 
-          $(".schedule_add_button").click(function (event) {
-            if ($(event.target).attr("id") == day) {
-              const value = $(".schedule_input").val();
-              $.ajax({
-                type: "POST",
-                url: "/add_schedule",
-                data: {
-                  month: month,
-                  day: day,
-                  value: value,
-                },
-              }).then((res) => {
-                window.location.reload()
-              });
-            }
-          }); 
-        
+        $(".schedule_add_button").click(function (event) {
+          if ($(event.target).attr("id") == day) {
+            const value = $(".schedule_input").val();
+            $.ajax({
+              type: "POST",
+              url: "/add_schedule",
+              data: {
+                month: month,
+                day: day,
+                value: value,
+              },
+            }).then((res) => {
+              window.location.reload()
+            });
+          }
+        });
+
 
         // modal2 delete button function
-        $('.schedule_del').click(function(){
+        $('.schedule_del').click(function () {
           const schedule_id = $(this).attr('id');
           $.ajax({
             type: "POST",
@@ -194,12 +218,13 @@
             data: {
               id: schedule_id
             }
-          }).then(res =>{
+          }).then(res => {
             window.location.reload()
           })
         })
       }
-      })
-    });
-  </script>
+    })
+  });
+</script>
+
 </html>
