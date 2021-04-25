@@ -14,12 +14,12 @@
     <nav>
         <div class='container'>
             <div class="nav-wrapper">
-            <a href="/" class="brand-logo">{{request.user | upper}}'S SCHEDULE</a>
+            <a href="/" class="brand-logo">{{request.user.first_name | upper}}'S SCHEDULE</a>
             <a href="/" data-target="mobile-demo" class="right sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down nav-button">
                 <li><a href="/">Home</a></li>
                 <li><a href="/calendar/{{user_data.current_year}}/{{user_data.current_month}}">Calendar</a></li>
-                <li><a href="/invite">Invite+</a></li>
+                <li><a href="/invite">Account</a></li>
                 <li><a href="/history">History</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
@@ -29,7 +29,7 @@
     <ul class="sidenav nav-button" id="mobile-demo">
          <li><a href="/">Home</a></li>
         <li><a href="/calendar/{{user_data.current_year}}/{{user_data.current_month}}">Calendar</a></li>
-        <li><a href="/invite">Invite+</a></li>
+        <li><a href="/invite">Account</a></li>
         <li><a href="/history">History</a></li>
         <li><a href="/logout">Logout</a></li>
     </ul>

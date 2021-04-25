@@ -1,20 +1,57 @@
-.invite_page_outer_container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.invite_wrap{
+    margin: 20px;
+    font-weight: 600;
 }
-.find_user_container,.user_status_container{
-    width: 100%;
-    padding: 50px;
-    text-align: center;
+.account-info-outer-container, .invite_page_outer_container{
     border: 1px solid #ddd;
-    margin: 30px 10px;
+    margin-bottom: 20px;
+    padding: 10px 30px;
+}
+.invite-title{
+    font-weight: 700;
+    font-size: 19px;
+    padding-bottom: 10px;
+}
+.account_info_title{
+    font-weight: 700;
+}
+
+.find_input_container > .find_input{
+    padding-right: 10px;
 }
 .find_input_container, .user_confirm_container{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    margin: 0 40px;
+}
+.find_input_container > .find_input > input, .user_confirm_container{
+    height: 25px !important;
+}
+
+.user_confirm_container > P{
+    margin: 0 10px;
+}
+.user_confirm_container > button{
+    font-size: 11px;
+    padding: 0 3px;
+    border-radius: 10px;
+    background-color: rgba(89, 89, 230, 0.747);
+    border: 1px solid rgb(121, 120, 120);
+    color: white;
 }
 .find_button{
     margin: auto 0;
+}
+
+@media screen and (min-width: 992px) {
+    .invite_wrap{
+        width:70%;
+        margin: 20px auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .account-info-outer-container, .invite_page_outer_container{
+        width: 40%;
+    }
 }

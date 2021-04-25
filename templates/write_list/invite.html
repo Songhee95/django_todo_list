@@ -24,23 +24,37 @@
   </head>
   <body>
   {% include 'navbar.html' %}
-    <div class="container invite_page_outer_container">
+  <div class="invite_wrap">
+    <div class="account-info-outer-container">
+    <h6 class='invite-title'><i class='material-icons'>tag</i> Account Info</h6>
+      <p><span class='account_info_title'>First Name: </span><span class='account_info'>{{user_info.user_first_name}}</span></p>
+      <p><span class='account_info_title'>Last Name: </span><span class='account_info'>{{user_info.user_last_name}}</span></p>
+      <p><span class='account_info_title'>Username: </span><span class='account_info'>{{user_info.user_username}}</span></p>
+      <p><span class='account_info_title'>Email: </span><span class='account_info'>{{user_info.user_email}}</span></p>
+      <p><span class='account_info_title'>Password: </span><span class='account_info'>********** </span><button>Reset Password</button></p>
+    </div>
+    <div class="invite_page_outer_container">
         <div class="find_user_container">
-            <h5 class='weekly-title'>Invite Friends!</h5>
+            <h6 class='invite-title'><i class='material-icons'>tag</i> Invite Friends</h6>
             <div class="find_input_container">
-                <div class="find_input"><input type="text"></div>
-                <div class="find_button"><input type="submit" value='Find'></div>
+                <div class="find_input"><input type="text"/></div>
+                <div class="find_button"><input type="submit" value='Find'/></div>
             </div>
         </div>
         <div class="user_status_container">
             <div class="current_user_status_container">
-                <h5 class='weekly-title'>Connect Status!</h5>
+                <h6 class='invite-title'><i class='material-icons'>tag</i> Connected Status!</h6>
                 <div class="current_user_status">
+                {% if joint_name %}
                     <p>{{joint_name}}</p>
+                {%  else %}
+                    <p>No Joint Account</p>
+                {% endif %}
                 </div>
             </div>
         </div>
     </div>
+  </div>
   </body>
     <script type="text/javascript">
       $(document).ready(function () {

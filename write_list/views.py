@@ -248,6 +248,10 @@ def history(request):
     daily = getData(userid, True)
     month = get_monthly_data(userid, True)
     send_data = {
+        'user_data': {
+            'current_year': datetime.now().year,
+            'current_month': datetime.now().month
+        },
         'daily': daily,
         'month': month,
         'current_year': datetime.now().year,
@@ -264,10 +268,22 @@ def invite(request):
         for joint in joint_status:
             joint_name = User.objects.get(pk=joint.joint_id)
     else:
-        print('no data')
+        joint_name = ''
+
     send_data = {
         'all_user': User.objects.all(),
-        'joint_name': joint_name
+        'joint_name': joint_name,
+        'user_info': {
+            'user_first_name': request.user.first_name,
+            'user_last_name': request.user.last_name,
+            'user_username': request.user.username,
+            'user_email': request.user.email,
+            'user_password': request.user.password,
+        },
+        'user_data': {
+            'current_year': datetime.now().year,
+            'current_month': datetime.now().month
+        }
     }
     if request.POST.get('selected_user'):
         # Send invitation email

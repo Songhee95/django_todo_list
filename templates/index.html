@@ -67,24 +67,11 @@
           <div class="home_list_set_wrap" data-content="{{list.created}}">
             <label class="home_list_checkbox checkbox_wrap joint_checkbox_wrap">
               <input type="checkbox" class="clearBtn user_checkbox" data-type="list" {{list.cleared}}
-                data-id="{{list.id}}" status="false" />
+                data-id="{{list.id}}" status="false" disabled/>
               <span></span>
             </label>
             <input class="displayed_list {{list.id}}" value="{{list.li}}" disabled />
-            <form action="">
-              <div class="editBtn home_list_buttons" data-type="list" data-id="{{list.id}}">
-                <i class="material-icons" data-type="list" data-id="{{list.id}}">edit</i>
-              </div>
-            </form>
-
-            <form action="{% url 'list:delete' list.id %}" method="post">
-              {% csrf_token %}
-              <div class='home_delete_button_wrap'>
-                <button class="delete home_list_buttons home_delete_button" name="list_delete" value="list_delete">
-                  <i class="material-icons">delete</i>
-                </button>
-              </div>
-            </form>
+ 
           </div>
           {% endif %} {% endfor %}
         </div>
