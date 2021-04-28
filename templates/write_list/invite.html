@@ -1,94 +1,104 @@
 {% load static %}
-{% load pwa %} 
+{% load pwa %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/invite.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/invite.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
   {% progressive_web_app_meta %}
-  </head>
-  <body>
+</head>
+
+<body>
   {% include 'navbar.html' %}
   <div class="invite_wrap">
     <div class="account-info-outer-container">
-    <h6 class='invite-title'><i class='material-icons'>tag</i> Account Info</h6>
-      <p><span class='account_info_title'>First Name: </span><span class='account_info'>{{user_info.user_first_name}}</span></p>
-      <p><span class='account_info_title'>Last Name: </span><span class='account_info'>{{user_info.user_last_name}}</span></p>
-      <p><span class='account_info_title'>Username: </span><span class='account_info'>{{user_info.user_username}}</span></p>
+      <h6 class='invite-title'><i class='material-icons'>tag</i> Account Info</h6>
+      <p><span class='account_info_title'>First Name: </span><span
+          class='account_info'>{{user_info.user_first_name}}</span></p>
+      <p><span class='account_info_title'>Last Name: </span><span
+          class='account_info'>{{user_info.user_last_name}}</span></p>
+      <p><span class='account_info_title'>Username: </span><span class='account_info'>{{user_info.user_username}}</span>
+      </p>
       <p><span class='account_info_title'>Email: </span><span class='account_info'>{{user_info.user_email}}</span></p>
-      <p><span class='account_info_title'>Password: </span><span class='account_info'>********** </span><button>Reset Password</button></p>
+      <p><span class='account_info_title'>Password: </span><span class='account_info'>********** </span><button>Reset
+          Password</button></p>
     </div>
     <div class="invite_page_outer_container">
-        <div class="find_user_container">
-            <h6 class='invite-title'><i class='material-icons'>tag</i> Invite Friends</h6>
-            <div class="find_input_container">
-                <div class="find_input"><input type="text"/></div>
-                <div class="find_button"><input type="submit" value='Find'/></div>
-            </div>
+      <div class="find_user_container">
+        <h6 class='invite-title'><i class='material-icons'>tag</i> Invite Friends</h6>
+        <div class="find_input_container">
+          <div class="find_input"><input type="text" /></div>
+          <div class="find_button"><input type="submit" value='Find' /></div>
         </div>
-        <div class="user_status_container">
-            <div class="current_user_status_container">
-                <h6 class='invite-title'><i class='material-icons'>tag</i> Connected Status!</h6>
-                <div class="current_user_status">
-                {% if joint_name %}
-                    <p>{{joint_name}}</p>
-                {%  else %}
-                    <p>No Joint Account</p>
-                {% endif %}
-                </div>
-            </div>
+      </div>
+      <div class="user_status_container">
+        <div class="current_user_status_container">
+          <h6 class='invite-title'><i class='material-icons'>tag</i> Connected Status!</h6>
+          <div class="current_user_status">
+            {% if joint_name %}
+            <ul class='joint_list_name'>
+              <li>{{joint_name}}</li>
+            </ul>
+            {%  else %}
+            <p>No Joint Account</p>
+            {% endif %}
+          </div>
         </div>
+      </div>
     </div>
   </div>
-  </body>
-    <script type="text/javascript">
-      $(document).ready(function () {
-          $('.find_button').click(function(e){
-              const user_match_container = $('.user_confirm_container')
-              if(user_match_container){
-                  user_match_container.remove()
-              }
-              const button_container = e.target.closest('div')
-              const input_container = button_container.previousElementSibling
-              const input_value = input_container.querySelector('input').value
-              var all_user = '{% for user in all_user %}{{user}}/{% endfor %}'
-              const all_user_arr = all_user.split('/')
-              if(input_value && all_user_arr.includes(input_value)){
-                  let new_div = $('<div>').addClass('user_confirm_container')
-                  let user_name = $('<p>').addClass('user_name').text(input_value)
-                  let confirm_button = $('<button>').addClass('user_confirm_button').text('Invite')
-                  new_div.append(user_name).append(confirm_button)
-                  $('.find_user_container').append(new_div)
-                  // if user_confirm_button clicked, invitaion email sent
-                  $('.user_confirm_button').click(function(e){
-                      console.log('invitation email sent')
-                      $.ajax({
-                          type: 'POST',
-                          url: "/invite",
-                          data:{
-                              selected_user : input_value
-                          }
-                      })
-                  })
-              }
-          })
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-      })
-    </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.find_button').click(function (e) {
+      const user_match_container = $('.user_confirm_container')
+      if (user_match_container) {
+        user_match_container.remove()
+      }
+      const button_container = e.target.closest('div')
+      const input_container = button_container.previousElementSibling
+      const input_value = input_container.querySelector('input').value
+      var all_user = '{% for user in all_user %}{{user}}/{% endfor %}'
+      const all_user_arr = all_user.split('/')
+      if (input_value && all_user_arr.includes(input_value)) {
+        let new_div = $('<div>').addClass('user_confirm_container')
+        let user_name = $('<p>').addClass('user_name').text(input_value)
+        let confirm_button = $('<button>').addClass('user_confirm_button').text('Invite')
+        new_div.append(user_name).append(confirm_button)
+        $('.find_user_container').append(new_div)
+        // if user_confirm_button clicked, invitaion email sent
+        $('.user_confirm_button').click(function (e) {
+          console.log('invitation email sent')
+          $.ajax({
+            type: 'POST',
+            url: "/invite",
+            data: {
+              selected_user: input_value
+            }
+          }).then(res => {
+            M.toast({
+              html: `The invitation has been sent to ${input_value}! <br>
+              As soon as the ${input_value} confirm your invitation, <br>
+              Your account will be joint with ${input_value} automatically!<br>`
+            })
+          })
+        })
+      }
+    })
+
+  })
+</script>
+
 </html>

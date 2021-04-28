@@ -38,9 +38,24 @@
     background-color: rgba(89, 89, 230, 0.747);
     border: 1px solid rgb(121, 120, 120);
     color: white;
+    cursor:pointer;
+}
+.user_confirm_container > button:hover{
+    background-color: rgb(89, 89, 230);
 }
 .find_button{
     margin: auto 0;
+}
+.find_button >input{
+    cursor: pointer;
+}
+.joint_list_name{
+    margin: 0 50px;
+}
+.joint_list_name > li{
+    list-style-type: circle !important;
+    font-size: 16px;
+    color: rgb(100, 97, 97);
 }
 
 @media screen and (min-width: 992px) {

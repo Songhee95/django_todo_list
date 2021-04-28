@@ -37,7 +37,7 @@
                 </th>
             </thead>
             <tbody id='daily_history_data_row'>
-            {% for list in daily.add_list|slice:":10" %}
+            {% for list in daily.add_list|slice:":5" %}
                 <tr >
                     <td>
                         <p>{{list.created}}</p>
@@ -74,7 +74,7 @@
             </th>
         </thead>
         <tbody id='monthly_history_data_row'>
-        {% for list in month.add_list|slice:":10"%}
+        {% for list in month.add_list|slice:":5"%}
             <tr>
                 <td>
                     <p>{{list.created}}</p>

@@ -100,6 +100,9 @@ def getData(userid, getAll):
     return send_data
 
 
+print(local_now)
+
+
 def get_monthly_data(userid, getAll):
     if getAll:
         user = models.Monthly.objects.filter(
@@ -291,6 +294,9 @@ def invite(request):
         selected_user_pk = User.objects.get(username=selected_user).pk
         selected_user_firstname = User.objects.get(
             username=selected_user).first_name
+        selected_user_email = User.objects.get(
+            username=selected_user).email
+
         current_site = get_current_site(request)
 
         link = reverse('list:confirm', kwargs={
@@ -308,8 +314,9 @@ def invite(request):
         #     settings.EMAIL_HOST_USER,
         #     ['noros78342@laraskey.com'],
         # )
+
         email = EmailMultiAlternatives(
-            email_subject, template, settings.EMAIL_HOST_USER,  ['noros78342@laraskey.com'])
+            email_subject, template, settings.EMAIL_HOST_USER,  [selected_user_email])
         email.attach_alternative(template, "text/html")
         email.fail_silently = False
         email.send()
