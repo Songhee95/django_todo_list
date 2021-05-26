@@ -53,6 +53,7 @@
 
     </div>
   </div>
+  {% include 'footer.html' %}
 </body>
 <script type="text/javascript">
   $(document).ready(function () {
@@ -168,7 +169,8 @@
             selected_schedule_arr.push(all_schedule_arr[i])
             var user_display_color = $('<div>').attr('class', 'user_display_color')
             var schedule_p_element = $('<p>').text(all_schedule_arr[i]).text();
-            var schedule_el = $('<div>').addClass('user_color_and_list_container').append(user_display_color).append(schedule_p_element)
+            var schedule_el = $('<div>').addClass('user_color_and_list_container').append(user_display_color)
+              .append(schedule_p_element)
             var del_icon = $('<i>').addClass('material-icons').text('delete')
             var schedule_del = $('<button>').addClass('schedule_del').attr('id', all_id_arr[i]).append(del_icon)
             var schedule_container = $('<div>').addClass('schedule_modal_container').append(schedule_el).append(
@@ -181,8 +183,10 @@
             joint_selected_schedule_arr.push(joint_all_created_arr[i])
             var joint_display_color = $('<div>').attr('class', 'joint_display_color')
             var joint_schedule_p_element = $('<p>').text(joint_all_schedule_arr[i]).text();
-            var joint_schedule_el = $('<div>').addClass('user_color_and_list_container').append(joint_display_color).append(joint_schedule_p_element)
-            var joint_schedule_container = $('<div>').addClass('joint_schedule_modal_container').append(joint_schedule_el)
+            var joint_schedule_el = $('<div>').addClass('user_color_and_list_container').append(
+              joint_display_color).append(joint_schedule_p_element)
+            var joint_schedule_container = $('<div>').addClass('joint_schedule_modal_container').append(
+              joint_schedule_el)
             $('.schedule_data_from_db_container').append(joint_schedule_container)
           }
         }
@@ -206,7 +210,7 @@
                 day: day,
                 value: value,
               },
-            }).then(res => window.location.reload()) 
+            }).then(res => window.location.reload())
           }
         });
 

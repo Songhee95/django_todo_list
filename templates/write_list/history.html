@@ -1,104 +1,103 @@
 {% load static %}
-{% load pwa %} 
+{% load pwa %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-{% progressive_web_app_meta %}
+    {% progressive_web_app_meta %}
 </head>
+
 <body>
-{% include 'navbar.html' %}
-<div class="container">
-    <h5 class="weekly-title">Todo List History</h5>
-    <div class='table-wrap'>
-        <table id='daily_history_data_table'>
-            <thead>
-                <th class='th_which_has_sort sort_by_created'>Created
-                    <div class='table_sort_button'>
-                        <i class='material-icons dropdown-trigger' data-target='daily_dropdown_by_created'>arrow_drop_down</i>
-                        <ul class='dropdown-content' id='daily_dropdown_by_created'>
-                        </ul>    
-                    </div>
-                </th>
-                <th>List</th>
-                <th class='th_which_has_sort'>Completed
-                </th>
-            </thead>
-            <tbody id='daily_history_data_row'>
-            {% for list in daily.add_list|slice:":5" %}
-                <tr >
-                    <td>
-                        <p>{{list.created}}</p>
-                    </td> 
-                    <td>
-                        <p>{{list.li}}</p>
-                    </td>
-                    <td>
-                        <label>
-                            <input type="checkbox" {{list.cleared}} disabled/>
-                            <span></span>
-                        </label>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h5 class="weekly-title">Todo List History</h5>
+        <div class='table-wrap'>
+            <table id='daily_history_data_table'>
+                <thead>
+                    <th class='th_which_has_sort sort_by_created'>Created
+                        <div class='table_sort_button'>
+                            <i class='material-icons dropdown-trigger'
+                                data-target='daily_dropdown_by_created'>arrow_drop_down</i>
+                            <ul class='dropdown-content' id='daily_dropdown_by_created'>
+                            </ul>
+                        </div>
+                    </th>
+                    <th class='history__header'>List</th>
+                    <th class='th_which_has_sort'>Status
+                    </th>
+                </thead>
+                <tbody id='daily_history_data_row'>
+                    {% for list in daily.add_list|slice:":5" %}
+                    <tr>
+                        <td>
+                            <p>{{list.created}}</p>
+                        </td>
+                        <td>
+                            <p>{{list.li}}</p>
+                        </td>
+                        <td class="home_list_set_wrap history__checkbox__wrap">
+                            <label class="home_list_checkbox checkbox_wrap joint_checkbox_wrap">
+                                <input type="checkbox" class="clearBtn user_checkbox" {{list.cleared}} disabled />
+                                <span></span>
+                            </label>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <h5 class="weekly-title">Monthly Goal History</h5>
+        <div class='table-wrap'>
+            <table id='monthly_history_data_table'>
+                <thead>
+                    <th class='th_which_has_sort sort_by_created'>Created
+                        <div class='table_sort_button'>
+                            <i class='material-icons dropdown-trigger'
+                                data-target='monthly_dropdown_by_created'>arrow_drop_down</i>
+                            <ul class='dropdown-content' id='monthly_dropdown_by_created'>
+                            </ul>
+                        </div>
+                    </th>
+                    <th>Monthly Goal</th>
+                    <th class='th_which_has_sort'>Status
+                    </th>
+                </thead>
+                <tbody id='monthly_history_data_row'>
+                    {% for list in month.add_list|slice:":5"%}
+                    <tr>
+                        <td>
+                            <p>{{list.created}}</p>
+                        </td>
+                        <td>
+                            <p>{{list.li}}</p>
+                        </td>
+                        <td class="home_list_set_wrap history__checkbox__wrap">
+                            <label class="home_list_checkbox checkbox_wrap joint_checkbox_wrap">
+                                <input type="checkbox" class="clearBtn user_checkbox" {{list.cleared}} disabled />
+                                <span></span>
+                            </label>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     </div>
-
-
-    <h5 class="weekly-title">Monthly Goal History</h5>
-    <div class='table-wrap'>
-        <table id='monthly_history_data_table'>
-        <thead>
-            <th class='th_which_has_sort sort_by_created'>Created
-                <div class='table_sort_button'>
-                    <i class='material-icons dropdown-trigger' data-target='monthly_dropdown_by_created'>arrow_drop_down</i>
-                    <ul class='dropdown-content' id='monthly_dropdown_by_created'>
-                    </ul>    
-                </div>
-            </th>
-            <th>Monthly Goal</th>
-            <th class='th_which_has_sort'>Completed
-            </th>
-        </thead>
-        <tbody id='monthly_history_data_row'>
-        {% for list in month.add_list|slice:":5"%}
-            <tr>
-                <td>
-                    <p>{{list.created}}</p>
-                </td> 
-                <td>
-                    <p>{{list.li}}</p>
-                </td>
-                <td>
-                    <label>
-                        <input type="checkbox" {{list.cleared}} disabled/>
-                        <span></span>
-                    </label>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-        </table>
-    </div>
-
-</div>
-
+    {% include 'footer.html' %}
 </body>
-    {{ daily|json_script:'daily'}}
-    {{ month|json_script:'month'}}
-    <script src="{% static 'js/home.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{{ daily|json_script:'daily'}}
+{{ month|json_script:'month'}}
+<script src="{% static 'js/home.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 </html>

@@ -2,6 +2,10 @@
 nav{
     background-color:#48433c !important;
 }
+.logo_icon{
+    width: 60px;
+    height: 60px;
+}
 .brand-logo{
     font-family: 'Fredericka the Great', cursive;
 }
@@ -115,7 +119,12 @@ nav{
 [type="checkbox"]+span:not(.lever):before, [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
     border: none !important
 }
-
+.history__header{
+    text-align: center;
+}
+.history__checkbox__wrap{
+    margin-left: 12px;
+}
 .modal_input_container{
     display: flex;
     flex-direction: row;
@@ -276,6 +285,13 @@ nav{
 }
 
 @media screen and (max-width: 992px) {
+#mobile-demo{
+    width: 200px;
+    background-color: rgba(245, 241, 241, 0.959);
+}
+.logo_icon{
+    display: none
+}
 .today-list-container{
     display: flex;
     flex-direction: column;

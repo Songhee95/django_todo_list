@@ -67,11 +67,11 @@
           <div class="home_list_set_wrap" data-content="{{list.created}}">
             <label class="home_list_checkbox checkbox_wrap joint_checkbox_wrap">
               <input type="checkbox" class="clearBtn user_checkbox" data-type="list" {{list.cleared}}
-                data-id="{{list.id}}" status="false" disabled/>
+                data-id="{{list.id}}" status="false" disabled />
               <span></span>
             </label>
             <input class="displayed_list {{list.id}}" value="{{list.li}}" disabled />
- 
+
           </div>
           {% endif %} {% endfor %}
         </div>
@@ -80,6 +80,7 @@
       {% block content %} {% endblock content %}
     </div>
   </div>
+  {% include 'footer.html' %}
 </body>
 <script src="{% static 'js/home.js' %}"></script>
 <script src="{% static 'js/cardBtn.js' %}"></script>
