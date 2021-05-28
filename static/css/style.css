@@ -119,6 +119,9 @@ nav{
 [type="checkbox"]+span:not(.lever):before, [type="checkbox"]:not(.filled-in)+span:not(.lever):after {
     border: none !important
 }
+.history__page__wrap{
+    padding-bottom: 100px;
+}
 .history__header{
     text-align: center;
 }

@@ -196,6 +196,7 @@ td.mon:hover, td.tue:hover, td.wed:hover, td.thu:hover, td.fri:hover, td.sat:hov
     .calendar_whole_container{
         flex-direction: row;
         justify-content: space-evenly;
+        padding-bottom: 150px;
     }
     .calendar{
         width: 100%;

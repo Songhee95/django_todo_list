@@ -1,3 +1,22 @@
-.white-text{
-    color: red !important;
+.footer__container{
+   background-color:#48433c;
+   padding: 10px 0;
+   text-align: center;
+   color: #ddd;
+   bottom: 0;
+   width: 100%;
+}
+.footer_logo_icon{
+    width: 30px;
+}
+.footer-copyright{
+    justify-content: center !important;
+
+}
+.footer__element{
+    margin-top: 15px;
+}
+.footer__icon{
+    padding: 0 5px;
+    color: #ddd;
 }
