@@ -266,6 +266,7 @@ def history(request):
 @ login_required(login_url='/login')
 @ csrf_exempt
 def invite(request):
+    print(request.user)
     joint_status = models.Joint.objects.filter(user_id=request.user.id)
     if joint_status:
         for joint in joint_status:
@@ -300,7 +301,8 @@ def invite(request):
         current_site = get_current_site(request)
 
         link = reverse('list:confirm', kwargs={
-                       'selected_user': selected_user_pk})
+                       'selected_user': selected_user_pk,
+                       'request_from': request.user.id})
 
         email_subject = 'SH Schedule App Invitation'
         confirm_url = 'http://'+current_site.domain+link
@@ -324,27 +326,30 @@ def invite(request):
     return render(request, 'write_list/invite.html', send_data)
 
 
-def confirm(request, selected_user):
+def confirm(request, selected_user, request_from):
     get_selected_user = User.objects.get(pk=selected_user).first_name
-    if request.method == 'POST':
-        print(request.POST.get('confirmed'))
-        user_side_joint_status = models.Joint.objects.filter(user=request.user)
-        print(user_side_joint_status)
-        try:
-            models.Joint.objects.get(
-                user_id=request.user.id, joint_id=selected_user)
-        except:
-            models.Joint.objects.create(
-                user_id=request.user.id,  joint_id=selected_user).save()
+    get_request_from_user = User.objects.get(pk=request_from).first_name
+    print(selected_user)
+    if request.POST.get("confirmed"):
+        user_side_joint_status = models.Joint.objects.filter(
+            user_id=request_from)
+        if selected_user != request_from:
+            print('good to go')
+            try:
+                models.Joint.objects.get(
+                    user_id=request_from, joint_id=selected_user)
+            except:
+                models.Joint.objects.create(
+                    user_id=request_from,  joint_id=selected_user).save()
 
-        try:
-            models.Joint.objects.get(
-                user_id=selected_user, joint_id=request.user.id)
-        except:
-            models.Joint.objects.create(
-                user_id=selected_user, joint_id=request.user.id).save()
+            try:
+                models.Joint.objects.get(
+                    user_id=selected_user, joint_id=request_from)
+            except:
+                models.Joint.objects.create(
+                    user_id=selected_user, joint_id=request_from).save()
 
-    return render(request, 'write_list/confirmation_page.html', {'selected_user': selected_user})
+    return render(request, 'write_list/confirmation_page.html', {'selected_user': selected_user, 'request_from': request_from, 'get_request_from_user': get_request_from_user, "get_selected_user": get_selected_user})
 
 
 @ login_required(login_url='/login')

@@ -67,13 +67,14 @@
                                         d="m168.951 94.335c-1.411 1.571-1.075 2.342-1.075 20.266 0 6.055-2.275 7.991-6.724 7.991-2.874 0-5.26-.792-6.189-3.587-.4-1.198-.603-2.727-.603-4.542v-16.606c0-5.37-5.009-5.668-6.953-3.511-.721.802-1.087 1.982-1.087 3.511 0 19.236-2.711 31.369 15.317 31.369 7.855 0 12.145-3.759 13.484-8.354 1.025-3.515.795-5.923.795-23.015 0-5.423-5.084-5.612-6.965-3.522z" />
                                 </g>
                             </svg> </span>
-                        <p style='font-size:20px; margin-bottom:10px'>From : {{request.user}}</p>
-                        <p>This invitation is from {{request.user}}.</p>
-                        <p>If You want to enjoy SHSchedule with {{request.user}} as a Joint Account, Click below
+                        <p style='font-size:20px; margin-bottom:10px'>From : {{get_request_from_user}}</p>
+                        <p>Hello {{get_selected_user}}! This invitation is from {{get_request_from_user}}.</p>
+                        <p>If You want to enjoy SHSchedule with {{get_request_from_user}} as a Joint Account, Click
+                            below
                             'Confirm' button!</p>
                     </div>
                     <div class="card-action">
-                        <form action="{% url 'list:confirm' selected_user %}" method="post">
+                        <form action="{% url 'list:confirm' selected_user request_from %}" method="post">
                             {% csrf_token %}
                             <input type="submit" value='Confirm' name='confirmed' class='confirm-submit'>
                     </div>
@@ -86,20 +87,22 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function () {
-                let count = 0;
-                document.querySelector('.confirm-submit').addEventListener('click', function (e) {
-                    e.preventDefault();
-                    count++;
-                    if (count < 2) {
-                        M.toast({
-                            html: "It's confirmed! Check your Account! <a href='https://sh-django-todo-app.herokuapp.com/'> Go To Page</a>"})
-                    } else {
-                        M.toast({
-                                html: "Already confirmed! Check your Account! <a href='https://sh-django-todo-app.herokuapp.com/'> Go To Page</a>"})
-                            }
-                        })
-                });
+    /* document.addEventListener("DOMContentLoaded", function () {
+        let count = 0;
+        document.querySelector('.confirm-submit').addEventListener('click', function (e) {
+            count++;
+            if (count < 2) {
+                M.toast({
+                    html: "It's confirmed! Check your Account! <a href='https://sh-django-todo-app.herokuapp.com/'> Go To Page</a>"
+                })
+            } else {
+                M.toast({
+                    html: "Already confirmed! Check your Account! <a href='https://sh-django-todo-app.herokuapp.com/'> Go To Page</a>"
+                })
+            }
+        })
+    });
+    */
 </script>
 
 </html>

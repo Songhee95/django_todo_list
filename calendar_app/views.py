@@ -37,7 +37,6 @@ def get_monthly_data(userid, getAll, year, month):
     user = models.Monthly.objects.filter(
         user=userid, created__year=year, created__month=month).order_by('created').reverse()
     list_array = []
-
     for listEle in user:
         if listEle.cleared:
             status = 'checked'

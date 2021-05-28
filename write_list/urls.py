@@ -11,5 +11,6 @@ urlpatterns = [
     path('edit/<int:list_id>', views.edit, name='edit'),
     path('history', views.history, name='history'),
     path('invite', views.invite, name='invite'),
-    path('confirm/<int:selected_user>', views.confirm, name='confirm')
+    path('confirm/<int:selected_user>/<int:request_from>/',
+         views.confirm, name='confirm')
 ]
