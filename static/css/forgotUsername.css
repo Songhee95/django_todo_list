@@ -1,0 +1,35 @@
+.forgot_username_button_wrap{
+    display: flex;
+    flex-direction: row;
+}
+.forgot_username_find_button, .forgot_username_back_button{
+    margin-top: 20px;
+    font-weight: 500;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+    align-items:center;
+    cursor: pointer;
+}
+.forgot_username_find_button{
+    background-color: #cfd8dc;
+    border-color: #90a4ae ;
+}
+.forgot_username_find_button:hover{
+    background-color: #546e7a;
+    color: antiquewhite;
+}
+.forgot_username_back_button{
+    background-color: #d7ccc8;
+    border-color: #8d6e63 ;
+}
+.forgot_username_back_button:hover{
+    background-color: #6d4c41 ;
+    color: antiquewhite;
+}
+.forgot_username_find_button > i, .forgot_username_back_button > i{
+    font-size: 20px;
+    margin-right: 5px;
+}

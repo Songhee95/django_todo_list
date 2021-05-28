@@ -41,7 +41,10 @@ def loginPage(request):
 
 def forgotUsernamePage(request):
     response = ''
-    if request.method == 'POST':
+    if request.POST.get('back_to_login'):
+        return render(request, 'user_authentication/login.html')
+
+    if request.POST.get('find_username'):
         response = 'no match'
         email = request.POST.get('email')
         firstName = request.POST.get('firstName').capitalize()

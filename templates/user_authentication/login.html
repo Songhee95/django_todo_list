@@ -19,6 +19,9 @@
 
 <body>
     <div class="register_page_container">
+        <div class='login-welcome-title'> <img src="{% static 'images/girl.png' %}" alt="icon"
+                class='login_logo_icon' />
+            Welcome to SHSchedule App</div>
         <h3 class='register_page_header'>login page</h3>
         <div class="login_input_container">
             <form action='{% url "user_authentication:login" %}' method='post'>

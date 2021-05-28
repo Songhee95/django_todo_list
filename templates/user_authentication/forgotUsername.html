@@ -34,18 +34,27 @@
                 <input type="text" name='firstName' placeholder='First Name'>
             </div>
 
-            <div>
-                <input type="submit" class='register_page_submit_btn' value='Find Username'>
+            <div class='forgot_username_button_wrap'>
+                <button type="submit" class='forgot_username_find_button' name='find_username' value='find_username'>
+                    <i class="material-icons">search</i>
+                    Find Username
+                </button>
+                <button type="submit" class='forgot_username_back_button' name='back_to_login' value='back_to_login'>
+                    <i class="material-icons">reply</i>
+                    Back to Login
+                </button>
             </div>
         </form>
 
-        {% if response == "no match" %}
-        <h5>There is no matched account for given information</h5>
-        {% else %}
-        {% if response != '' %}
-        <h5>Your name is <strong><i>{{response}}</i></strong>. </h5>
-        {% endif %}
-        {% endif %}
+        <ul class="collection with-header">
+            {% if response == "no match" %}
+            <li class="collection-item red lighten-4">There is no matched account for given information</li>
+            {% else %}
+            {% if response != '' %}
+            <li class="collection-item cyan lighten-4">Your name is <strong><i>{{response}}</i></strong>.</li>
+            {% endif %}
+            {% endif %}
+        </ul>
     </div>
 </body>
 

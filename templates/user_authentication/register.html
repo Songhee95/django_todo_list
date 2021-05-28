@@ -1,72 +1,71 @@
 {% load static %}
-{% load pwa %} 
+{% load pwa %}
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
 
   {% progressive_web_app_meta %}
-  </head>
-  <body>
-    <div class="register_page_container">
-        <h3 class='register_page_header'>Register page</h3>
-        <div class="login_input_container">
-          <form action="" method='post' >
-                {% csrf_token %}
-                <div class='register_page_icons'>
-                <i class="material-icons prefix">account_circle</i>
-                    {{form.first_name.label}}
-                    {{form.first_name}}
-                </div>
-                <div class='register_page_icons'>
-                <i class="material-icons prefix">account_circle</i>
-                    {{form.last_name.label}}
-                    {{form.last_name}}
-                </div>
-                <div class='register_page_icons'>
-                <i class="material-icons prefix">account_circle</i>
-                    {{form.username.label}}
-                    {{form.username}}
-                </div>
-                <div class='register_page_icons'>
-                <i class="material-icons prefix">email</i>
-                    {{form.email.label}}
-                    {{form.email}}
-                </div>
-                <div class='register_page_icons'>
-                <i class="material-icons prefix">password1</i>
-                    {{form.password1.label}}
-                    {{form.password1}}
-                </div>
-                <div class='register_page_icons'>
-                <i class="material-icons prefix">password1</i>
-                    {{form.password2.label}}
-                    {{form.password2}}
-                </div>
-                <div class='register_page_submit_btn_wrap'>
-                    <input type="submit" name="Create User" class='register_page_submit_btn'>
-                </div>
-            {% comment %} inform error  {% endcomment %}
-                {{form.errors}}
-                <div class="login_bottom_link">
-                  <p class='register_page_already_p'>Aready have an account? <a href="/login">Login</a></p>
-                </div>
-          </form>
+</head>
+
+<body>
+  <div class='login-welcome-title'> <img src="{% static 'images/girl.png' %}" alt="icon" class='login_logo_icon' />
+    Welcome to SHSchedule App</div>
+  <div class="register_page_container">
+    <h3 class='register_page_header'>Register page</h3>
+    <div class="login_input_container">
+      <form action="" method='post'>
+        {% csrf_token %}
+        <div class='register_page_icons'>
+          <i class="material-icons prefix">account_circle</i>
+          {{form.first_name.label}}
+          {{form.first_name}}
         </div>
+        <div class='register_page_icons'>
+          <i class="material-icons prefix">account_circle</i>
+          {{form.last_name.label}}
+          {{form.last_name}}
+        </div>
+        <div class='register_page_icons'>
+          <i class="material-icons prefix">account_circle</i>
+          {{form.username.label}}
+          {{form.username}}
+        </div>
+        <div class='register_page_icons'>
+          <i class="material-icons prefix">email</i>
+          {{form.email.label}}
+          {{form.email}}
+        </div>
+        <div class='register_page_icons'>
+          <i class="material-icons prefix">password1</i>
+          {{form.password1.label}}
+          {{form.password1}}
+        </div>
+        <div class='register_page_icons'>
+          <i class="material-icons prefix">password1</i>
+          {{form.password2.label}}
+          {{form.password2}}
+        </div>
+        <div class='register_page_submit_btn_wrap'>
+          <input type="submit" name="Create User" class='register_page_submit_btn'>
+        </div>
+        {% comment %} inform error {% endcomment %}
+        {{form.errors}}
+        <div class="login_bottom_link">
+          <p class='register_page_already_p'>Aready have an account? <a href="/login">Login</a></p>
+        </div>
+      </form>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
