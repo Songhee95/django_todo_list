@@ -348,6 +348,7 @@ def confirm(request, selected_user, request_from):
             except:
                 models.Joint.objects.create(
                     user_id=selected_user, joint_id=request_from).save()
+            return render(request, 'write_list/after_confirmation.html')
 
     return render(request, 'write_list/confirmation_page.html', {'selected_user': selected_user, 'request_from': request_from, 'get_request_from_user': get_request_from_user, "get_selected_user": get_selected_user})
 

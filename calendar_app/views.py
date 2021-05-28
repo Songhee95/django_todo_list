@@ -100,7 +100,7 @@ def cal_date(request, year, month):
 
     schedule_data = calModels.Month_Schedule.objects.filter(
         user_id=userid, created__year=year, created__month=month)
-
+    print(schedule_data)
     return render(request, 'calendar_app/calendar.html', {
         'cal': cal,
         'month': month_name,

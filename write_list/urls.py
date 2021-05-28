@@ -12,5 +12,5 @@ urlpatterns = [
     path('history', views.history, name='history'),
     path('invite', views.invite, name='invite'),
     path('confirm/<int:selected_user>/<int:request_from>/',
-         views.confirm, name='confirm')
+         views.confirm, name='confirm'),
 ]
