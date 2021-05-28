@@ -36,3 +36,7 @@ def loginPage(request):
         else:
             messages.info(request, 'Username OR password is incorrect!')
     return render(request, 'user_authentication/login.html')
+
+
+def forgotUsernamePage(request):
+    return render(request, 'user_authentication/forgotUsername.html')
