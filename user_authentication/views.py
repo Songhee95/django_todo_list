@@ -55,3 +55,7 @@ def forgotUsernamePage(request):
             response = user
 
     return render(request, 'user_authentication/forgotUsername.html', {'response': response})
+
+
+def forgotPasswordPage(request):
+    return render(request, 'user_authentication/forgotPassword.html')

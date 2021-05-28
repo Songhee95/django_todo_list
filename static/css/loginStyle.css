@@ -57,6 +57,11 @@
     font-size: 18px;
     color: black;
 }
+.forgot__stuff{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 
 @media screen and (max-width: 992px) {
     .register_page_container{
