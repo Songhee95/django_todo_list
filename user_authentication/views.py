@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 from .forms import ShRegisterForm
@@ -39,4 +40,15 @@ def loginPage(request):
 
 
 def forgotUsernamePage(request):
-    return render(request, 'user_authentication/forgotUsername.html')
+    response = ''
+    if request.method == 'POST':
+        response = 'no match'
+        email = request.POST.get('email')
+        firstName = request.POST.get('firstName').capitalize()
+        user_info = User.objects.filter(
+            email=email, first_name=firstName)
+        if user_info:
+            user = str(user_info[0])
+            response = user
+
+    return render(request, 'user_authentication/forgotUsername.html', {'response': response})
