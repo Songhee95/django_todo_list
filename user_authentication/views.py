@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -7,8 +7,6 @@ from django.contrib.auth.models import User
 from .forms import ShRegisterForm
 # flash messages after register
 from django.contrib import messages
-
-from django.contrib.auth import authenticate, login, logout
 
 
 def registerPage(request):
@@ -57,5 +55,25 @@ def forgotUsernamePage(request):
     return render(request, 'user_authentication/forgotUsername.html', {'response': response})
 
 
+def authenticate_passwordless(username, email):
+    try:
+        return User.objects.get(username=username, email=email)
+    except User.DoesNotExist:
+        return None
+
+
 def forgotPasswordPage(request):
-    return render(request, 'user_authentication/forgotPassword.html')
+    form = ShRegisterForm()
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        user = authenticate_passwordless(username=username, email=email)
+        print(user)
+        if user is not None:
+            print('match')
+        else:
+            print('no match')
+            messages.info(request, 'Username OR password is incorrect!')
+
+    context = {"form": form}
+    return render(request, 'user_authentication/forgotPassword.html', context)
