@@ -59,7 +59,11 @@
           <input type="submit" name="Create User" class='register_page_submit_btn'>
         </div>
         {% comment %} inform error {% endcomment %}
-        {{form.errors}}
+        {% for field in form %}
+        {% if field.errors %}
+        <strong>{{field.errors}}</strong>
+        {% endif %}
+        {% endfor %}
         <div class="login_bottom_link">
           <p class='register_page_already_p'>Aready have an account? <a href="/login">Login</a></p>
         </div>

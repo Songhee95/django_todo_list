@@ -55,25 +55,25 @@ def forgotUsernamePage(request):
     return render(request, 'user_authentication/forgotUsername.html', {'response': response})
 
 
-def authenticate_passwordless(username, email):
-    try:
-        return User.objects.get(username=username, email=email)
-    except User.DoesNotExist:
-        return None
+# def authenticate_passwordless(username, email):
+#     try:
+#         return User.objects.get(username=username, email=email)
+#     except User.DoesNotExist:
+#         return None
 
 
-def forgotPasswordPage(request):
-    form = ShRegisterForm()
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        user = authenticate_passwordless(username=username, email=email)
-        print(user)
-        if user is not None:
-            print('match')
-        else:
-            print('no match')
-            messages.info(request, 'Username OR password is incorrect!')
+# def forgotPasswordPage(request):
+#     form = ShRegisterForm()
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         email = request.POST.get('email')
+#         user = authenticate_passwordless(username=username, email=email)
+#         print(user)
+#         if user is not None:
+#             print('match')
+#         else:
+#             print('no match')
+#             messages.info(request, 'Username OR password is incorrect!')
 
-    context = {"form": form}
-    return render(request, 'user_authentication/forgotPassword.html', context)
+#     context = {"form": form}
+#     return render(request, 'user_authentication/forgotPassword.html', context)
