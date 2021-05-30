@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}" />
     <link rel="stylesheet" href="{% static 'css/forgotUsername.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -19,42 +20,46 @@
 
 <body>
 
-    <div class="forgot_user_name_container container">
-        <h1>Forgot Username</h1>
-        <form action='{% url "user_authentication:forgotUsername" %}' method='post'>
-            {% csrf_token %}
-            <div>
-                <label for="email" class='login_page_input_labels'>Please enter the e-mail address associated with
-                    your account.</label>
-                <input type="text" name='email' placeholder='email'>
-            </div>
+    <div class="register_page_container">
+        <div class='login-welcome-title'> <img src="{% static 'images/girl.png' %}" alt="icon"
+                class='login_logo_icon' />
+            Welcome to SHSchedule App</div>
+        <h1 class='forgotUser_page_header'>Forgot Your Username</h1>
+        <div class="login_input_container">
+            <form action='{% url "user_authentication:forgotUsername" %}' method='post'>
+                {% csrf_token %}
+                <div>
+                    <label for="email" class='login_page_input_labels'>Please enter the e-mail address.</label>
+                    <input class='forgotUsername_page_input' type="text" name='email' placeholder='Email'>
+                </div>
 
-            <div>
-                <label for="firstName" class='login_page_input_labels'>Please enter your first name.</label>
-                <input type="text" name='firstName' placeholder='First Name'>
-            </div>
+                <div>
+                    <label for="firstName" class='login_page_input_labels'>Please enter your First name.</label>
+                    <input class='forgotUsername_page_input' type="text" name='firstName' placeholder='First Name'>
+                </div>
 
-            <div class='forgot_username_button_wrap'>
-                <button type="submit" class='forgot_username_find_button' name='find_username' value='find_username'>
-                    <i class="material-icons">search</i>
-                    Find Username
-                </button>
-                <button type="submit" class='forgot_username_back_button' name='back_to_login' value='back_to_login'>
-                    <i class="material-icons">reply</i>
-                    Back to Login
-                </button>
-            </div>
-        </form>
+                <div class='forgot_username_button_wrap'>
+                    <button type="submit" class='forgot_username_find_button btn' name='find_username'
+                        value='find_username'>
+                        Find Username
+                    </button>
+                    <a class='forgot_username_back_link' href="/login"><i class="material-icons">reply</i>Back to
+                        Login</a>
+                </div>
+            </form>
 
-        <ul class="collection with-header">
             {% if response == "no match" %}
-            <li class="collection-item red lighten-4">There is no matched account for given information</li>
+            <ul class="collection with-header">
+                <li class="collection-item red lighten-4">There is no matched account for given information</li>
+            </ul>
             {% else %}
             {% if response != '' %}
-            <li class="collection-item cyan lighten-4">Your name is <strong><i>{{response}}</i></strong>.</li>
+            <ul class="collection with-header">
+                <li class="collection-item cyan lighten-4">Your Username is <strong><i>{{response}}</i></strong>.</li>
+            </ul>
             {% endif %}
             {% endif %}
-        </ul>
+        </div>
     </div>
 </body>
 

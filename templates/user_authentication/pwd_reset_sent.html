@@ -1,8 +1,39 @@
-	<!--Password reset sent-->
-	<div class="container p-5">
-	    <h2 class="font-weight-bold mt-3">Password reset sent</h2>
-	    <hr>
-	    <p>We've emailed you instructions for setting your password, if an account exists with the email you entered. You
-	        should receive them shortly.<br>If you don't receive an email, please make sure you've entered the address you
-	        registered with, and check your spam folder.</p>
-	</div>
+{% load static %}
+{% load pwa %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/forgotUsername.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+
+    {% progressive_web_app_meta %}
+</head>
+
+<body>
+    <!--Password reset sent-->
+    <div class="register_page_container">
+        <div class='login-welcome-title'> <img src="{% static 'images/girl.png' %}" alt="icon"
+                class='login_logo_icon' />
+            Welcome to SHSchedule App</div>
+        <h2 class='forgotUser_page_header'>Password reset sent...</h2>
+        <div class="login_input_container">
+            <p>We've emailed you instructions for setting your password, if an account exists with the email you
+                entered.
+                You
+                should receive them shortly.<br>If you don't receive an email, please make sure you've entered the
+                address
+                you
+                registered with, and check your spam folder.</p>
+        </div>
+</body>
+
+</html>

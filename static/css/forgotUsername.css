@@ -1,35 +1,33 @@
+.forgotUser_page_header{
+    font-size: 30px;
+    background-color: #d7ccc8  ;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    font-weight: 500;
+    color: #5d4037;
+}
+.forgotUsername_page_input{
+    border: 1px solid #4db6ac !important;
+    border-radius: 5px !important;
+    height: 35px !important;
+    margin: 10px 0 !important;
+    padding-left: 10px !important;
+}
 .forgot_username_button_wrap{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
-.forgot_username_find_button, .forgot_username_back_button{
+.forgot_username_find_button, .forgot_username_back_link{
     margin-top: 20px;
-    font-weight: 500;
-    padding: 8px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: row;
     margin-right: 10px;
-    align-items:center;
-    cursor: pointer;
 }
-.forgot_username_find_button{
-    background-color: #cfd8dc;
-    border-color: #90a4ae ;
-}
-.forgot_username_find_button:hover{
-    background-color: #546e7a;
-    color: antiquewhite;
-}
-.forgot_username_back_button{
-    background-color: #d7ccc8;
-    border-color: #8d6e63 ;
-}
-.forgot_username_back_button:hover{
-    background-color: #6d4c41 ;
-    color: antiquewhite;
-}
-.forgot_username_find_button > i, .forgot_username_back_button > i{
-    font-size: 20px;
-    margin-right: 5px;
+
+
+.forgot_username_back_link:hover{
+    color: rgb(114, 106, 96);
 }
