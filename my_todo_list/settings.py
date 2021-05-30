@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'user_authentication',
     'calendar_app',
     'pwa',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

@@ -16,11 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('', include('write_list.urls')),
     path('', include('user_authentication.urls')),
     path('', include('calendar_app.urls')),
     path('admin/', admin.site.urls),
-    url('', include('pwa.urls'))
+    url('', include('pwa.urls')),
+    path('pwd_reset_sent/', auth_views.PasswordResetDoneView.as_view(template_name='user_authentication/pwd_reset_sent.html'),
+         name="password_reset_done"),
+
+    path('reset/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name='user_authentication/pwd_reset_confirm.html'), name='password_reset_confirm'),
+
+    path('pwd_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='user_authentication/pwd_reset_complete.html'),
+         name="password_reset_complete"),
 ]
