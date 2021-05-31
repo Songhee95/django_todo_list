@@ -83,8 +83,8 @@ def getData(userid, getAll):
         add_list = {
             'cleared': status,
             "li": listEle.todo_list,
-            "created": timezone_set(listEle.created).strftime('%B, %d, %Y'),
-            "updated": timezone_set(listEle.updated_time).strftime('%B, %d, %Y, %I:%M'),
+            "created": listEle.created.strftime('%B, %d, %Y'),
+            "updated": listEle.updated_time.strftime('%B, %d, %Y, %I:%M'),
             "id": listEle.id,
         }
         list_array.append(add_list)
@@ -97,10 +97,8 @@ def getData(userid, getAll):
         'current_year': datetime.now().year,
         'current_month': datetime.now().month
     }
+
     return send_data
-
-
-print(local_now)
 
 
 def get_monthly_data(userid, getAll):

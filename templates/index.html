@@ -39,7 +39,7 @@
 
         <div class="today-list-second-container">
           <h6 class="yellow-title">Todays' ToDo List</h6>
-          {% for list in user_data.add_list %} {% if list.created == user_data.local_now %}
+          {% for list in user_data.add_list %}{% if list.created == user_data.local_now %}
           <div class="home_list_set_wrap" data-content="{{list.created}}">
             <label class="home_list_checkbox checkbox_wrap user_checkbox_wrap">
               <input type="checkbox" class="clearBtn user_checkbox" data-type="list" {{list.cleared}}
